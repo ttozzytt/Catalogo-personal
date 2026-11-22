@@ -4,7 +4,9 @@
 <meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
 <meta name="theme-color" content="#8f3925"><meta name="description" content="Menú digital de El Local. Hamburguesas a la parrilla, dobles, mixtas y salchipapas.">
 <link rel="manifest" href="./manifest.json"><link rel="icon" href="./icons/icon.svg"><link rel="stylesheet" href="./pwa.css?v=checkout-60s-profile-v2">
-<title>El Local · Menú y pedidos</title><script defer src="./pwa.js?v=checkout-60s-profile-v2"></script>
+<title>El Local · Menú y pedidos</title><script defer src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.119.2"></script>
+<script defer src="../catalog-db.js"></script>
+<script defer src="./pwa.js?v=checkout-60s-profile-v2"></script>
 </head>
 <body class="food-app">
 <header class="app-header">
@@ -93,7 +95,7 @@
   </div>
  </section>
  <section class="view" id="view-historial" aria-labelledby="historyTitle" hidden>
-  <div class="view-head"><div><p class="eyebrow">HISTORIAL EN ESTE DISPOSITIVO</p><h1 id="historyTitle">Mis pedidos</h1><p>Solicitudes confirmadas localmente.</p></div><button class="button-secondary" id="clearHistory" type="button">Borrar historial</button></div>
+  <div class="view-head"><div><p class="eyebrow">HISTORIAL EN ESTE DISPOSITIVO</p><h1 id="historyTitle">Mis pedidos</h1><p>Solicitudes confirmadas en línea.</p></div><button class="button-secondary" id="clearHistory" type="button">Borrar historial</button></div>
   <div class="history-list" id="historyList"><p class="empty-state">Todavía no tienes pedidos guardados.</p></div>
  </section>
 </main>
