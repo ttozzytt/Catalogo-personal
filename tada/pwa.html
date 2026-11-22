@@ -3,10 +3,10 @@
 <head>
 <meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
 <meta name="theme-color" content="#29154f"><meta name="description" content="TaDa Bolivia: catálogo de bebidas, lista de pedidos y solicitud de delivery.">
-<link rel="manifest" href="./manifest.json"><link rel="icon" href="./icons/icon.svg"><link rel="stylesheet" href="./pwa.css?v=tada-delivery-60s-20261122">
+<link rel="manifest" href="./manifest.json"><link rel="icon" href="./icons/icon.svg"><link rel="stylesheet" href="./pwa.css?v=tada-cloud-20261122">
 <title>TaDa Bolivia · Catálogo y delivery</title><script defer src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.119.2"></script>
 <script defer src="../catalog-db.js"></script>
-<script defer src="./pwa.js?v=tada-delivery-60s-20261122"></script>
+<script defer src="./pwa.js?v=tada-cloud-20261122"></script>
 </head>
 <body class="tada-app">
 <header class="app-header">
@@ -69,11 +69,11 @@
     <button class="button-primary" type="submit">Revisar solicitud de delivery</button>
     <p class="form-message" id="deliveryMessage" role="status">La solicitud es local y no se envía automáticamente a TaDa.</p>
    </form>
-   <aside class="info-panel"><p class="eyebrow">TU PERFIL</p><h2 id="accountGreeting">Datos para tu próxima entrega.</h2><p>Los datos de contacto y dirección pueden quedar guardados en tu cuenta en línea en este navegador para facilitar futuras solicitudes.</p><div class="info-separator"></div><strong>Canal oficial de compra</strong><p>Revisa cobertura, precio y stock actual en la plataforma de TaDa.</p><a class="button-secondary" href="https://tadadelivery.com.bo/" target="_blank" rel="noopener">Abrir TaDa Delivery ↗</a><button class="text-button" id="deleteDeliveryProfile" type="button">Eliminar mis datos de este dispositivo</button></aside>
+   <aside class="info-panel"><p class="eyebrow">TU PERFIL</p><h2 id="accountGreeting">Datos para tu próxima entrega.</h2><p>Los datos de contacto y dirección pueden quedar guardados en tu cuenta en línea en este navegador para facilitar futuras solicitudes.</p><div class="info-separator"></div><strong>Canal oficial de compra</strong><p>Revisa cobertura, precio y stock actual en la plataforma de TaDa.</p><a class="button-secondary" href="https://tadadelivery.com.bo/" target="_blank" rel="noopener">Abrir TaDa Delivery ↗</a><button class="text-button" id="deleteDeliveryProfile" type="button">Eliminar mi perfil en línea</button></aside>
   </div>
  </section>
  <section class="view" id="view-pedidos" aria-labelledby="ordersTitle" hidden>
-  <div class="view-head"><div><p class="eyebrow">HISTORIAL LOCAL</p><h1 id="ordersTitle">Mis pedidos</h1><p>Solicitudes preparadas desde este dispositivo.</p></div><button class="button-secondary" id="clearOrders" type="button">Borrar historial</button></div>
+  <div class="view-head"><div><p class="eyebrow">HISTORIAL EN LÍNEA</p><h1 id="ordersTitle">Mis pedidos</h1><p>Solicitudes guardadas en tu historial en línea.</p></div><button class="button-secondary" id="clearOrders" type="button">Borrar historial en línea</button></div>
   <div class="orders-list" id="ordersList"><p class="empty-state">Todavía no hay solicitudes.</p></div>
  </section>
  <section class="view" id="view-informacion" aria-labelledby="infoTitle" hidden>
@@ -86,7 +86,7 @@
  <div class="age-card"><div class="age-logo">Ta<span>·</span>Da</div><p class="eyebrow">CONTROL DE EDAD</p><h2 id="ageTitle">¿Tienes 18 años o más?</h2><p id="ageMessage">Este catálogo incluye bebidas alcohólicas. Debes confirmar tu mayoría de edad para continuar.</p><button class="button-primary" id="confirmAge" type="button">Sí, tengo 18 años o más</button><button class="age-minor" id="denyAge" type="button">No, soy menor de edad</button><small>Consume con responsabilidad.</small></div>
 </div>
 <div class="confirm-layer" id="deliveryConfirm" hidden>
- <section class="confirm-card" role="dialog" aria-modal="true" aria-labelledby="deliveryConfirmTitle"><button class="confirm-close" id="closeDeliveryConfirm" type="button" aria-label="Cancelar">×</button><p class="eyebrow">SOLICITUD DE DELIVERY</p><h2 id="deliveryConfirmTitle">Confirma los datos del pedido</h2><p id="deliveryConfirmSummary"></p><div class="countdown-label">TIEMPO PARA CONFIRMAR</div><strong class="countdown" id="deliveryCountdown">01:00</strong><div class="countdown-track"><span id="deliveryCountdownBar"></span></div><p class="confirm-note">Confirmar guarda una copia local de la solicitud. No reserva inventario, no efectúa pago ni sustituye la confirmación del canal oficial TaDa Delivery.</p><div class="confirm-actions"><button class="button-secondary" id="cancelDeliveryPending" type="button">Cancelar</button><button class="button-primary" id="confirmDeliveryPending" type="button">Confirmar solicitud</button></div></section>
+ <section class="confirm-card" role="dialog" aria-modal="true" aria-labelledby="deliveryConfirmTitle"><button class="confirm-close" id="closeDeliveryConfirm" type="button" aria-label="Cancelar">×</button><p class="eyebrow">SOLICITUD DE DELIVERY</p><h2 id="deliveryConfirmTitle">Confirma los datos del pedido</h2><p id="deliveryConfirmSummary"></p><div class="countdown-label">TIEMPO PARA CONFIRMAR</div><strong class="countdown" id="deliveryCountdown">01:00</strong><div class="countdown-track"><span id="deliveryCountdownBar"></span></div><p class="confirm-note">Confirmar registra la solicitud en tu historial en línea. No reserva inventario, no efectúa pago ni sustituye la confirmación del canal oficial TaDa Delivery.</p><div class="confirm-actions"><button class="button-secondary" id="cancelDeliveryPending" type="button">Cancelar</button><button class="button-primary" id="confirmDeliveryPending" type="button">Confirmar solicitud</button></div></section>
 </div>
 <div class="toast" id="toast" role="status" aria-live="polite"></div>
 </body>
