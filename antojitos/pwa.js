@@ -61,8 +61,11 @@
   $('profileForm').addEventListener('submit',async event=>{
     event.preventDefault();const p={display_name:$('profileName').value.trim(),phone:$('profilePhone').value.trim(),zone:$('profileZone').value.trim(),address:$('profileAddress').value.trim(),city:'La Paz',contact_preference:'whatsapp'};
     if(p.display_name.length<2||!/^\d{8}$/.test(p.phone)){$('profileMessage').textContent='Escribe un nombre válido y un celular boliviano de 8 dígitos.';return;}
-    try{state.profile=await state.cloud.saveProfile(STORE,p);state.mode=$('profileMode').value;await saveCartState();$('profileMessage').textContent='Perfil guardado en tu cuenta en línea.';renderProfile();toast('Perfil sincronizado.');}
-    catch(error){$('profileMessage').textContent='No se pudo guardar en la nube: '+error.message;}
+    if(!state.cloud){$('profileMessage').textContent='Conectando con la base de datos. Inténtalo de nuevo en unos segundos.';return;}
+    const button=event.currentTarget.querySelector('button[type="submit"]');button.disabled=true;
+    try{state.profile=await state.cloud.saveProfile(STORE,p);state.mode=$('profileMode').value;await saveCartState();$('profileMessage').textContent='Perfil creado o actualizado correctamente en la nube.';renderProfile();toast('Perfil sincronizado.');}
+    catch(error){$('profileMessage').textContent='No se pudo guardar: '+error.message;}
+    finally{button.disabled=false;}
   });
   $('deleteProfile').addEventListener('click',async()=>{
     if(!confirm('¿Eliminar tu perfil de El Local de la nube?'))return;
