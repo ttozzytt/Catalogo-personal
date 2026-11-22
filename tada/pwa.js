@@ -9,28 +9,42 @@
   document.querySelectorAll('[data-view]').forEach(b=>b.addEventListener('click',()=>showView(b.dataset.view)));
   document.querySelectorAll('[data-go]').forEach(b=>b.addEventListener('click',()=>showView(b.dataset.go)));
   const totalUnits=()=>Object.values(state.list).reduce((sum,n)=>sum+Number(n||0),0);
-  function mapProduct(row){const s=row.specs||{};return{id:row.item_code,name:row.name,category:row.category,type:s.type||row.category,description:row.description||'',image:row.image_url||''};}
+  function mapProduct(row){
+    const s=row.specs||{};
+    return{id:row.item_code,name:row.name,category:row.category,brand:row.brand||'',type:s.type||row.category,
+      description:row.description||'',image:row.image_url||'',price:row.price===null?null:Number(row.price),
+      priceLabel:s.priceLabel||'Consultar',priceSource:s.priceSource||'TaDa · consultar',
+      priceNote:s.priceNote||'',formatGroup:s.presentationGroup||'botellas',ageRestricted:Boolean(s.ageRestricted)};
+  }
   function updateBadges(){const n=totalUnits();$('listBadge').textContent=n;$('mobileBadge').textContent=n;$('listSummary').textContent=n+' unidades seleccionadas';}
   async function saveList(){try{await state.cloud.saveUserState(STORE,'cart',{quantities:state.list});}catch(error){toast('No se pudo sincronizar la lista: '+error.message,'error');}}
+  function formatPrice(p){
+    if(p.price===null)return p.formatGroup==='cajas'?'Caja full · consultar':'Consultar precio en TaDa';
+    const amount='Bs '+p.price.toLocaleString('es-BO',{minimumFractionDigits:p.price%1?2:0,maximumFractionDigits:2});
+    return amount+' · ref. '+p.priceSource;
+  }
   function renderProducts(){
     const grid=$('productGrid'),q=$('productSearch').value.trim().toLocaleLowerCase('es');grid.replaceChildren();
-    const rows=state.products.filter(p=>(state.filter==='todos'||p.category===state.filter)&&(p.name+' '+p.type+' '+p.description).toLocaleLowerCase('es').includes(q));
-    if(!rows.length){grid.append(node('p','No encontramos marcas con ese criterio.','empty-state'));return;}
+    const rows=state.products.filter(p=>(state.filter==='todos'||p.category===state.filter||p.formatGroup===state.filter)&&(p.name+' '+p.brand+' '+p.type+' '+p.description+' '+p.priceSource).toLocaleLowerCase('es').includes(q));
+    if(!rows.length){grid.append(node('p','No encontramos presentaciones con ese criterio.','empty-state'));return;}
     rows.forEach(p=>{
       const card=node('article',undefined,'product-card'),art=node('div',undefined,'product-art'),img=node('img');
-      img.src=p.image||'';img.alt='Marca '+p.name;img.loading='lazy';img.decoding='async';
-      img.addEventListener('error',()=>{img.remove();art.append(node('span',p.name,'brand-fallback'));},{once:true});art.append(img);
-      const body=node('div',undefined,'product-body');body.append(node('small',p.type),node('h3',p.name),node('p',p.description));
-      const foot=node('div',undefined,'product-foot'),price=node('span','Consultar precio y disponibilidad'),button=node('button',state.list[p.id]?'Añadido ✓':'Añadir +');button.type='button';
+      img.src=p.image||'';img.alt=p.name;img.loading='lazy';img.decoding='async';
+      img.addEventListener('error',()=>{img.remove();art.append(node('span',p.brand||p.name,'brand-fallback'));},{once:true});art.append(img);
+      const body=node('div',undefined,'product-body');
+      body.append(node('small',(p.brand||p.type)+' · '+p.type),node('h3',p.name),node('p',p.description));
+      const foot=node('div',undefined,'product-foot'),priceWrap=node('div',undefined,'product-price-wrap');
+      priceWrap.append(node('strong',formatPrice(p)),node('small',p.priceNote||'Precio y stock final sujetos a confirmación del canal TaDa.'));
+      const button=node('button',state.list[p.id]?'Añadido ✓':'Añadir +');button.type='button';
       button.addEventListener('click',async()=>{state.list[p.id]=(state.list[p.id]||0)+1;updateBadges();button.textContent='Añadido ✓';await saveList();toast(p.name+' agregado a tu lista.');});
-      foot.append(price,button);body.append(foot);card.append(art,body);grid.append(card);
+      foot.append(priceWrap,button);body.append(foot);card.append(art,body);grid.append(card);
     });
   }
   function renderList(){
     const area=$('selectedList');area.replaceChildren();const rows=state.products.filter(p=>state.list[p.id]);
     if(!rows.length){area.append(node('p','Tu lista está vacía. Explora el catálogo para agregar bebidas.','empty-state'));updateBadges();return;}
     rows.forEach(p=>{
-      const row=node('article',undefined,'selected-row'),info=node('div');info.append(node('strong',p.name),node('small',p.type+' · '+state.list[p.id]+' unidad(es)'));
+      const row=node('article',undefined,'selected-row'),info=node('div');info.append(node('strong',p.name),node('small',p.type+' · '+state.list[p.id]+' unidad(es) · '+formatPrice(p)));
       const controls=node('div',undefined,'quantity-controls'),minus=node('button','−'),count=node('b',state.list[p.id]),plus=node('button','+');minus.type=plus.type='button';
       minus.setAttribute('aria-label','Quitar una unidad de '+p.name);plus.setAttribute('aria-label','Agregar una unidad de '+p.name);
       minus.addEventListener('click',async()=>{state.list[p.id]--;if(state.list[p.id]<=0)delete state.list[p.id];updateBadges();renderList();await saveList();});
@@ -99,7 +113,7 @@
   $('saveDeliveryProfile').addEventListener('click',saveDeliveryProfile);
   $('deliveryForm').addEventListener('submit',event=>{
     event.preventDefault();const d=collectDelivery();if(!validateDelivery(d))return;
-    const items=state.products.filter(p=>state.list[p.id]).map(p=>({id:p.id,name:p.name,category:p.category,quantity:state.list[p.id]}));
+    const items=state.products.filter(p=>state.list[p.id]).map(p=>({id:p.id,name:p.name,brand:p.brand,presentation:p.type,quantity:state.list[p.id],referencePrice:p.price,priceSource:p.priceSource}));
     state.pending={items,delivery:d};state.expiresAt=Date.now()+60000;
     $('deliveryConfirmSummary').textContent=items.map(p=>p.quantity+' × '+p.name).join(' · ')+' | Entrega: '+d.zone+', '+d.city+' | '+d.name+' · '+d.phone;
     $('deliveryConfirm').hidden=false;updateCountdown();state.timer=setInterval(updateCountdown,250);$('confirmDeliveryPending').focus();
