@@ -2,7 +2,7 @@
   "id":"./pwa.html",
   "name":"TaDa · Bebidas para cada plan",
   "short_name":"TaDa Bolivia",
-  "description":"Catálogo académico inspirado en el portafolio público de TaDa Bolivia.",
+  "description":"Catálogo referencial de bebidas basado en marcas del portafolio público de TaDa Bolivia.",
   "start_url":"./pwa.html",
   "scope":"./",
   "display":"standalone",
