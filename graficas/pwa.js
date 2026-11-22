@@ -127,15 +127,11 @@
     state.requests.forEach(row=>{
       const d=row.request_data||{},card=node('article',undefined,'history-card'),info=node('div');
       const title=(d.quantity||1)+' × '+(d.model||categoryNames[d.category]||'Componente');
-      info.append(node('strong',title),node('p',(d.brand||'Marca por definir')+' · '+(d.categoryLabel||d.category||'Componente')+(d.budget!==null&&d.budget!==undefined?' · Presupuesto: '+money(d.budget):'')),
+      info.append(node('strong',title),
+        node('p',(d.brand||'Marca por definir')+' · '+(d.categoryLabel||d.category||'Componente')+(d.budget!==null&&d.budget!==undefined?' · Presupuesto: '+money(d.budget):'')),
         node('small',row.contact_name+' · '+row.phone+' · '+(d.city||'')+' · '+(d.deliveryLabel||row.delivery_method||'')),
         node('small','Estado: '+row.status));
-      const copy=node('button','Copiar solicitud');copy.type='button';
-      copy.addEventListener('click',async()=>{
-        const text='SOLICITUD COMPUCENTER\n'+title+'\nMarca: '+(d.brand||'Por definir')+'\nCiudad: '+(d.city||'')+'\nEntrega: '+(d.deliveryLabel||'Consultar')+'\nNombre: '+row.contact_name+' · '+row.phone+'\nDirección: '+(row.address||'—')+'\nDetalles: '+(d.details||'—')+'\nPrecio y stock: por confirmar.';
-        try{await navigator.clipboard.writeText(text);toast('Resumen copiado.');}catch(_){toast('No se pudo copiar.','error');}
-      });
-      card.append(info,copy);list.append(card);
+      card.append(info);list.append(card);
     });
   }
   $('clearRequests').addEventListener('click',async()=>{
