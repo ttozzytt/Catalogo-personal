@@ -113,9 +113,7 @@
     state.orders.forEach(row=>{
       const d=row.request_data||{},items=Array.isArray(d.items)?d.items:[],card=node('article',undefined,'order-card'),main=node('div');
       main.append(node('strong','TaDa · '+row.id.slice(0,8).toUpperCase()),node('p',items.map(p=>p.quantity+' × '+p.name).join(' · ')),node('small',row.contact_name+' · '+(d.zone||'')+', '+(d.city||'')+' · '+row.phone),node('small','Estado: '+row.status));
-      const actions=node('div',undefined,'order-actions'),copy=node('button','Copiar pedido');copy.type='button';
-      copy.addEventListener('click',async()=>{const text='SOLICITUD TaDa\n'+items.map(p=>p.quantity+' × '+p.name).join('\n')+'\nRecibe: '+row.contact_name+'\nCelular: '+row.phone+'\nDirección: '+row.address+', '+(d.zone||'')+', '+(d.city||'')+'\nReferencia: '+row.reference+'\nCarnet físico: mostrar al recibir. No se guardó número ni fotografía.';try{await navigator.clipboard.writeText(text);toast('Resumen copiado.');}catch(_){toast('No se pudo copiar.','error');}});
-      actions.append(copy);card.append(main,actions);list.append(card);
+      card.append(main);list.append(card);
     });
   }
   $('productSearch').addEventListener('input',renderProducts);
