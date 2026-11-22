@@ -60,7 +60,7 @@
   function renderProfile(){const p=state.profile||{};$('profileName').value=p.display_name||'';$('profilePhone').value=p.phone||'';$('profileMode').value=state.mode;$('profileZone').value=p.zone||'';$('profileAddress').value=p.address||'';$('profileGreeting').textContent=p.display_name?'Hola, '+p.display_name.split(' ')[0]+'.':'Completa tu perfil.';}
   $('profileForm').addEventListener('submit',async event=>{
     event.preventDefault();const p={display_name:$('profileName').value.trim(),phone:$('profilePhone').value.trim(),zone:$('profileZone').value.trim(),address:$('profileAddress').value.trim(),city:'La Paz',contact_preference:'whatsapp'};
-    if(p.display_name.length<2||!/^\\d{8}$/.test(p.phone)){$('profileMessage').textContent='Escribe un nombre válido y un celular boliviano de 8 dígitos.';return;}
+    if(p.display_name.length<2||!/^\d{8}$/.test(p.phone)){$('profileMessage').textContent='Escribe un nombre válido y un celular boliviano de 8 dígitos.';return;}
     try{state.profile=await state.cloud.saveProfile(STORE,p);state.mode=$('profileMode').value;await saveCartState();$('profileMessage').textContent='Perfil guardado en tu cuenta en línea.';renderProfile();toast('Perfil sincronizado.');}
     catch(error){$('profileMessage').textContent='No se pudo guardar en la nube: '+error.message;}
   });
@@ -87,7 +87,7 @@
   $('checkoutForm').addEventListener('submit',event=>{
     event.preventDefault();if(!count()){toast('Tu carrito está vacío.','error');setView('menu');return;}
     const order=buildOrder(),c=order.customer;
-    if(c.name.length<2||!/^\\d{8}$/.test(c.phone)||!$('checkoutConsent').checked){$('checkoutMessage').textContent='Revisa nombre, celular y aceptación de la solicitud.';return;}
+    if(c.name.length<2||!/^\d{8}$/.test(c.phone)||!$('checkoutConsent').checked){$('checkoutMessage').textContent='Revisa nombre, celular y aceptación de la solicitud.';return;}
     if(c.mode==='Entrega a domicilio'&&(c.zone.length<2||c.address.length<4||c.reference.length<3)){$('checkoutMessage').textContent='Completa zona, calle y referencia de entrega.';return;}
     state.pending=order;state.expiresAt=Date.now()+60000;
     $('confirmSummary').textContent=order.items.map(p=>p.quantity+' × '+p.name).join(' · ')+' | '+money(order.estimatedTotal)+' (estimado) | '+c.mode;
