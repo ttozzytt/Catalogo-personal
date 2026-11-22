@@ -89,7 +89,7 @@
         display_name:d.name,phone:d.phone,city:d.city||null,zone:d.zone||null,
         address:d.address||null,reference:d.reference||null,contact_preference:'whatsapp'
       });
-      fillDeliveryProfile();
+      $('accountGreeting').textContent='Hola, '+d.name.split(' ')[0]+'.';
       $('profileSaveMessage').textContent='Tu perfil se guardó correctamente en la nube.';
       toast('Datos de entrega guardados en tu cuenta.');
     }catch(error){
