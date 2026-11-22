@@ -1,18 +1,379 @@
 [
- {"id":"rx7600","name":"ASUS Dual Radeon RX 7600 8GB","brand":"AMD · ASUS","category":"gpu","categoryLabel":"Tarjeta gráfica","price":7124,"shortDescription":"8 GB GDDR6, bus de 128 bits, PCIe 4.0 y refrigeración Dual Fan Axial-tech.","image":"https://app.compucenter.store/products/Y0MuneBhXXRmllkkrUikB0kjVKpjhbcdwezdNG54.jpg","url":"https://compucenter.store/product/tarjeta-de-video-asus-amd-radeon-rx-7600-8gb-gddr6-pci-express-40","specs":{"memory":"8 GB GDDR6","bus":"128 bits","interface":"PCI Express 4.0","power":"Fuente recomendada 550 W · Conector 8-pin","warranty":"30 días de tienda según publicación"}},
- {"id":"rtx3050","name":"ZOTAC Gaming GeForce RTX 3050 6GB OC","brand":"NVIDIA · ZOTAC","category":"gpu","categoryLabel":"Tarjeta gráfica","price":5421,"shortDescription":"6 GB GDDR6, bus de 96 bits, PCIe 4.0 y doble ventilador.","image":"https://app.compucenter.store/products/m83ePT86nmEK6LxGpwdNbnPPrTZBZbNFMhI6nKT1.jpg","url":"https://compucenter.store/product/tarjeta-de-video-zotac-gaming-twin-edge-nvidia-geforce-rtx-3050-6gb-gddr6-pci-express-40-salidas-3-displayport-y-1-x-hdmi","specs":{"memory":"6 GB GDDR6","bus":"96 bits","interface":"PCI Express 4.0 x8","power":"Consumo indicado 70 W · Fuente sugerida 450 W","warranty":"30 días de tienda según publicación"}},
- {"id":"gt710","name":"MSI GeForce GT 710 2GB DDR3","brand":"NVIDIA · MSI","category":"gpu","categoryLabel":"Tarjeta gráfica","price":1378,"shortDescription":"2 GB DDR3, perfil bajo y salidas HDMI, DVI-D y VGA.","image":"https://app.compucenter.store/products/msi-gt710-2gb-ddr3.jpg","url":"https://compucenter.store/product/msi-tarjeta-de-video-2gb-ddr3-low-profile-64bits-pci-express-20-x16-opera-en-x8-hdmi-vga-dvi-d","specs":{"memory":"2 GB DDR3","bus":"64 bits","interface":"PCI Express 2.0 x16 (opera en x8)","outputs":"HDMI · DVI-D · VGA","warranty":"30 días de tienda según publicación"}},
- {"id":"ram-ddr5","name":"Kingston Fury Beast 16GB DDR5-5600","brand":"Kingston","category":"ram","categoryLabel":"Memoria RAM","price":5187,"shortDescription":"1 × 16 GB UDIMM DDR5-5600, CL40, 288 pines y perfil XMP 3.0.","image":"https://img.openshop.com.hk/s2/202302/63eb1b2b81e40.jpg","url":"https://compucenter.store/product/memoria-ram-para-pc-kingston-fury-beast-1-x-16gb-udimm-ddr5-5600-110-125v","specs":{"capacity":"16 GB (1 × 16 GB)","type":"DDR5 UDIMM","speed":"5600 MT/s · CL40","formFactor":"DIMM 288 pines","warranty":"30 días de tienda según publicación"}},
- {"id":"ram-ddr4","name":"Crucial 16GB DDR4-3200","brand":"Crucial","category":"ram","categoryLabel":"Memoria RAM","price":2470,"shortDescription":"1 × 16 GB UDIMM DDR4-3200, CL22 y voltaje de 1.2 V.","image":null,"artLabel":"CRUCIAL · DDR4","url":"https://compucenter.store/product/crucial-memoria-ram-para-pc-1-x-16gb-udimm-ddr4-3200-12v","specs":{"capacity":"16 GB (1 × 16 GB)","type":"DDR4 UDIMM","speed":"3200 MT/s · CL22","formFactor":"DIMM 288 pines","warranty":"30 días de tienda según publicación"}},
- {"id":"ssd-bx500","name":"Crucial BX500 500GB SATA","brand":"Crucial","category":"ssd","categoryLabel":"SSD SATA 2.5 pulgadas","price":1885,"shortDescription":"SSD interno de 500 GB, SATA III 6 Gb/s, formato 2.5 pulgadas.","image":"https://www.techtrade.si/images/thumbs/0050414_crucial-ssd-disk-500gb-bx500-sata-3-tlc-3d-ct500bx500ssd1.jpeg","url":"https://www.compucenter.store/category/2-almacenamiento/10-disco-solido","specs":{"capacity":"500 GB","type":"SSD SATA III","interface":"6 Gb/s · 2.5 pulgadas","warranty":"Consultar garantía vigente"}},
- {"id":"ssd-bx1tb","name":"Crucial BX500 1TB SATA","brand":"Crucial","category":"ssd","categoryLabel":"SSD SATA 2.5 pulgadas","price":2184,"shortDescription":"SSD interno de 1 TB, SATA 3.0 6 Gb/s, formato 2.5 pulgadas.","image":null,"artLabel":"CRUCIAL · SSD 1TB","url":"https://www.compucenter.store/category/2-almacenamiento/10-disco-solido","specs":{"capacity":"1 TB","type":"SSD SATA 3.0","interface":"6 Gb/s · 2.5 pulgadas","warranty":"Consultar garantía vigente"}},
- {"id":"nv3-500","name":"Kingston NV3 500GB M.2 NVMe","brand":"Kingston","category":"m2","categoryLabel":"SSD M.2 NVMe","price":2015,"shortDescription":"SSD M.2 2280, PCIe 4.0 Gen 4 ×4 NVMe, 500 GB.","image":"https://flexxmemory.co.uk/cdn/shop/files/1c17c7c4220148269aac45dd24ac3301.avif?v=1767801275","url":"https://www.compucenter.store/category/2-almacenamiento/10-disco-solido","specs":{"capacity":"500 GB","type":"M.2 NVMe","interface":"PCIe 4.0 Gen 4 ×4 · 2280","warranty":"Consultar garantía vigente"}},
- {"id":"hdd-blue","name":"Western Digital Blue 1TB HDD","brand":"Western Digital","category":"hdd","categoryLabel":"Disco duro HDD","price":1170,"shortDescription":"Disco interno de 1 TB, 5400 RPM, SATA 6 Gb/s y caché de 128 MB.","image":"https://hethong.24hlaptop.com/image_product/o-cung-pc-hdd-1tb-3-5-wd-blue-sata--1.jpg1689740550862.jpg","url":"https://www.compucenter.store/category/2-almacenamiento/9-disco-duro","specs":{"capacity":"1 TB","type":"HDD interno","interface":"SATA 6 Gb/s","speed":"5400 RPM · Caché 128 MB","formFactor":"2.5 pulgadas","warranty":"Consultar garantía vigente"}},
- {"id":"hdd-red8","name":"Western Digital Red Plus 8TB HDD","brand":"Western Digital","category":"hdd","categoryLabel":"Disco duro HDD / NAS","price":8580,"shortDescription":"Disco duro NAS interno de 8 TB, SATA 6 Gb/s y caché de 256 MB.","image":null,"artLabel":"WD RED PLUS · 8TB","url":"https://www.compucenter.store/category/2-almacenamiento/9-disco-duro","specs":{"capacity":"8 TB","type":"HDD NAS","interface":"SATA 6 Gb/s","speed":"5640 RPM · Caché 256 MB","formFactor":"3.5 pulgadas","warranty":"Consultar garantía vigente"}},
- {"id":"board-b760","name":"Gigabyte B760M H 1.0 DDR4","brand":"Gigabyte","category":"board","categoryLabel":"Placa madre Intel","price":1703,"shortDescription":"Micro-ATX, socket LGA1700, 2 ranuras M.2 PCIe 4.0 y hasta 64 GB DDR4.","image":"https://elitehubs.com/cdn/shop/files/B760M-H-DDR5_result_45061488-93fc-4fef-a92f-ddb74871eb55.png?v=1717563783","url":"https://compucenter.store/product/tarjeta-madre-gigabyte-formato-micro-atx-para-intel-de-14va-13va-12va-gen-socket-lga-1700-dimm-ddr4-max-64-gb-2-x-m2-pcie-40-salida-video-hdmi-y-vga","specs":{"socket":"Intel LGA 1700","chipset":"Intel B760 Express","memory":"2 × DDR4 DIMM · Hasta 64 GB","interface":"2 × M.2 PCIe 4.0 · 1 × PCIe 4.0 x16","formFactor":"Micro-ATX","warranty":"30 días de tienda según publicación"}},
- {"id":"board-h610","name":"ASUS PRIME H610M-K","brand":"ASUS","category":"board","categoryLabel":"Placa madre Intel","price":1794,"shortDescription":"Micro-ATX, chipset H610, socket LGA1700, DDR5 y PCIe 4.0.","image":null,"artLabel":"ASUS PRIME · H610","url":"https://www.compucenter.store/category/componentes-pc","specs":{"socket":"Intel LGA 1700","chipset":"Intel H610","memory":"DDR5 · confirmar capacidad máxima con la tienda","interface":"PCIe 4.0 · M.2","formFactor":"Micro-ATX","warranty":"Consultar garantía vigente"}},
- {"id":"psu-thermaltake","name":"Thermaltake TR2 500W","brand":"Thermaltake","category":"power","categoryLabel":"Fuente de poder","price":975,"shortDescription":"Fuente ATX de 500 W. Verifica conectores y consumo antes de elegirla.","image":null,"artLabel":"THERMALTAKE · 500W","url":"https://www.compucenter.store/category/componentes-pc","specs":{"power":"500 W","formFactor":"ATX","compatibility":"Revisar requerimientos de GPU y conectores","warranty":"Consultar garantía vigente"}},
- {"id":"psu-msi750","name":"MSI MAG A750BN PCIe5 750W","brand":"MSI","category":"power","categoryLabel":"Fuente de poder","price":1326,"shortDescription":"750 W, certificación 80 PLUS Bronze y soporte PCIe 5.0.","image":"https://img.terabyteshop.com.br/produto/g/fonte-msi-mag-a750bn-pcie5-750w-80-plus-bronze-pfc-ativo-preto_251859.jpg","url":"https://www.compucenter.store/product/fuente-poder-msi-pcie5-750w-80-plus-bronze","specs":{"power":"750 W","efficiency":"80 PLUS Bronze","formFactor":"ATX · No modular","features":"PCIe 5.0 · Protecciones OVP / OCP / SCP","warranty":"Consultar garantía vigente"}},
- {"id":"case-cg580","name":"DeepCool CG580 4F WH","brand":"DeepCool","category":"case","categoryLabel":"Gabinete gamer","price":1937,"shortDescription":"Gabinete ATX blanco, cuatro ventiladores PWM-ARGB y panel de vidrio templado.","image":null,"artLabel":"DEEPCOOL · CG580","url":"https://www.compucenter.store/category/componentes-pc","specs":{"formFactor":"ATX","features":"4 ventiladores PWM-ARGB · Vidrio templado","color":"Blanco","warranty":"Consultar garantía vigente"}},
- {"id":"cpu-request","name":"Procesadores Intel / AMD por pedido","brand":"A cotizar","category":"cpu","categoryLabel":"Procesador bajo pedido","price":null,"shortDescription":"Solicita Core, Ryzen u otro CPU por modelo, socket y generación para cotizar próxima mercadería.","image":null,"artLabel":"CPU · BAJO PEDIDO","url":"https://www.compucenter.store/category/componentes-pc","compare":false,"specs":{"brand":"Intel o AMD","socket":"Indica AM4, AM5, LGA1700 u otro","generation":"Indica generación y modelo exacto","availability":"Consulta de próxima mercadería","price":"Cotización según modelo solicitado"}}
+  {
+    "id": "rx7600",
+    "name": "ASUS Dual Radeon RX 7600 8GB",
+    "brand": "AMD · ASUS",
+    "category": "gpu",
+    "categoryLabel": "Tarjeta gráfica",
+    "price": 7124,
+    "shortDescription": "8 GB GDDR6, bus de 128 bits, PCIe 4.0 y refrigeración Dual Fan Axial-tech.",
+    "image": "https://app.compucenter.store/products/Y0MuneBhXXRmllkkrUikB0kjVKpjhbcdwezdNG54.jpg",
+    "url": "https://compucenter.store/product/tarjeta-de-video-asus-amd-radeon-rx-7600-8gb-gddr6-pci-express-40",
+    "specs": {
+      "memory": "8 GB GDDR6",
+      "bus": "128 bits",
+      "interface": "PCI Express 4.0",
+      "power": "Fuente recomendada 550 W · Conector 8-pin",
+      "warranty": "30 días de tienda según publicación"
+    }
+  },
+  {
+    "id": "rtx3050",
+    "name": "ZOTAC Gaming GeForce RTX 3050 6GB OC",
+    "brand": "NVIDIA · ZOTAC",
+    "category": "gpu",
+    "categoryLabel": "Tarjeta gráfica",
+    "price": 5421,
+    "shortDescription": "6 GB GDDR6, bus de 96 bits, PCIe 4.0 y doble ventilador.",
+    "image": "https://app.compucenter.store/products/m83ePT86nmEK6LxGpwdNbnPPrTZBZbNFMhI6nKT1.jpg",
+    "url": "https://compucenter.store/product/tarjeta-de-video-zotac-gaming-twin-edge-nvidia-geforce-rtx-3050-6gb-gddr6-pci-express-40-salidas-3-displayport-y-1-x-hdmi",
+    "specs": {
+      "memory": "6 GB GDDR6",
+      "bus": "96 bits",
+      "interface": "PCI Express 4.0 x8",
+      "power": "Consumo indicado 70 W · Fuente sugerida 450 W",
+      "warranty": "30 días de tienda según publicación"
+    }
+  },
+  {
+    "id": "gt710",
+    "name": "MSI GeForce GT 710 2GB DDR3",
+    "brand": "NVIDIA · MSI",
+    "category": "gpu",
+    "categoryLabel": "Tarjeta gráfica",
+    "price": 1378,
+    "shortDescription": "2 GB DDR3, perfil bajo y salidas HDMI, DVI-D y VGA.",
+    "image": "https://app.compucenter.store/products/msi-gt710-2gb-ddr3.jpg",
+    "url": "https://compucenter.store/product/msi-tarjeta-de-video-2gb-ddr3-low-profile-64bits-pci-express-20-x16-opera-en-x8-hdmi-vga-dvi-d",
+    "specs": {
+      "memory": "2 GB DDR3",
+      "bus": "64 bits",
+      "interface": "PCI Express 2.0 x16 (opera en x8)",
+      "outputs": "HDMI · DVI-D · VGA",
+      "warranty": "30 días de tienda según publicación"
+    }
+  },
+  {
+    "id": "ram-ddr5",
+    "name": "Kingston Fury Beast 16GB DDR5-5600",
+    "brand": "Kingston",
+    "category": "ram",
+    "categoryLabel": "Memoria RAM",
+    "price": 5187,
+    "shortDescription": "1 × 16 GB UDIMM DDR5-5600, CL40, 288 pines y perfil XMP 3.0.",
+    "image": "https://img.openshop.com.hk/s2/202302/63eb1b2b81e40.jpg",
+    "url": "https://compucenter.store/product/memoria-ram-para-pc-kingston-fury-beast-1-x-16gb-udimm-ddr5-5600-110-125v",
+    "specs": {
+      "capacity": "16 GB (1 × 16 GB)",
+      "type": "DDR5 UDIMM",
+      "speed": "5600 MT/s · CL40",
+      "formFactor": "DIMM 288 pines",
+      "warranty": "30 días de tienda según publicación"
+    }
+  },
+  {
+    "id": "ram-ddr4",
+    "name": "Crucial 16GB DDR4-3200",
+    "brand": "Crucial",
+    "category": "ram",
+    "categoryLabel": "Memoria RAM",
+    "price": 2470,
+    "shortDescription": "1 × 16 GB UDIMM DDR4-3200, CL22 y voltaje de 1.2 V.",
+    "image": null,
+    "artLabel": "CRUCIAL · DDR4",
+    "url": "https://compucenter.store/product/crucial-memoria-ram-para-pc-1-x-16gb-udimm-ddr4-3200-12v",
+    "specs": {
+      "capacity": "16 GB (1 × 16 GB)",
+      "type": "DDR4 UDIMM",
+      "speed": "3200 MT/s · CL22",
+      "formFactor": "DIMM 288 pines",
+      "warranty": "30 días de tienda según publicación"
+    }
+  },
+  {
+    "id": "ssd-bx500",
+    "name": "Crucial BX500 500GB SATA",
+    "brand": "Crucial",
+    "category": "ssd",
+    "categoryLabel": "SSD SATA 2.5 pulgadas",
+    "price": 1885,
+    "shortDescription": "SSD interno de 500 GB, SATA III 6 Gb/s, formato 2.5 pulgadas.",
+    "image": "https://www.techtrade.si/images/thumbs/0050414_crucial-ssd-disk-500gb-bx500-sata-3-tlc-3d-ct500bx500ssd1.jpeg",
+    "url": "https://www.compucenter.store/category/2-almacenamiento/10-disco-solido",
+    "specs": {
+      "capacity": "500 GB",
+      "type": "SSD SATA III",
+      "interface": "6 Gb/s · 2.5 pulgadas",
+      "warranty": "Consultar garantía vigente"
+    }
+  },
+  {
+    "id": "ssd-bx1tb",
+    "name": "Crucial BX500 1TB SATA",
+    "brand": "Crucial",
+    "category": "ssd",
+    "categoryLabel": "SSD SATA 2.5 pulgadas",
+    "price": 2184,
+    "shortDescription": "SSD interno de 1 TB, SATA 3.0 6 Gb/s, formato 2.5 pulgadas.",
+    "image": null,
+    "artLabel": "CRUCIAL · SSD 1TB",
+    "url": "https://www.compucenter.store/category/2-almacenamiento/10-disco-solido",
+    "specs": {
+      "capacity": "1 TB",
+      "type": "SSD SATA 3.0",
+      "interface": "6 Gb/s · 2.5 pulgadas",
+      "warranty": "Consultar garantía vigente"
+    }
+  },
+  {
+    "id": "nv3-500",
+    "name": "Kingston NV3 500GB M.2 NVMe",
+    "brand": "Kingston",
+    "category": "m2",
+    "categoryLabel": "SSD M.2 NVMe",
+    "price": 2015,
+    "shortDescription": "SSD M.2 2280, PCIe 4.0 Gen 4 ×4 NVMe, 500 GB.",
+    "image": "https://flexxmemory.co.uk/cdn/shop/files/1c17c7c4220148269aac45dd24ac3301.avif?v=1767801275",
+    "url": "https://www.compucenter.store/category/2-almacenamiento/10-disco-solido",
+    "specs": {
+      "capacity": "500 GB",
+      "type": "M.2 NVMe",
+      "interface": "PCIe 4.0 Gen 4 ×4 · 2280",
+      "warranty": "Consultar garantía vigente"
+    }
+  },
+  {
+    "id": "hdd-blue",
+    "name": "Western Digital Blue 1TB HDD",
+    "brand": "Western Digital",
+    "category": "hdd",
+    "categoryLabel": "Disco duro HDD",
+    "price": 1170,
+    "shortDescription": "Disco interno de 1 TB, 5400 RPM, SATA 6 Gb/s y caché de 128 MB.",
+    "image": "https://hethong.24hlaptop.com/image_product/o-cung-pc-hdd-1tb-3-5-wd-blue-sata--1.jpg1689740550862.jpg",
+    "url": "https://www.compucenter.store/category/2-almacenamiento/9-disco-duro",
+    "specs": {
+      "capacity": "1 TB",
+      "type": "HDD interno",
+      "interface": "SATA 6 Gb/s",
+      "speed": "5400 RPM · Caché 128 MB",
+      "formFactor": "2.5 pulgadas",
+      "warranty": "Consultar garantía vigente"
+    }
+  },
+  {
+    "id": "hdd-red8",
+    "name": "Western Digital Red Plus 8TB HDD",
+    "brand": "Western Digital",
+    "category": "hdd",
+    "categoryLabel": "Disco duro HDD / NAS",
+    "price": 8580,
+    "shortDescription": "Disco duro NAS interno de 8 TB, SATA 6 Gb/s y caché de 256 MB.",
+    "image": null,
+    "artLabel": "WD RED PLUS · 8TB",
+    "url": "https://www.compucenter.store/category/2-almacenamiento/9-disco-duro",
+    "specs": {
+      "capacity": "8 TB",
+      "type": "HDD NAS",
+      "interface": "SATA 6 Gb/s",
+      "speed": "5640 RPM · Caché 256 MB",
+      "formFactor": "3.5 pulgadas",
+      "warranty": "Consultar garantía vigente"
+    }
+  },
+  {
+    "id": "board-b760",
+    "name": "Gigabyte B760M H 1.0 DDR4",
+    "brand": "Gigabyte",
+    "category": "board",
+    "categoryLabel": "Placa madre Intel",
+    "price": 1703,
+    "shortDescription": "Micro-ATX, socket LGA1700, 2 ranuras M.2 PCIe 4.0 y hasta 64 GB DDR4.",
+    "image": "https://elitehubs.com/cdn/shop/files/B760M-H-DDR5_result_45061488-93fc-4fef-a92f-ddb74871eb55.png?v=1717563783",
+    "url": "https://compucenter.store/product/tarjeta-madre-gigabyte-formato-micro-atx-para-intel-de-14va-13va-12va-gen-socket-lga-1700-dimm-ddr4-max-64-gb-2-x-m2-pcie-40-salida-video-hdmi-y-vga",
+    "specs": {
+      "socket": "Intel LGA 1700",
+      "chipset": "Intel B760 Express",
+      "memory": "2 × DDR4 DIMM · Hasta 64 GB",
+      "interface": "2 × M.2 PCIe 4.0 · 1 × PCIe 4.0 x16",
+      "formFactor": "Micro-ATX",
+      "warranty": "30 días de tienda según publicación"
+    }
+  },
+  {
+    "id": "board-h610",
+    "name": "ASUS PRIME H610M-K",
+    "brand": "ASUS",
+    "category": "board",
+    "categoryLabel": "Placa madre Intel",
+    "price": 1794,
+    "shortDescription": "Micro-ATX, chipset H610, socket LGA1700, DDR5 y PCIe 4.0.",
+    "image": null,
+    "artLabel": "ASUS PRIME · H610",
+    "url": "https://www.compucenter.store/category/componentes-pc",
+    "specs": {
+      "socket": "Intel LGA 1700",
+      "chipset": "Intel H610",
+      "memory": "DDR5 · confirmar capacidad máxima con la tienda",
+      "interface": "PCIe 4.0 · M.2",
+      "formFactor": "Micro-ATX",
+      "warranty": "Consultar garantía vigente"
+    }
+  },
+  {
+    "id": "psu-thermaltake",
+    "name": "Thermaltake TR2 500W",
+    "brand": "Thermaltake",
+    "category": "power",
+    "categoryLabel": "Fuente de poder",
+    "price": 975,
+    "shortDescription": "Fuente ATX de 500 W. Verifica conectores y consumo antes de elegirla.",
+    "image": null,
+    "artLabel": "THERMALTAKE · 500W",
+    "url": "https://www.compucenter.store/category/componentes-pc",
+    "specs": {
+      "power": "500 W",
+      "formFactor": "ATX",
+      "compatibility": "Revisar requerimientos de GPU y conectores",
+      "warranty": "Consultar garantía vigente"
+    }
+  },
+  {
+    "id": "psu-msi750",
+    "name": "MSI MAG A750BN PCIe5 750W",
+    "brand": "MSI",
+    "category": "power",
+    "categoryLabel": "Fuente de poder",
+    "price": 1326,
+    "shortDescription": "750 W, certificación 80 PLUS Bronze y soporte PCIe 5.0.",
+    "image": "https://img.terabyteshop.com.br/produto/g/fonte-msi-mag-a750bn-pcie5-750w-80-plus-bronze-pfc-ativo-preto_251859.jpg",
+    "url": "https://www.compucenter.store/product/fuente-poder-msi-pcie5-750w-80-plus-bronze",
+    "specs": {
+      "power": "750 W",
+      "efficiency": "80 PLUS Bronze",
+      "formFactor": "ATX · No modular",
+      "features": "PCIe 5.0 · Protecciones OVP / OCP / SCP",
+      "warranty": "Consultar garantía vigente"
+    }
+  },
+  {
+    "id": "case-cg580",
+    "name": "DeepCool CG580 4F WH",
+    "brand": "DeepCool",
+    "category": "case",
+    "categoryLabel": "Gabinete gamer",
+    "price": 1937,
+    "shortDescription": "Gabinete ATX blanco, cuatro ventiladores PWM-ARGB y panel de vidrio templado.",
+    "image": null,
+    "artLabel": "DEEPCOOL · CG580",
+    "url": "https://www.compucenter.store/category/componentes-pc",
+    "specs": {
+      "formFactor": "ATX",
+      "features": "4 ventiladores PWM-ARGB · Vidrio templado",
+      "color": "Blanco",
+      "warranty": "Consultar garantía vigente"
+    }
+  },
+  {
+    "id": "cpu-request",
+    "name": "Procesadores Intel / AMD por pedido",
+    "brand": "A cotizar",
+    "category": "cpu",
+    "categoryLabel": "Procesador bajo pedido",
+    "price": null,
+    "shortDescription": "Solicita Core, Ryzen u otro CPU por modelo, socket y generación para cotizar próxima mercadería.",
+    "image": null,
+    "artLabel": "CPU · BAJO PEDIDO",
+    "url": "https://www.compucenter.store/category/componentes-pc",
+    "compare": false,
+    "specs": {
+      "brand": "Intel o AMD",
+      "socket": "Indica AM4, AM5, LGA1700 u otro",
+      "generation": "Indica generación y modelo exacto",
+      "availability": "Consulta de próxima mercadería",
+      "price": "Cotización según modelo solicitado"
+    }
+  },
+  {
+    "id": "board-h510-gigabyte",
+    "name": "Gigabyte H510M-K V2",
+    "brand": "Gigabyte",
+    "category": "board",
+    "categoryLabel": "Placa madre Intel",
+    "price": 1456,
+    "shortDescription": "Micro-ATX LGA1200 para Intel 10.ª/11.ª gen, DDR4 hasta 64 GB y M.2 PCIe.",
+    "image": null,
+    "artLabel": "GIGABYTE · H510M-K V2",
+    "url": "https://www.compucenter.store/product/tarjeta-madre-gigabyte-formato-micro-atx-para-procesadores-intel-de-10ma-y-11va-gen-socket-lga-1200-dimm-ddr4-max-64-gb-m2-pcie-4030-x16-salida-video-hdmi-y-vga",
+    "specs": {
+      "socket": "Intel LGA 1200",
+      "chipset": "Intel H510",
+      "memory": "2 × DDR4 DIMM · Hasta 64 GB",
+      "speed": "2133–3200 MHz según CPU",
+      "interface": "1 × M.2 PCIe 3.0 x4/SATA · 2 × SATA III",
+      "formFactor": "Micro-ATX",
+      "warranty": "30 días de tienda según publicación"
+    }
+  },
+  {
+    "id": "board-h510-asus",
+    "name": "ASUS Prime H510M-K",
+    "brand": "ASUS",
+    "category": "board",
+    "categoryLabel": "Placa madre Intel",
+    "price": 1521,
+    "shortDescription": "Micro-ATX LGA1200 para Intel 10.ª/11.ª gen, DDR4 hasta 64 GB y M.2.",
+    "image": null,
+    "artLabel": "ASUS PRIME · H510M-K",
+    "url": "https://www.compucenter.store/product/tarjeta-madre-asus-formato-micro-atx-para-procesadores-intel-de-10ma-y-11va-gen-socket-lga-1200-dimm-ddr4-max-64-gb-m2-pcie-4030-x16-salida-video-hdmi-y-vga",
+    "specs": {
+      "socket": "Intel LGA 1200",
+      "chipset": "Intel H470 (según ficha de tienda)",
+      "memory": "2 × DDR4 DIMM · Hasta 64 GB",
+      "speed": "2133–3200 MHz según CPU",
+      "interface": "1 × M.2 PCIe 4.0/3.0 x4/SATA · 2 × SATA III",
+      "formFactor": "Micro-ATX",
+      "warranty": "30 días de tienda según publicación"
+    }
+  },
+  {
+    "id": "psu-checkpoint850",
+    "name": "CheckPoint X-Point 850W 80 Plus Gold",
+    "brand": "CheckPoint",
+    "category": "power",
+    "categoryLabel": "Fuente de poder",
+    "price": 1612,
+    "shortDescription": "850 W continuos, certificación 80 PLUS Gold y cableado no modular.",
+    "image": null,
+    "artLabel": "CHECKPOINT · 850W GOLD",
+    "url": "https://compucenter.store/product/fuente-de-poder-checkpoint-x-point-850w-80-plus-gold",
+    "specs": {
+      "power": "850 W continuos",
+      "efficiency": "80 PLUS Gold · Hasta 90% a 50% de carga",
+      "formFactor": "ATX 12V v2.4 / EPS 2.92",
+      "connectors": "24 pines · 2 × CPU 8 pines · 3 × PCIe 8 pines · SATA",
+      "cabling": "No modular",
+      "warranty": "2 meses de tienda según publicación"
+    }
+  },
+  {
+    "id": "psu-cougar850",
+    "name": "COUGAR GR Series 850W 80 Plus Gold",
+    "brand": "COUGAR",
+    "category": "power",
+    "categoryLabel": "Fuente de poder",
+    "price": 2197,
+    "shortDescription": "850 W, 80 PLUS Gold, totalmente modular y estándar ATX 3.1 / PCIe 5.1.",
+    "image": null,
+    "artLabel": "COUGAR · 850W GOLD",
+    "url": "https://compucenter.store/product/cougar-fuente-real-para-pc-850w-80-plus-gold-full-modular-atx-31",
+    "specs": {
+      "power": "850 W nominales",
+      "efficiency": "80 PLUS Gold · Hasta 91%",
+      "formFactor": "ATX 3.1 · PCIe 5.1",
+      "cabling": "Totalmente modular",
+      "features": "Ventilador 120 mm · +12 V 70.8 A",
+      "warranty": "12 meses según publicación"
+    }
+  }
 ]
