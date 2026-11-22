@@ -52,7 +52,7 @@
     },
     async saveProfile(storeCode, profile) {
       const { data, error } = await client.from('catalog_profiles')
-        .upsert({ store_code: storeCode, user_id: this.user.id, ...profile, updated_at: new Date().toISOString() },
+        .upsert({ ...profile, store_code: storeCode, user_id: this.user.id, updated_at: new Date().toISOString() },
           { onConflict: 'store_code,user_id' }).select().single();
       if (error) throw error;
       return data;
