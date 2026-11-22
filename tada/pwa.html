@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
 <meta name="theme-color" content="#29154f"><meta name="description" content="TaDa Bolivia: catálogo de bebidas, lista de pedidos y solicitud de delivery.">
-<link rel="manifest" href="./manifest.json"><link rel="icon" href="./icons/icon.svg"><link rel="stylesheet" href="./pwa.css?v=tada-variedades-36-v9">
+<link rel="manifest" href="./manifest.json"><link rel="icon" href="./icons/icon.svg"><link rel="stylesheet" href="./pwa.css?v=tada-variedades-36-v9-theme-v1">
 <title>TaDa Bolivia · Catálogo y delivery</title><script defer src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.119.2"></script>
 <script defer src="../catalog-db.js"></script>
 <script defer src="./pwa.js?v=tada-variedades-36-v9"></script>
@@ -18,6 +18,7 @@
   <button class="nav-link" data-view="cuenta" type="button">Delivery / cuenta</button>
   <button class="nav-link" data-view="pedidos" type="button">Mis pedidos</button>
  </nav>
+ <button class="theme-toggle" id="themeToggle" type="button" aria-pressed="false">☾ Modo noche</button>
  <span class="network-pill" id="networkStatus" data-state="checking"><i></i><b>Conectando…</b></span>
 </header>
 <nav class="mobile-nav" aria-label="Navegación móvil">
@@ -103,5 +104,6 @@
  <section class="confirm-card" role="dialog" aria-modal="true" aria-labelledby="deliveryConfirmTitle"><button class="confirm-close" id="closeDeliveryConfirm" type="button" aria-label="Cancelar">×</button><p class="eyebrow">SOLICITUD DE DELIVERY</p><h2 id="deliveryConfirmTitle">Confirma los datos del pedido</h2><p id="deliveryConfirmSummary"></p><div class="countdown-label">TIEMPO PARA CONFIRMAR</div><strong class="countdown" id="deliveryCountdown">01:00</strong><div class="countdown-track"><span id="deliveryCountdownBar"></span></div><p class="confirm-note">Confirmar registra la solicitud en tu historial en línea. No reserva inventario, no efectúa pago ni sustituye la confirmación del canal oficial TaDa Delivery.</p><div class="confirm-actions"><button class="button-secondary" id="cancelDeliveryPending" type="button">Cancelar</button><button class="button-primary" id="confirmDeliveryPending" type="button">Confirmar solicitud</button></div></section>
 </div>
 <div class="toast" id="toast" role="status" aria-live="polite"></div>
+<script defer src="../theme-toggle.js?v=light-dark-v1"></script>
 </body>
 </html>
