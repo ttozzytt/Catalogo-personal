@@ -75,6 +75,28 @@
     }catch(error){toast('No se pudo registrar el pedido: '+error.message,'error');}
     finally{$('confirmDeliveryPending').disabled=false;}
   }
+
+  async function saveDeliveryProfile(){
+    const d=collectDelivery();
+    if(d.name.length<2||d.phone.length!==8||!d.phone.split('').every(ch=>ch>='0'&&ch<='9')){
+      $('profileSaveMessage').textContent='Escribe tu nombre y un celular boliviano de 8 dígitos.';
+      return;
+    }
+    if(!state.cloud){$('profileSaveMessage').textContent='Conectando con la base de datos. Inténtalo de nuevo en unos segundos.';return;}
+    $('saveDeliveryProfile').disabled=true;
+    try{
+      state.profile=await state.cloud.saveProfile(STORE,{
+        display_name:d.name,phone:d.phone,city:d.city||null,zone:d.zone||null,
+        address:d.address||null,reference:d.reference||null,contact_preference:'whatsapp'
+      });
+      fillDeliveryProfile();
+      $('profileSaveMessage').textContent='Tu perfil se guardó correctamente en la nube.';
+      toast('Datos de entrega guardados en tu cuenta.');
+    }catch(error){
+      $('profileSaveMessage').textContent='No se pudo guardar: '+error.message;
+    }finally{$('saveDeliveryProfile').disabled=false;}
+  }
+  $('saveDeliveryProfile').addEventListener('click',saveDeliveryProfile);
   $('deliveryForm').addEventListener('submit',event=>{
     event.preventDefault();const d=collectDelivery();if(!validateDelivery(d))return;
     const items=state.products.filter(p=>state.list[p.id]).map(p=>({id:p.id,name:p.name,category:p.category,quantity:state.list[p.id]}));
