@@ -14,7 +14,7 @@
     return{id:row.item_code,name:row.name,category:row.category,brand:row.brand||'',type:s.type||row.category,
       description:row.description||'',image:row.image_url||'',price:row.price===null?null:Number(row.price),
       priceLabel:s.priceLabel||'Consultar',priceSource:s.priceSource||'TaDa · consultar',
-      priceNote:s.priceNote||'',formatGroup:s.presentationGroup||'botellas',ageRestricted:Boolean(s.ageRestricted)};
+      priceNote:s.priceNote||'',formatGroup:s.presentationGroup==='cajas'?'packs':(s.presentationGroup||'botellas'),ageRestricted:Boolean(s.ageRestricted)};
   }
   function updateBadges(){const n=totalUnits();$('listBadge').textContent=n;$('mobileBadge').textContent=n;$('listSummary').textContent=n+' unidades seleccionadas';}
   async function saveList(){try{await state.cloud.saveUserState(STORE,'cart',{quantities:state.list});}catch(error){toast('No se pudo sincronizar la lista: '+error.message,'error');}}
@@ -32,7 +32,7 @@
       img.src=p.image||'';img.alt=p.name;img.loading='lazy';img.decoding='async';
       img.addEventListener('error',()=>{img.remove();art.append(node('span',p.brand||p.name,'brand-fallback'));},{once:true});art.append(img);
       const body=node('div',undefined,'product-body');
-      body.append(node('small',(p.brand||p.type)+' · '+p.type),node('h3',p.name),node('p',p.description));
+      body.append(node('small',(p.brand||p.type)+' · '+p.type+(p.ageRestricted?' · +18':'')),node('h3',p.name),node('p',p.description));
       const foot=node('div',undefined,'product-foot'),priceWrap=node('div',undefined,'product-price-wrap');
       priceWrap.append(node('strong',formatPrice(p)),node('small',p.priceNote||'Precio y stock final sujetos a confirmación del canal TaDa.'));
       const button=node('button',state.list[p.id]?'Añadido ✓':'Añadir +');button.type='button';
