@@ -50,7 +50,7 @@
   function collectDelivery(){return{name:$('deliveryName').value.trim(),phone:$('deliveryPhone').value.trim(),city:$('deliveryCity').value,zone:$('deliveryZone').value.trim(),address:$('deliveryAddress').value.trim(),reference:$('deliveryReference').value.trim(),notes:$('deliveryNotes').value.trim(),adultConfirmed:$('adultConfirm').checked,idAtDoor:$('idAtDoor').checked};}
   function validateDelivery(d){
     if(totalUnits()===0){$('deliveryMessage').textContent='Primero agrega bebidas a tu pedido.';return false;}
-    if(d.name.length<2||!/^\\d{8}$/.test(d.phone)||!d.city||d.zone.length<2||d.address.length<4||d.reference.length<3){$('deliveryMessage').textContent='Revisa nombre, celular, ciudad, zona, dirección y referencia.';return false;}
+    if(d.name.length<2||!/^\d{8}$/.test(d.phone)||!d.city||d.zone.length<2||d.address.length<4||d.reference.length<3){$('deliveryMessage').textContent='Revisa nombre, celular, ciudad, zona, dirección y referencia.';return false;}
     if(!d.adultConfirmed||!d.idAtDoor){$('deliveryMessage').textContent='Confirma que eres mayor de edad y que presentarás tu carnet físico al recibir.';return false;}
     return true;
   }
