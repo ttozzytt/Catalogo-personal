@@ -36,7 +36,7 @@
    <button type="button" data-category="salchipapas"><span>04</span><strong>Salchipapas</strong><small>Un clásico para compartir</small></button>
   </div>
   <div class="order-process"><article><b>01 · Selecciona</b><small>Elige platos y cantidades.</small></article><article><b>02 · Organiza</b><small>Retiro o entrega a domicilio.</small></article><article><b>03 · Confirma</b><small>60 segundos para confirmar la solicitud.</small></article></div>
-  <p class="fine-note">La confirmación se guarda en este dispositivo. El pedido debe coordinarse con el local; no existe conexión automática con cocina ni reparto.</p>
+  <p class="fine-note">La confirmación se guarda en tu historial en línea. El negocio debe validar el pedido; no existe conexión automática con cocina ni reparto.</p>
  </section>
  <section class="view" id="view-menu" aria-labelledby="menuTitle" hidden>
   <div class="view-head"><div><p class="eyebrow">MENÚ DEL LOCAL</p><h1 id="menuTitle">¿Qué se te antoja?</h1><p>Precios en Bs. Ajusta la cantidad de cada producto.</p></div><label class="search"><span>⌕</span><input id="productSearch" type="search" placeholder="Buscar producto…" aria-label="Buscar producto"></label></div>
@@ -66,7 +66,7 @@
     <label>Zona / barrio <span class="optional">Para futuras entregas</span><input id="profileZone" maxlength="60" placeholder="Ej. Sopocachi"></label>
     <label>Dirección habitual <span class="optional">Opcional</span><input id="profileAddress" maxlength="100" placeholder="Calle, número, edificio"></label>
     <button class="button-primary" type="submit">Guardar mi perfil</button>
-    <p class="form-message" id="profileMessage" role="status">El perfil se guarda en este dispositivo y no crea una cuenta en un servidor.</p>
+    <p class="form-message" id="profileMessage" role="status">El perfil se guarda en tu cuenta en línea.</p>
    </form>
    <aside class="info-panel"><p class="eyebrow">TUS DATOS</p><h2 id="profileGreeting">Completa tu perfil.</h2><p>Estos datos se reutilizan para completar el checkout. Puedes modificarlos o eliminarlos desde aquí.</p><button class="button-secondary" id="deleteProfile" type="button">Eliminar mis datos</button></aside>
   </div>
@@ -87,7 +87,7 @@
      <label>Referencia<textarea id="checkoutReference" maxlength="120" rows="2" placeholder="Entre calles, edificio, color de puerta…"></textarea></label>
     </div>
     <label>Indicaciones para el pedido <span class="optional">Opcional</span><textarea id="checkoutInstructions" maxlength="180" rows="2" placeholder="Timbre, referencia o indicación adicional"></textarea></label>
-    <label class="check-line"><input id="checkoutConsent" type="checkbox" required><span>Entiendo que es una solicitud local y que el local debe confirmar el pedido.</span></label>
+    <label class="check-line"><input id="checkoutConsent" type="checkbox" required><span>Entiendo que es una solicitud en línea y que el negocio debe confirmar el pedido.</span></label>
     <p class="form-message" id="checkoutMessage" role="status"></p>
     <button class="button-primary" type="submit">Revisar y confirmar</button>
    </form>
@@ -95,7 +95,7 @@
   </div>
  </section>
  <section class="view" id="view-historial" aria-labelledby="historyTitle" hidden>
-  <div class="view-head"><div><p class="eyebrow">HISTORIAL EN ESTE DISPOSITIVO</p><h1 id="historyTitle">Mis pedidos</h1><p>Solicitudes confirmadas en línea.</p></div><button class="button-secondary" id="clearHistory" type="button">Borrar historial en línea</button></div>
+  <div class="view-head"><div><p class="eyebrow">HISTORIAL EN LÍNEA</p><h1 id="historyTitle">Mis pedidos</h1><p>Solicitudes confirmadas en línea.</p></div><button class="button-secondary" id="clearHistory" type="button">Borrar historial en línea</button></div>
   <div class="history-list" id="historyList"><p class="empty-state">Todavía no tienes pedidos guardados.</p></div>
  </section>
 </main>
@@ -106,7 +106,7 @@
   <button class="confirm-close" id="closeConfirm" type="button" aria-label="Cancelar confirmación">×</button>
   <p class="eyebrow">PEDIDO PREPARADO</p><h2 id="confirmTitle">Confirma tu pedido</h2><p id="confirmSummary"></p>
   <div class="countdown-label">TIEMPO PARA CONFIRMAR</div><strong class="countdown" id="confirmCountdown">01:00</strong><div class="countdown-track"><span id="confirmCountdownBar"></span></div>
-  <p class="confirm-note">Al confirmar se guarda una solicitud local con el resumen y el total. No se procesa pago ni se envía automáticamente al local.</p>
+  <p class="confirm-note">Al confirmar se registra una solicitud en tu historial en línea con el resumen y total estimado. No se procesa pago ni se envía automáticamente al local.</p>
   <div class="confirm-actions"><button class="button-secondary" id="cancelConfirm" type="button">Cancelar</button><button class="button-primary" id="acceptConfirm" type="button">Confirmar pedido</button></div>
  </section>
 </div>
