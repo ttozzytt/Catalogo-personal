@@ -143,6 +143,7 @@
   });
   $('confirmPending').addEventListener('click',confirmPending);
   $('closeQrPayment').addEventListener('click',()=>$('qrPaymentModal').hidden=true);
+  $('closeQrPaymentBottom').addEventListener('click',()=>$('qrPaymentModal').hidden=true);
   $('qrPaymentModal').addEventListener('click',event=>{if(event.target===$('qrPaymentModal'))$('qrPaymentModal').hidden=true;});
   $('cancelPending').addEventListener('click',()=>closeConfirm('Solicitud temporal cancelada.'));
   $('closeConfirm').addEventListener('click',()=>closeConfirm('Solicitud temporal cancelada.'));
