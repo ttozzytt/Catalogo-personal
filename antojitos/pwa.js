@@ -76,7 +76,7 @@
   document.querySelectorAll('[data-mode]').forEach(b=>b.addEventListener('click',()=>setMode(b.dataset.mode)));
   function renderCheckoutSummary(){
     $('checkoutTotal').textContent=money(total());const list=$('checkoutItems');list.replaceChildren();
-    selectedProducts().forEach(p=>list.append(node('p',(state.cart[p.id]||0)+' × '+p.name+' — '+money(p.price*state.cart[p.id]))));
+    selectedProducts().forEach(p=>list.append(node('p',(state.cart[p.id]||0)+' × '+p.name+' — '+money(p.price===null?null:p.price*state.cart[p.id]))));
     $('checkoutName').value=state.profile?.display_name||$('checkoutName').value;
     $('checkoutPhone').value=state.profile?.phone||$('checkoutPhone').value;
     $('checkoutZone').value=state.profile?.zone||$('checkoutZone').value;
@@ -133,7 +133,7 @@
     });
   }
   $('clearHistory').addEventListener('click',async()=>{
-    if(!confirm('¿Borrar el historial de pedidos de El Local en la nube?'))return;
+    if(!confirm('¿Borrar el historial de pedidos de Antojitos en la nube?'))return;
     try{await state.cloud.deleteRequests(STORE);state.orders=[];renderHistory();toast('Historial eliminado de la base de datos.');}
     catch(error){toast('No se pudo borrar: '+error.message,'error');}
   });
