@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
 <meta name="theme-color" content="#29154f"><meta name="description" content="TaDa Bolivia: catálogo de bebidas, lista de pedidos y solicitud de delivery.">
-<link rel="manifest" href="./manifest.json"><link rel="icon" href="./icons/icon.svg"><link rel="stylesheet" href="./pwa.css?v=tada-history-clean-v5">
+<link rel="manifest" href="./manifest.json"><link rel="icon" href="./icons/icon.svg"><link rel="stylesheet" href="./pwa.css?v=tada-variedades-36-v6">
 <title>TaDa Bolivia · Catálogo y delivery</title><script defer src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.119.2"></script>
 <script defer src="../catalog-db.js"></script>
 <script defer src="./pwa.js?v=tada-history-clean-v5"></script>
@@ -26,21 +26,33 @@
 <main class="app-main">
  <section class="view active" id="view-inicio" aria-labelledby="homeTitle">
   <div class="hero">
-   <div class="hero-copy"><p class="eyebrow">BEBIDAS FRÍAS · TIENDAS · DELIVERY</p><h1 id="homeTitle">Lo bueno se<br><em>comparte.</em></h1><p>Explora marcas del portafolio TaDa Bolivia, prepara tu pedido y consulta el delivery oficial.</p><div class="hero-actions"><button class="button-primary" data-go="catalogo" type="button">Explorar catálogo</button><a class="button-secondary" href="https://tadadelivery.com.bo/" target="_blank" rel="noopener">Delivery oficial ↗</a></div></div>
+   <div class="hero-copy"><p class="eyebrow">BEBIDAS FRÍAS · TIENDAS · DELIVERY</p><h1 id="homeTitle">Lo bueno se<br><em>comparte.</em></h1><p>Explora marcas y presentaciones: latas, botellas, packs y cajas full. Precios claros y consulta directa de disponibilidad.</p><div class="hero-actions"><button class="button-primary" data-go="catalogo" type="button">Explorar catálogo</button><a class="button-secondary" href="https://tadadelivery.com.bo/" target="_blank" rel="noopener">Delivery oficial ↗</a></div></div>
    <img src="https://franquicias.tada.com.bo/assets/img/hat.png" alt="Selección de bebidas de TaDa" fetchpriority="high">
   </div>
   <div class="category-tiles">
-   <button type="button" data-category="cervezas"><span>01</span><strong>Cervezas</strong><small>Marcas nacionales e internacionales</small></button>
+   <button type="button" data-category="cervezas"><span>01</span><strong>Cervezas</strong><small>Paceña, Huari, Golden, Bock y Corona</small></button>
    <button type="button" data-category="destilados"><span>02</span><strong>Destilados</strong><small>Ron, tequila y aperitivos</small></button>
-   <button type="button" data-category="singani"><span>03</span><strong>Singani</strong><small>Tradición boliviana</small></button>
-   <button type="button" data-category="sin-alcohol"><span>04</span><strong>Sin alcohol</strong><small>Opciones para compartir</small></button>
+   <button type="button" data-category="singani"><span>03</span><strong>Singani</strong><small>Casa Real y presentaciones</small></button>
+   <button type="button" data-category="sin-alcohol"><span>04</span><strong>Sin alcohol</strong><small>Gaseosas y otras bebidas</small></button>
+   <button type="button" data-category="latas"><span>05</span><strong>Latas</strong><small>Presentaciones individuales</small></button>
+   <button type="button" data-category="packs"><span>06</span><strong>Packs y cajas</strong><small>Paquetes y cajas full por cotizar</small></button>
   </div>
   <div class="delivery-strip"><div><strong>¿Lo llevamos a tu domicilio?</strong><small>Prepara el pedido y verifica cobertura y disponibilidad.</small></div><button class="button-primary" data-go="lista" type="button">Armar pedido ↗</button></div>
   <p class="fine-note">Catálogo referencial, sin precios ni inventario en tiempo real. La disponibilidad y el importe final se confirman en TaDa Delivery.</p>
  </section>
  <section class="view" id="view-catalogo" aria-labelledby="catalogTitle" hidden>
-  <div class="view-head"><div><p class="eyebrow">PORTAFOLIO DE MARCAS</p><h1 id="catalogTitle">Encuentra tu favorita</h1><p>Agrega marcas a tu lista y organiza una consulta de delivery.</p></div><label class="search"><span>⌕</span><input id="productSearch" type="search" placeholder="Buscar bebida o marca…" aria-label="Buscar bebida"></label></div>
-  <nav class="filter-row" aria-label="Categorías"><button class="filter active" type="button" data-filter="todos">Todas</button><button class="filter" type="button" data-filter="cervezas">Cervezas</button><button class="filter" type="button" data-filter="destilados">Destilados</button><button class="filter" type="button" data-filter="singani">Singani</button><button class="filter" type="button" data-filter="sin-alcohol">Sin alcohol</button></nav>
+  <div class="view-head"><div><p class="eyebrow">PORTAFOLIO DE MARCAS</p><h1 id="catalogTitle">Encuentra tu favorita</h1><p>Elige una marca y su presentación. Consulta precio y stock final por el canal oficial.</p></div><label class="search"><span>⌕</span><input id="productSearch" type="search" placeholder="Buscar bebida o marca…" aria-label="Buscar bebida"></label></div>
+  <nav class="filter-row" aria-label="Categorías y presentaciones">
+   <button class="filter active" type="button" data-filter="todos">Todo</button>
+   <button class="filter" type="button" data-filter="cervezas">Cervezas</button>
+   <button class="filter" type="button" data-filter="destilados">Destilados</button>
+   <button class="filter" type="button" data-filter="singani">Singani</button>
+   <button class="filter" type="button" data-filter="sin-alcohol">Sin alcohol</button>
+   <button class="filter" type="button" data-filter="latas">Latas</button>
+   <button class="filter" type="button" data-filter="botellas">Botellas</button>
+   <button class="filter" type="button" data-filter="packs">Packs / cajas</button>
+  </nav>
+  <p class="fine-note">El portafolio de marcas se basa en el sitio oficial TaDa. Los precios señalados como referencia proceden de Hipermaxi o Amarket y no son cotizaciones oficiales de TaDa; confirma importe, presentación, unidades por caja y disponibilidad antes de pedir.</p>
   <div class="catalog-grid" id="productGrid"><p class="loading">Cargando marcas…</p></div>
  </section>
  <section class="view" id="view-lista" aria-labelledby="listTitle" hidden>
