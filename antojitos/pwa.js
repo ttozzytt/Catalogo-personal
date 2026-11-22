@@ -123,11 +123,12 @@
     const list=$('historyList');list.replaceChildren();
     if(!state.orders.length){list.append(node('p','Todavía no tienes pedidos guardados.','empty-state'));return;}
     state.orders.forEach(row=>{
-      const d=row.request_data||{},c=d.customer||{},items=Array.isArray(d.items)?d.items:[],card=node('article',undefined,'history-card'),info=node('div');
-      info.append(node('strong',money(d.estimatedTotal)+' · '+row.id.slice(0,8).toUpperCase()),node('p',items.map(p=>p.quantity+' × '+p.name).join(' · ')),node('small',row.contact_name+' · '+row.phone+' · '+(row.delivery_method==='delivery'?'Entrega a domicilio':'Retiro en local')+(row.address?' · '+row.address:'')),node('small','Estado: '+row.status));
-      const copy=node('button','Copiar resumen');copy.type='button';
-      copy.addEventListener('click',async()=>{const text='PEDIDO · EL LOCAL\n'+items.map(p=>p.quantity+' × '+p.name+' — '+money(p.subtotal)).join('\n')+'\nTOTAL ESTIMADO: '+money(d.estimatedTotal)+'\nCliente: '+row.contact_name+' · '+row.phone+'\nModalidad: '+(row.delivery_method==='delivery'?'Entrega a domicilio':'Retiro en local')+'\nDirección: '+(row.address||'Retiro')+'\nReferencia: '+(row.reference||'—')+'\nObservaciones: '+(d.note||c.instructions||'—')+'\nPendiente de confirmación del negocio.';try{await navigator.clipboard.writeText(text);toast('Resumen copiado.');}catch(_){toast('No se pudo copiar.','error');}});
-      card.append(info,copy);list.append(card);
+      const d=row.request_data||{},items=Array.isArray(d.items)?d.items:[],card=node('article',undefined,'history-card'),info=node('div');
+      info.append(node('strong',money(d.estimatedTotal)+' · '+row.id.slice(0,8).toUpperCase()),
+        node('p',items.map(p=>p.quantity+' × '+p.name).join(' · ')),
+        node('small',row.contact_name+' · '+row.phone+' · '+(row.delivery_method==='delivery'?'Entrega a domicilio':'Retiro en local')+(row.address?' · '+row.address:'')),
+        node('small','Estado: '+row.status));
+      card.append(info);list.append(card);
     });
   }
   $('clearHistory').addEventListener('click',async()=>{
