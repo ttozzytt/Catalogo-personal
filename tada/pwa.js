@@ -19,7 +19,7 @@
   function updateBadges(){const n=totalUnits();$('listBadge').textContent=n;$('mobileBadge').textContent=n;$('listSummary').textContent=n+' unidades seleccionadas';}
   async function saveList(){try{await state.cloud.saveUserState(STORE,'cart',{quantities:state.list});}catch(error){toast('No se pudo sincronizar la lista: '+error.message,'error');}}
   function formatPrice(p){
-    if(p.price===null)return p.formatGroup==='cajas'?'Caja full · consultar':'Consultar precio en TaDa';
+    if(p.price===null)return p.type==='Caja full'?'Caja full · consultar':'Consultar precio en TaDa';
     const amount='Bs '+p.price.toLocaleString('es-BO',{minimumFractionDigits:p.price%1?2:0,maximumFractionDigits:2});
     return amount+' · ref. '+p.priceSource;
   }
