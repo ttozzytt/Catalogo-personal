@@ -8,3 +8,29 @@
 @media(max-width:850px){.category-tiles{grid-template-columns:repeat(2,minmax(0,1fr))}}
 @media(max-width:430px){.product-price-wrap{max-width:100%}.product-foot{align-items:stretch}.product-price-wrap strong{font-size:9px}}
 .product-price-wrap a{color:#80768e;font-size:8px;line-height:1.25;text-decoration:underline;text-underline-offset:2px}
+
+/* Tema oscuro: variables y superficies */
+body[data-theme=dark]{--paper:#15111f;--ink:#eee9f7;--muted:#b3aabd;--surface:#211a30;--line:#42364f;--purple:#c4a7ff;--purple2:#b79aff;--orange:#ffb85b;}
+.theme-toggle{flex:0 0 auto;display:inline-flex;align-items:center;justify-content:center;gap:6px;min-height:34px;padding:0 10px;border:1px solid var(--line);border-radius:8px;background:var(--surface);color:var(--ink);font-size:10px;font-weight:850;white-space:nowrap;cursor:pointer}
+.theme-toggle:hover{filter:brightness(.97)}
+.theme-toggle:focus-visible{outline:3px solid var(--accent,var(--gold));outline-offset:3px}
+body[data-theme=dark]{color-scheme:dark;background:var(--paper);color:var(--ink)}
+body[data-theme=dark] .app-header,body[data-theme=dark] .mobile-nav,body[data-theme=dark] .topbar,body[data-theme=dark] .app-footer{background:var(--surface);border-color:var(--line);color:var(--muted)}
+body[data-theme=dark] .nav-link{color:var(--muted)}
+body[data-theme=dark] .nav-link:hover,body[data-theme=dark] .nav-link.active{background:#ffffff12;color:var(--ink)}
+body[data-theme=dark] .network-pill{background:var(--surface);border-color:var(--line);color:var(--muted)}
+body[data-theme=dark) .app-brand{color:var(--ink)}
+body[data-theme=dark] .view-head h1,body[data-theme=dark] .info-panel h2,body[data-theme=dark] .order-summary>strong,body[data-theme=dark] .product-body h3,body[data-theme=dark] .food-body h3,body[data-theme=dark] .history-card strong,body[data-theme=dark] .request-card h3,body[data-theme=dark] .order-row strong{color:var(--accent)}
+body[data-theme=dark] .view-head p,body[data-theme=dark] .fine-note,body[data-theme=dark] .optional,body[data-theme=dark] .info-panel p,body[data-theme=dark] .order-summary>small,body[data-theme=dark] .food-body p,body[data-theme=dark] .product-body p,body[data-theme=dark] .empty-state{color:var(--muted)}
+body[data-theme=dark] .category-tiles button,body[data-theme=dark] .product-card,body[data-theme=dark] .food-card,body[data-theme=dark] .service-card,body[data-theme=dark] .request-card,body[data-theme=dark] .history-card,body[data-theme=dark] .order-card,body[data-theme=dark] .selected-row,body[data-theme=dark] .order-row,body[data-theme=dark] .order-summary,body[data-theme=dark] .info-panel,body[data-theme=dark] .account-form,body[data-theme=dark] .checkout-form,body[data-theme=dark] .compare-card,body[data-theme=dark] .info-grid article,body[data-theme=dark] .modal-card,body[data-theme=dark] .confirm-card,body[data-theme=dark] .empty-state,body[data-theme=dark] .order-process article,body[data-theme=dark] .search,body[data-theme=dark] .filter,body[data-theme=dark] .mode-switch{background:var(--surface);border-color:var(--line);color:var(--ink)}
+body[data-theme=dark] input,body[data-theme=dark] select,body[data-theme=dark] textarea{background:#111820;border-color:var(--line);color:var(--ink)}
+body[data-theme=dark] input::placeholder,body[data-theme=dark] textarea::placeholder{color:#8c9aa8}
+body[data-theme=dark] .search input{background:transparent}
+body[data-theme=dark] .mobile-nav{box-shadow:0 4px 14px #0002}
+body[data-theme=dark] .filter.active,body[data-theme=dark] .mode-button.active{background:var(--accent);color:#101820}
+body[data-theme=dark] .button-secondary,body[data-theme=dark] .mode-button,body[data-theme=dark] .more-button,body[data-theme=dark] .quantity-controls button{background:#ffffff0d;border-color:var(--line);color:var(--ink)}
+body[data-theme=dark] .app-footer a,body[data-theme=dark] .info-grid a{color:var(--accent)}
+body[data-theme=dark] .hero-copy>p,body[data-theme=dark] .hero p{color:inherit}
+body[data-theme=dark] .confirm-layer{background:#000b}
+body[data-theme=dark] .toast{background:#33463c;color:#fff}
+@media(max-width:850px){.theme-toggle{min-height:32px;padding:0 8px;font-size:9px}}
