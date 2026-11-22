@@ -133,8 +133,11 @@
   $('profileForm').addEventListener('submit',async event=>{
     event.preventDefault();const p=profilePayload();
     if(p.display_name.length<2||!/^\d{8}$/.test(p.phone)){$('profileMessage').textContent='Ingresa un nombre válido y un celular boliviano de 8 dígitos.';return;}
-    try{state.profile=await state.cloud.saveProfile(STORE,p);$('profileMessage').textContent='Perfil guardado en tu cuenta en línea.';renderProfile();fillProfileToBooking();toast('Perfil sincronizado.');}
-    catch(error){$('profileMessage').textContent='No se pudo guardar en la nube: '+error.message;}
+    if(!state.cloud){$('profileMessage').textContent='Conectando con la base de datos. Inténtalo de nuevo en unos segundos.';return;}
+    const button=event.currentTarget.querySelector('button[type="submit"]');button.disabled=true;
+    try{state.profile=await state.cloud.saveProfile(STORE,p);$('profileMessage').textContent='Perfil creado o actualizado correctamente en la nube.';renderProfile();fillProfileToBooking();toast('Perfil sincronizado.');}
+    catch(error){$('profileMessage').textContent='No se pudo guardar: '+error.message;}
+    finally{button.disabled=false;}
   });
   $('deleteProfile').addEventListener('click',async()=>{
     if(!confirm('¿Eliminar tu perfil de Navaja 27 de la nube?'))return;
