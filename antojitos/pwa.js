@@ -68,7 +68,7 @@
     finally{button.disabled=false;}
   });
   $('deleteProfile').addEventListener('click',async()=>{
-    if(!confirm('¿Eliminar tu perfil de El Local de la nube?'))return;
+    if(!confirm('¿Eliminar tu perfil de Antojitos de la nube?'))return;
     try{await state.cloud.deleteProfile(STORE);state.profile=null;renderProfile();toast('Perfil eliminado de la base de datos.');}
     catch(error){toast('No se pudo eliminar: '+error.message,'error');}
   });
