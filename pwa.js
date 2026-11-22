@@ -140,7 +140,7 @@
       state.profile=await state.cloud.profile(STORE);
       await state.cloud.submit(STORE,'appointment',data.name,data.phone,{
         requested_for:new Date(data.date+'T'+data.time+':00').toISOString(),
-        request_data:{serviceCode:data.serviceCode,serviceName:data.service,date:data.date,time:data.time,note:data.note,durationMinutes:data.duration,referencePrice:data.priceLabel,priceAmount:data.priceAmount,currency:'BOB',paymentMethod:'qr',paymentStatus:data.priceAmount===null?'quote_required':'qr_pending_configuration'}
+        request_data:{serviceCode:data.serviceCode,serviceName:data.service,date:data.date,time:data.time,note:data.note,durationMinutes:data.duration,referencePrice:data.priceLabel,priceAmount:data.priceAmount,currency:'BOB',paymentMethod:'Altoke QR',paymentStatus:data.priceAmount===null?'quote_required':'qr_pending_manual_verification'}
       });
       state.requests=await state.cloud.requests(STORE);
       closeConfirm('Solicitud registrada en tu historial en línea. Falta la confirmación real de Navaja 27.');
