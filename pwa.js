@@ -84,15 +84,34 @@
     const d=row.request_data||{};
     return (d.date|| (row.requested_for?new Date(row.requested_for).toLocaleDateString('en-CA'):''))+' '+(d.time||'');
   }
+  function requestAmount(row) {
+    const data=row.request_data||{};
+    if(typeof data.priceAmount==='number'&&Number.isFinite(data.priceAmount))return data.priceAmount;
+    const match=String(data.referencePrice||'').match(/Bs\s*([\d.,]+)/i);
+    if(!match)return null;
+    const amount=Number(match[1].replace(/,/g,''));
+    return Number.isFinite(amount)?amount:null;
+  }
+  function openQrPayment(row) {
+    const amount=requestAmount(row),data=row.request_data||{};
+    $('qrPaymentTitle').textContent='Pago con QR · Navaja 27';
+    $('qrPaymentService').textContent=(data.serviceName||'Servicio')+' · '+toDate(row);
+    $('qrPaymentAmount').textContent=amount===null?'Precio por confirmar':'Bs '+amount.toLocaleString('es-BO');
+    $('qrPaymentStatus').textContent='Solicitud pendiente de confirmación del local.';
+    $('qrPaymentUnavailable').hidden=false;
+    $('qrPaymentModal').hidden=false;
+    $('closeQrPayment').focus();
+  }
   function renderRequests() {
     const list=$('requestList');list.replaceChildren();
     if(!state.requests.length){list.append(node('p','Todavía no tienes solicitudes guardadas.','empty-state'));return;}
     state.requests.forEach(row=>{
       const d=row.request_data||{},card=node('article',undefined,'request-card'),info=node('div');
-      info.append(node('h3',d.serviceName||'Turno solicitado'),node('p',toDate(row)+' · '+row.contact_name+' · '+row.phone),node('small','Estado: '+(row.status||'pending')));
-      const actions=node('div',undefined,'request-actions'),copy=node('button','Copiar resumen');copy.type='button';
-      copy.addEventListener('click',async()=>{const text='NAVAJA 27 · SOLICITUD DE TURNO\n'+row.contact_name+' · '+row.phone+'\n'+(d.serviceName||'Turno')+'\n'+toDate(row)+'\nEstado: '+row.status;try{await navigator.clipboard.writeText(text);toast('Resumen copiado.');}catch(_){toast('No se pudo copiar.','error');}});
-      actions.append(copy);card.append(info,actions);list.append(card);
+      const amount=requestAmount(row);
+      info.append(node('h3',d.serviceName||'Turno solicitado'),node('p',toDate(row)+' · '+row.contact_name+' · '+row.phone),node('small','Estado: '+(row.status||'pending')),node('small',amount===null?'Precio por confirmar':'Total: Bs '+amount.toLocaleString('es-BO')));
+      const actions=node('div',undefined,'request-actions'),pay=node('button',amount===null?'Consultar precio':'Pagar con QR');
+      pay.type='button';pay.disabled=amount===null;pay.addEventListener('click',()=>openQrPayment(row));
+      actions.append(pay);card.append(info,actions);list.append(card);
     });
   }
   async function confirmPending() {
@@ -104,7 +123,7 @@
       state.profile=await state.cloud.profile(STORE);
       await state.cloud.submit(STORE,'appointment',data.name,data.phone,{
         requested_for:new Date(data.date+'T'+data.time+':00').toISOString(),
-        request_data:{serviceCode:data.serviceCode,serviceName:data.service,date:data.date,time:data.time,note:data.note,durationMinutes:data.duration,referencePrice:data.priceLabel}
+        request_data:{serviceCode:data.serviceCode,serviceName:data.service,date:data.date,time:data.time,note:data.note,durationMinutes:data.duration,referencePrice:data.priceLabel,priceAmount:data.priceAmount,currency:'BOB',paymentMethod:'qr',paymentStatus:data.priceAmount===null?'quote_required':'pending'}
       });
       state.requests=await state.cloud.requests(STORE);
       closeConfirm('Solicitud registrada en tu historial en línea. Falta la confirmación real de Navaja 27.');
@@ -120,9 +139,11 @@
     const conflict=state.requests.some(r=>{const d=r.request_data||{};return r.request_type==='appointment'&&d.date===date&&d.time===time&&r.status!=='cancelled';});
     if(conflict){toast('Ya tienes una solicitud para ese horario. Elige otra hora.','error');return;}
     $('bookingMessage').textContent='Conexión lista. Revisa los datos antes de confirmar.';
-    openConfirm({name,phone,service:service.name,serviceCode:service.id,date,time,note:noteText,duration:service.duration,priceLabel:service.priceLabel});
+    openConfirm({name,phone,service:service.name,serviceCode:service.id,date,time,note:noteText,duration:service.duration,priceLabel:service.priceLabel,priceAmount:service.price});
   });
   $('confirmPending').addEventListener('click',confirmPending);
+  $('closeQrPayment').addEventListener('click',()=>$('qrPaymentModal').hidden=true);
+  $('qrPaymentModal').addEventListener('click',event=>{if(event.target===$('qrPaymentModal'))$('qrPaymentModal').hidden=true;});
   $('cancelPending').addEventListener('click',()=>closeConfirm('Solicitud temporal cancelada.'));
   $('closeConfirm').addEventListener('click',()=>closeConfirm('Solicitud temporal cancelada.'));
   $('clearRequests').addEventListener('click',async()=>{
