@@ -1,0 +1,20 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+  <meta name="theme-color" content="#22382d"><meta name="description" content="Catálogo de servicios de Navaja 27 Barber Studio.">
+  <link rel="manifest" href="./manifest.json"><link rel="icon" href="./icons/icon.svg"><link rel="stylesheet" href="./pwa.css">
+  <title>Servicios · Navaja 27</title><script defer src="./pwa.js"></script>
+</head>
+<body class="n27">
+<header class="topbar"><a class="brand" href="./index.html"><span class="brand-mark">N27</span><span>NAVAJA 27</span></a><span class="top-status" id="appStatus">Conectando…</span></header>
+<main class="app-wrap">
+  <section class="app-hero"><div><p class="eyebrow">PRECISIÓN · CARÁCTER · ESTILO</p><h1>Tu estilo,<br><em>bien trabajado.</em></h1><p>Explora los servicios disponibles y selecciona tu próximo look.</p></div><img src="https://raw.githubusercontent.com/ttozzytt/baber/main/proyecto-personal/fase-ui-pwa/imagenes/barber-working.webp" alt="Trabajo de barbería" loading="lazy"></section>
+  <section class="catalog-head"><div><p class="eyebrow">CATÁLOGO</p><h2>Servicios</h2></div><label class="search"><span>⌕</span><input id="searchInput" type="search" placeholder="Buscar servicio…" aria-label="Buscar servicio"></label></section>
+  <nav class="filters" aria-label="Filtrar servicios"><button class="active" data-filter="todos">Todos</button><button data-filter="cabello">Cabello</button><button data-filter="barba">Barba</button><button data-filter="cejas">Cejas</button><button data-filter="combos">Combos</button></nav>
+  <section class="service-grid" id="serviceGrid" aria-live="polite"></section>
+  <p class="selection-note" id="selectionNote" role="status">Selecciona un servicio para ver el resumen.</p>
+  <footer class="app-footer"><a href="./index.html">Volver a portada</a><span>Navaja 27 · Barber Studio</span></footer>
+</main>
+</body>
+</html>

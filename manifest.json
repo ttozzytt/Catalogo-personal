@@ -1,0 +1,6 @@
+{
+  "id":"./pwa.html","name":"Navaja 27 Barber Studio","short_name":"Navaja 27",
+  "description":"Catálogo de servicios de barbería.","start_url":"./pwa.html","scope":"./","display":"standalone",
+  "background_color":"#f4f0e7","theme_color":"#22382d",
+  "icons":[{"src":"./icons/icon.svg","sizes":"any","type":"image/svg+xml"}]
+}
