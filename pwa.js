@@ -113,8 +113,8 @@
     const amount=requestAmount(row),data=row.request_data||{};
     $('qrPaymentTitle').textContent='Pago con QR · Navaja 27';
     $('qrPaymentService').textContent=(data.serviceName||'Servicio')+' · '+toDate(row);
-    $('qrPaymentAmount').textContent=amount===null?'Precio por confirmar':'Precio acordado: Bs '+amount.toLocaleString('es-BO');
-    $('qrPaymentStatus').textContent='El monto mostrado es referencial hasta que Navaja 27 confirme el precio del turno.';
+    $('qrPaymentAmount').textContent=amount===null?'Precio por confirmar':'Precio de referencia: Bs '+amount.toLocaleString('es-BO');
+    $('qrPaymentStatus').textContent='El monto es referencial. Confirma el precio con Navaja 27 y verifica el beneficiario y el importe en tu aplicación bancaria antes de autorizar.';
     drawAltokeQr();
     $('qrPaymentModal').hidden=false;
     $('closeQrPayment').focus();
