@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
 <meta name="theme-color" content="#a3442b"><meta name="description" content="Menú digital de Antojitos en La Paz: hamburguesas, choripanes, hot dogs, salchipapas, parrillitas y bebidas.">
-<link rel="manifest" href="./manifest.json"><link rel="icon" href="./icons/icon.svg"><link rel="stylesheet" href="./pwa.css?v=antojitos-official-menu-v5">
+<link rel="manifest" href="./manifest.json"><link rel="icon" href="./icons/icon.svg"><link rel="stylesheet" href="./pwa.css?v=antojitos-official-menu-v5-theme-v1">
 <title>Antojitos · Menú y pedidos</title><script defer src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.119.2"></script>
 <script defer src="../catalog-db.js"></script>
 <script defer src="./pwa.js?v=antojitos-official-menu-v5"></script>
@@ -18,6 +18,7 @@
   <button class="nav-link" data-view="cuenta" type="button">Mi cuenta</button>
   <button class="nav-link" data-view="historial" type="button">Mis pedidos</button>
  </nav>
+ <button class="theme-toggle" id="themeToggle" type="button" aria-pressed="false">☾ Modo noche</button>
  <span class="network-pill" id="networkStatus" data-state="checking"><i></i><b>Conectando…</b></span>
 </header>
 <nav class="mobile-nav" aria-label="Navegación móvil">
@@ -121,5 +122,6 @@
   <div class="confirm-actions"><button class="button-secondary" id="cancelConfirm" type="button">Cancelar</button><button class="button-primary" id="acceptConfirm" type="button">Confirmar pedido</button></div>
  </section>
 </div>
+<script defer src="../theme-toggle.js?v=light-dark-v1"></script>
 </body>
 </html>
