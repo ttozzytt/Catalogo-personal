@@ -2,6 +2,7 @@
 (() => {
   const $ = id => document.getElementById(id);
   const STORE = 'navaja27';
+  const QR_MATRIX_B64 = '/jHRFvPpkIuD/BHNdu0u2yJzUG6GPGVQ/oUIArt04EHAogX6fpXbo4tv9Da/O3euwVI2xTePHdRxB/qqqqqqqqqqr+AEPDHNDkQa6gCWhsz/bIPmcC0HDWh8Csgmq6rblfn1gFHHmEl7LCI930Cxg55jdlEzppmfzKrMbGyAwMlWPk7XbGcdS3OAPwYEcZx4fDPMTZsBfZGiYZoh5hbZDqsK0X3CI++I3oYXKoi8vaUd5voHJCKncbkB2dY3QYAU8jNEM1S8ainuqXhJeehuQnpuK7d61GWjpXj7lgCMNxgn8NgA5Vtnb4/T/zz76KSfoceqZEXMEfojxTaupapzlaxagrcxwBUWkyxwA/EI/Sovt9L++mP9JiMMQokMvHvO6MzgDrN35CdXceQRkERKRaZQTmgWhdg9ANa4Wmq/AWIZGuGvbDcuEY1kjvxPP0zDpXn/MK6oVRCpOUSjyKCa2+pkzdqo2tjtVM/9rPHW/8Ma+rXk8AwCty/LPXxi3TC4EDfj6dy96QzM18IAku2IjtfiZfaY7RF7gtjqYDlm4Qc9HctbSdpmuHT9YfK9YEcJomwYGdj8Qp+29vt+cxvxYp+Esz5NHc7xRRNF6T0UeoO9rJ/yorqqzMW8LGAgcfNLRBfuG//MNvhRr++KejkvM4OZA9GoaiIC7dFsXE9I3JPDPgXs3X8WiEtcdDkoCjWjL3aIm1U1SpK7aqMLB7SFfdMg1+5sbhR18IR4Zyfiva7vQjLVF/jMrAMPlZENKYFR0MQ5Hh3Z2aKqpLY4lq3lUs/r6DYS3aFGIqbFkjwE7KI+DEvBkLTes8tvw6XbKkHmwCJFwvW01rubqJjTpzK3J3Y3euFuE627A6TLQRSKt6a6D5jfPqlJ+IBy0ceIZx4nJF/5zTKgLKq5ECpQXpbRkvFGaUcXumhY+4n/4ipPldUD1lkmn/5KxO6eVw8WKGpqkvMEdJVQY3dvXAOv64ARL5bXsI6dAA==';
   const state = { services: [], filter: 'todos', view: 'inicio', requests: [], profile: null, pending: null, timer: null, expiresAt: 0, cloud: null };
   const node = (tag, text, cls) => { const el = document.createElement(tag); if (text !== undefined) el.textContent = String(text); if (cls) el.className = cls; return el; };
   function toast(message, type) { const el=$('toast'); el.textContent=message; el.className='toast show'+(type?' '+type:''); clearTimeout(toast.timer); toast.timer=setTimeout(()=>el.className='toast',3200); }
@@ -92,13 +93,29 @@
     const amount=Number(match[1].replace(/,/g,''));
     return Number.isFinite(amount)?amount:null;
   }
+  function drawAltokeQr() {
+    const canvas=$('qrPaymentCanvas');
+    if(!canvas||canvas.dataset.ready==='yes')return;
+    const packed=window.atob(QR_MATRIX_B64),modules=77,quiet=4,cell=8,total=(modules+quiet*2)*cell;
+    canvas.width=total;canvas.height=total;
+    const ctx=canvas.getContext('2d',{alpha:false});
+    ctx.imageSmoothingEnabled=false;ctx.fillStyle='#fff';ctx.fillRect(0,0,total,total);ctx.fillStyle='#050505';
+    for(let bit=0;bit<modules*modules;bit++){
+      const byte=packed.charCodeAt(bit>>3),mask=1<<(7-(bit&7));
+      if(byte&mask){
+        const x=bit%modules,y=Math.floor(bit/modules);
+        ctx.fillRect((x+quiet)*cell,(y+quiet)*cell,cell,cell);
+      }
+    }
+    canvas.dataset.ready='yes';
+  }
   function openQrPayment(row) {
     const amount=requestAmount(row),data=row.request_data||{};
     $('qrPaymentTitle').textContent='Pago con QR · Navaja 27';
     $('qrPaymentService').textContent=(data.serviceName||'Servicio')+' · '+toDate(row);
-    $('qrPaymentAmount').textContent=amount===null?'Precio por confirmar':'Bs '+amount.toLocaleString('es-BO');
-    $('qrPaymentStatus').textContent='Confirma primero disponibilidad y precio con Navaja 27 antes de transferir.';
-    $('qrPaymentUnavailable').hidden=false;
+    $('qrPaymentAmount').textContent=amount===null?'Precio por confirmar':'Precio acordado: Bs '+amount.toLocaleString('es-BO');
+    $('qrPaymentStatus').textContent='El monto mostrado es referencial hasta que Navaja 27 confirme el precio del turno.';
+    drawAltokeQr();
     $('qrPaymentModal').hidden=false;
     $('closeQrPayment').focus();
   }
