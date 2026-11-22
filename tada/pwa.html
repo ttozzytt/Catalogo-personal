@@ -4,7 +4,9 @@
 <meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
 <meta name="theme-color" content="#29154f"><meta name="description" content="TaDa Bolivia: catálogo de bebidas, lista de pedidos y solicitud de delivery.">
 <link rel="manifest" href="./manifest.json"><link rel="icon" href="./icons/icon.svg"><link rel="stylesheet" href="./pwa.css?v=tada-delivery-60s-20261122">
-<title>TaDa Bolivia · Catálogo y delivery</title><script defer src="./pwa.js?v=tada-delivery-60s-20261122"></script>
+<title>TaDa Bolivia · Catálogo y delivery</title><script defer src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.119.2"></script>
+<script defer src="../catalog-db.js"></script>
+<script defer src="./pwa.js?v=tada-delivery-60s-20261122"></script>
 </head>
 <body class="tada-app">
 <header class="app-header">
@@ -67,7 +69,7 @@
     <button class="button-primary" type="submit">Revisar solicitud de delivery</button>
     <p class="form-message" id="deliveryMessage" role="status">La solicitud es local y no se envía automáticamente a TaDa.</p>
    </form>
-   <aside class="info-panel"><p class="eyebrow">TU PERFIL</p><h2 id="accountGreeting">Datos para tu próxima entrega.</h2><p>Los datos de contacto y dirección pueden quedar guardados localmente en este navegador para facilitar futuras solicitudes.</p><div class="info-separator"></div><strong>Canal oficial de compra</strong><p>Revisa cobertura, precio y stock actual en la plataforma de TaDa.</p><a class="button-secondary" href="https://tadadelivery.com.bo/" target="_blank" rel="noopener">Abrir TaDa Delivery ↗</a><button class="text-button" id="deleteDeliveryProfile" type="button">Eliminar mis datos de este dispositivo</button></aside>
+   <aside class="info-panel"><p class="eyebrow">TU PERFIL</p><h2 id="accountGreeting">Datos para tu próxima entrega.</h2><p>Los datos de contacto y dirección pueden quedar guardados en tu cuenta en línea en este navegador para facilitar futuras solicitudes.</p><div class="info-separator"></div><strong>Canal oficial de compra</strong><p>Revisa cobertura, precio y stock actual en la plataforma de TaDa.</p><a class="button-secondary" href="https://tadadelivery.com.bo/" target="_blank" rel="noopener">Abrir TaDa Delivery ↗</a><button class="text-button" id="deleteDeliveryProfile" type="button">Eliminar mis datos de este dispositivo</button></aside>
   </div>
  </section>
  <section class="view" id="view-pedidos" aria-labelledby="ordersTitle" hidden>
