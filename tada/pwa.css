@@ -7,3 +7,4 @@
 .category-tiles{grid-template-columns:repeat(3,minmax(0,1fr))}
 @media(max-width:850px){.category-tiles{grid-template-columns:repeat(2,minmax(0,1fr))}}
 @media(max-width:430px){.product-price-wrap{max-width:100%}.product-foot{align-items:stretch}.product-price-wrap strong{font-size:9px}}
+.product-price-wrap a{color:#80768e;font-size:8px;line-height:1.25;text-decoration:underline;text-underline-offset:2px}
