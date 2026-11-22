@@ -2,15 +2,15 @@
 <html lang="es">
 <head>
 <meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
-<meta name="theme-color" content="#8f3925"><meta name="description" content="Menú digital de El Local. Hamburguesas a la parrilla, dobles, mixtas y salchipapas.">
-<link rel="manifest" href="./manifest.json"><link rel="icon" href="./icons/icon.svg"><link rel="stylesheet" href="./pwa.css?v=checkout-history-clean-v4">
-<title>El Local · Menú y pedidos</title><script defer src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.119.2"></script>
+<meta name="theme-color" content="#a3442b"><meta name="description" content="Menú digital de Antojitos en La Paz: hamburguesas, choripanes, hot dogs, salchipapas, parrillitas y bebidas.">
+<link rel="manifest" href="./manifest.json"><link rel="icon" href="./icons/icon.svg"><link rel="stylesheet" href="./pwa.css?v=antojitos-official-menu-v1">
+<title>Antojitos · Menú y pedidos</title><script defer src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.119.2"></script>
 <script defer src="../catalog-db.js"></script>
-<script defer src="./pwa.js?v=checkout-history-clean-v4"></script>
+<script defer src="./pwa.js?v=antojitos-official-menu-v1"></script>
 </head>
 <body class="food-app">
 <header class="app-header">
- <a class="app-brand" href="./index.html"><span class="brand-mark">EL</span><span>EL LOCAL<small>ANTOJITOS · LA PAZ</small></span></a>
+ <a class="app-brand" href="./index.html"><span class="brand-mark">AN</span><span>ANTOJITOS<small>IRPAVI · ACHUMANI</small></span></a>
  <nav class="main-nav" aria-label="Navegación principal">
   <button class="nav-link active" data-view="inicio" type="button">Inicio</button>
   <button class="nav-link" data-view="menu" type="button">Menú</button>
@@ -26,21 +26,32 @@
 <main class="app-main">
  <section class="view active" id="view-inicio" aria-labelledby="homeTitle">
   <div class="hero">
-   <div class="hero-copy"><p class="eyebrow">SABOR · PARRILLA · ANTOJO</p><h1 id="homeTitle">Arma tu pedido<br><em>a tu manera.</em></h1><p>Explora el menú, añade tus favoritos y revisa el total antes de confirmar el pedido.</p><button class="button-primary" type="button" data-go="menu">Ver el menú</button></div>
+   <div class="hero-copy"><p class="eyebrow">SNACK ANTOJITOS · LA PAZ</p><h1 id="homeTitle">El antojo<br><em>tiene nombre.</em></h1><p>Conoce los platos de Irpavi y Achumani, prepara tu pedido y consulta el total antes de enviarlo.</p><button class="button-primary" type="button" data-go="menu">Ver el menú</button></div>
    <img src="https://images.pexels.com/photos/109400/pexels-photo-109400.jpeg?auto=compress&cs=tinysrgb&w=1400" alt="Hamburguesa servida con acompañamiento" fetchpriority="high">
   </div>
   <div class="category-tiles">
-   <button type="button" data-category="parrilla"><span>01</span><strong>A la parrilla</strong><small>Hamburguesas de la casa</small></button>
-   <button type="button" data-category="dobles"><span>02</span><strong>Dobles</strong><small>Más carne, más sabor</small></button>
-   <button type="button" data-category="mixtas"><span>03</span><strong>Mixtas</strong><small>Hamburguesa y salchipapas</small></button>
-   <button type="button" data-category="salchipapas"><span>04</span><strong>Salchipapas</strong><small>Un clásico para compartir</small></button>
+   <button type="button" data-category="hamburguesas"><span>01</span><strong>Hamburguesas</strong><small>Simples y dobles</small></button>
+   <button type="button" data-category="choripanes"><span>02</span><strong>Choripanes</strong><small>Toscano y parrillero</small></button>
+   <button type="button" data-category="hot-dogs"><span>03</span><strong>Hot dogs</strong><small>Con o sin piel</small></button>
+   <button type="button" data-category="salchipapas"><span>04</span><strong>Salchipapas</strong><small>Con salchicha Bock</small></button>
+   <button type="button" data-category="parrillitas"><span>05</span><strong>Parrillitas</strong><small>Bife, chorizo y papas</small></button>
+   <button type="button" data-category="bebidas"><span>06</span><strong>Bebidas</strong><small>Gaseosas y jugos</small></button>
   </div>
   <div class="order-process"><article><b>01 · Selecciona</b><small>Elige platos y cantidades.</small></article><article><b>02 · Organiza</b><small>Retiro o entrega a domicilio.</small></article><article><b>03 · Confirma</b><small>60 segundos para confirmar la solicitud.</small></article></div>
   <p class="fine-note">La confirmación se guarda en tu historial en línea. El negocio debe validar el pedido; no existe conexión automática con cocina ni reparto.</p>
  </section>
  <section class="view" id="view-menu" aria-labelledby="menuTitle" hidden>
   <div class="view-head"><div><p class="eyebrow">MENÚ DEL LOCAL</p><h1 id="menuTitle">¿Qué se te antoja?</h1><p>Precios en Bs. Ajusta la cantidad de cada producto.</p></div><label class="search"><span>⌕</span><input id="productSearch" type="search" placeholder="Buscar producto…" aria-label="Buscar producto"></label></div>
-  <nav class="filter-row" aria-label="Categorías del menú"><button class="filter active" type="button" data-filter="todos">Todo</button><button class="filter" type="button" data-filter="parrilla">A la parrilla</button><button class="filter" type="button" data-filter="dobles">Dobles</button><button class="filter" type="button" data-filter="mixtas">Mixtas</button><button class="filter" type="button" data-filter="salchipapas">Salchipapas</button></nav>
+  <nav class="filter-row" aria-label="Categorías del menú">
+   <button class="filter active" type="button" data-filter="todos">Todo</button>
+   <button class="filter" type="button" data-filter="hamburguesas">Hamburguesas</button>
+   <button class="filter" type="button" data-filter="choripanes">Choripanes</button>
+   <button class="filter" type="button" data-filter="hot-dogs">Hot dogs</button>
+   <button class="filter" type="button" data-filter="salchipapas">Salchipapas</button>
+   <button class="filter" type="button" data-filter="parrillitas">Parrillitas</button>
+   <button class="filter" type="button" data-filter="bebidas">Bebidas</button>
+  </nav>
+  <p class="fine-note">Menú y precios publicados por Snack Antojitos para sus sucursales Irpavi y Achumani. Pueden variar entre sucursales; confirma disponibilidad. Las fotografías son ilustrativas.</p>
   <div class="catalog-grid" id="productGrid"><p class="loading">Cargando menú…</p></div>
   <button class="more-button" id="showMore" type="button" hidden>Mostrar más productos</button>
  </section>
@@ -99,7 +110,7 @@
   <div class="history-list" id="historyList"><p class="empty-state">Todavía no tienes pedidos guardados.</p></div>
  </section>
 </main>
-<footer class="app-footer"><a href="./index.html">Volver a portada</a><span>El Local · Antojitos La Paz</span><span>Precios en Bs</span></footer>
+<footer class="app-footer"><a href="./index.html">Volver a portada</a><span>Antojitos · La Paz</span><span>Precios en Bs</span></footer>
 <div class="toast" id="toast" role="status" aria-live="polite"></div>
 <div class="confirm-layer" id="orderConfirm" hidden>
  <section class="confirm-card" role="dialog" aria-modal="true" aria-labelledby="confirmTitle">
