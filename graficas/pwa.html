@@ -3,10 +3,10 @@
 <head>
 <meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
 <meta name="theme-color" content="#14253d"><meta name="description" content="Catálogo de componentes PC de CompuCenter Bolivia. GPU, RAM, SSD, M.2, HDD, placas madre, fuentes y solicitudes de procesador.">
-<link rel="manifest" href="./manifest.json"><link rel="icon" href="./icons/icon.svg"><link rel="stylesheet" href="./pwa.css?v=componentes-catalogo-v3">
+<link rel="manifest" href="./manifest.json"><link rel="icon" href="./icons/icon.svg"><link rel="stylesheet" href="./pwa.css?v=componentes-cloud-20261122">
 <title>CompuCenter · Componentes PC</title><script defer src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.119.2"></script>
 <script defer src="../catalog-db.js"></script>
-<script defer src="./pwa.js?v=componentes-catalogo-v3"></script>
+<script defer src="./pwa.js?v=componentes-cloud-20261122"></script>
 </head>
 <body class="gpu-app">
 <header class="app-header">
@@ -83,7 +83,7 @@
   </div>
  </section>
  <section class="view" id="view-historial" aria-labelledby="historyTitle" hidden>
-  <div class="view-head"><div><p class="eyebrow">HISTORIAL EN LÍNEA</p><h1 id="historyTitle">Mis solicitudes</h1><p>Cotizaciones y componentes que quieres consultar.</p></div><button class="button-secondary" id="clearRequests" type="button">Borrar historial</button></div>
+  <div class="view-head"><div><p class="eyebrow">HISTORIAL EN LÍNEA</p><h1 id="historyTitle">Mis solicitudes</h1><p>Cotizaciones y componentes que quieres consultar.</p></div><button class="button-secondary" id="clearRequests" type="button">Borrar historial en línea</button></div>
   <div class="history-list" id="historyList"><p class="empty-state">Todavía no tienes solicitudes.</p></div>
  </section>
  <section class="view" id="view-tienda" aria-labelledby="storeTitle" hidden>
@@ -98,7 +98,7 @@
 </main>
 <footer class="app-footer"><a href="./index.html">Volver a portada</a><span>Catálogo referencial · CompuCenter Bolivia</span><span>Precios sujetos a cambio</span></footer>
 <div class="modal" id="detailModal" hidden><section class="modal-card" role="dialog" aria-modal="true" aria-labelledby="detailTitle"><button class="close" id="closeDetail" type="button" aria-label="Cerrar">×</button><p class="eyebrow">FICHA TÉCNICA</p><h2 id="detailTitle"></h2><div id="detailSpecs"></div><a id="detailLink" class="button-primary" href="#" target="_blank" rel="noopener">Consultar en tienda ↗</a></section></div>
-<div class="confirm-layer" id="requestConfirm" hidden><section class="confirm-card" role="dialog" aria-modal="true" aria-labelledby="confirmRequestTitle"><button class="confirm-close" id="closeRequestConfirm" type="button" aria-label="Cancelar">×</button><p class="eyebrow">SOLICITUD DE COMPONENTE</p><h2 id="confirmRequestTitle">Confirma tu solicitud</h2><p id="requestSummary"></p><div class="countdown-label">TIEMPO PARA CONFIRMAR</div><strong class="countdown" id="requestCountdown">01:00</strong><div class="countdown-track"><span id="requestCountdownBar"></span></div><p class="confirm-note">Se guarda una solicitud local para consultar precio, stock, próxima mercadería y forma de entrega. No reserva inventario ni procesa pagos.</p><div class="confirm-actions"><button class="button-secondary" id="cancelRequest" type="button">Cancelar</button><button class="button-primary" id="acceptRequest" type="button">Confirmar solicitud</button></div></section></div>
+<div class="confirm-layer" id="requestConfirm" hidden><section class="confirm-card" role="dialog" aria-modal="true" aria-labelledby="confirmRequestTitle"><button class="confirm-close" id="closeRequestConfirm" type="button" aria-label="Cancelar">×</button><p class="eyebrow">SOLICITUD DE COMPONENTE</p><h2 id="confirmRequestTitle">Confirma tu solicitud</h2><p id="requestSummary"></p><div class="countdown-label">TIEMPO PARA CONFIRMAR</div><strong class="countdown" id="requestCountdown">01:00</strong><div class="countdown-track"><span id="requestCountdownBar"></span></div><p class="confirm-note">Se guarda una solicitud en tu historial en línea para consultar precio, stock, próxima mercadería y entrega. No reserva inventario ni procesa pagos.</p><div class="confirm-actions"><button class="button-secondary" id="cancelRequest" type="button">Cancelar</button><button class="button-primary" id="acceptRequest" type="button">Confirmar solicitud</button></div></section></div>
 <div class="toast" id="toast" role="status" aria-live="polite"></div>
 </body>
 </html>
