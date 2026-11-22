@@ -1,78 +1,30 @@
+'use strict';
 (() => {
-  const base = 'https://franquicias.tada.com.bo/assets/img/';
-  const products = [
-    {id:'pacena',name:'Paceña',cat:'cervezas',kind:'Cerveza',detail:'Una de las marcas de cerveza del portafolio TaDa.',img:base+'Pace%C3%B1a.png'},
-    {id:'huari',name:'Huari',cat:'cervezas',kind:'Cerveza',detail:'Cerveza premium boliviana presente en el portafolio.',img:base+'Huari.png'},
-    {id:'corona',name:'Corona',cat:'cervezas',kind:'Cerveza',detail:'Cerveza internacional del catálogo de marcas.',img:base+'Corona.png'},
-    {id:'casareal',name:'Casa Real',cat:'singani',kind:'Singani',detail:'Singani boliviano incluido en la selección de marcas.',img:base+'Casa_Real.png'},
-    {id:'josecuervo',name:'José Cuervo',cat:'destilados',kind:'Tequila',detail:'Tequila de la selección internacional de destilados.',img:base+'Jose_Cuervo.png'},
-    {id:'havana',name:'Havana Club',cat:'destilados',kind:'Ron',detail:'Ron de origen cubano presente en el portafolio.',img:base+'Havana.png'},
-    {id:'fernet',name:'Fernet Branca',cat:'destilados',kind:'Amaro',detail:'Bebida amarga italiana de la selección de licores.',img:base+'Fernet_Branca.png'},
-    {id:'cocacola',name:'Coca-Cola',cat:'sin-alcohol',kind:'Sin alcohol',detail:'Opción sin alcohol para acompañar cualquier encuentro.',img:base+'Coca_Cola.png'}
-  ];
-  const grid = document.getElementById('productGrid');
-  const search = document.getElementById('searchInput');
-  const bar = document.getElementById('selectionBar');
-  const count = document.getElementById('selectionCount');
-  const modal = document.getElementById('selectionModal');
-  const lines = document.getElementById('selectionLines');
-  let filter = 'todos';
-  let selected = {};
-  const render = () => {
-    const query = (search.value || '').toLocaleLowerCase('es');
-    const found = products.filter(p => (filter === 'todos' || filter === p.cat) && (p.name + ' ' + p.kind + ' ' + p.detail).toLocaleLowerCase('es').includes(query));
-    grid.innerHTML = found.map(p => '<article class="product"><div class="product-art"><img src="' + p.img + '" alt="' + p.name + '" loading="lazy" onerror="this.style.display=\'none\'"></div><div class="product-body"><small>' + p.kind + '</small><h3>' + p.name + '</h3><p>' + p.detail + '</p><div class="product-foot"><span>Consultar precio</span><button type="button" data-add="' + p.id + '">' + (selected[p.id] ? 'Añadido ✓' : 'Añadir a lista +') + '</button></div></div></article>').join('') || '<p>No encontramos bebidas con ese nombre.</p>';
-  };
-  const updateSelection = () => {
-    const total = Object.values(selected).reduce((a,b) => a + b, 0);
-    count.textContent = total + (total === 1 ? ' producto' : ' productos');
-    bar.hidden = total === 0;
-  };
-  document.querySelectorAll('[data-filter]').forEach(button => button.addEventListener('click', () => {
-    document.querySelectorAll('[data-filter]').forEach(item => item.classList.remove('active'));
-    button.classList.add('active');
-    filter = button.dataset.filter;
-    render();
-  }));
-  search.addEventListener('input', render);
-  grid.addEventListener('click', event => {
-    const button = event.target.closest('[data-add]');
-    if (!button) return;
-    const id = button.dataset.add;
-    selected[id] = (selected[id] || 0) + 1;
-    updateSelection();
-    render();
-  });
-  const showSelection = () => {
-    const chosen = products.filter(p => selected[p.id]);
-    lines.innerHTML = chosen.map(p => '<div class="selection-line"><span>' + selected[p.id] + ' × ' + p.name + '</span><button type="button" data-remove="' + p.id + '">Quitar</button></div>').join('');
-    modal.hidden = false;
-  };
-  document.getElementById('showSelection').addEventListener('click', showSelection);
-  document.getElementById('closeModal').addEventListener('click', () => modal.hidden = true);
-  modal.addEventListener('click', event => { if (event.target === modal) modal.hidden = true; });
-  lines.addEventListener('click', event => {
-    const button = event.target.closest('[data-remove]');
-    if (!button) return;
-    delete selected[button.dataset.remove];
-    updateSelection();
-    showSelection();
-    render();
-    if (!Object.keys(selected).length) modal.hidden = true;
-  });
-  document.getElementById('copySelection').addEventListener('click', async () => {
-    const text = 'Mi selección TaDa\\n' + products.filter(p => selected[p.id]).map(p => selected[p.id] + ' × ' + p.name).join('\\n') + '\\nConsultar precio y disponibilidad.';
-    const button = document.getElementById('copySelection');
-    try { await navigator.clipboard.writeText(text); button.textContent = 'Copiado ✓'; }
-    catch (_) { button.textContent = 'No se pudo copiar'; }
-  });
-  document.getElementById('clearSelection').addEventListener('click', () => { selected = {}; updateSelection(); render(); modal.hidden = true; });
-  const status = document.getElementById('appStatus');
-  const updateStatus = () => status.textContent = navigator.onLine ? 'En línea' : 'Modo sin conexión';
-  updateStatus();
-  window.addEventListener('online', updateStatus);
-  window.addEventListener('offline', updateStatus);
-  if ('serviceWorker' in navigator && (location.protocol === 'https:' || location.hostname === 'localhost')) navigator.serviceWorker.register('./sw.js').catch(console.warn);
-  updateSelection();
-  render();
+ const $=id=>document.getElementById(id),state={products:[],filter:'todos',view:'inicio',list:{}},storageKey='tada-list-v2',ageKey='tada-age-confirmed-v1';
+ const read=()=>{try{const value=JSON.parse(localStorage.getItem(storageKey)||'{}');return value&&typeof value==='object'?value:{};}catch(_){return{};}};
+ const save=()=>{try{localStorage.setItem(storageKey,JSON.stringify(state.list));}catch(_){toast('No se pudo guardar la lista.','error');}};
+ function node(tag,text,cls){const el=document.createElement(tag);if(text!==undefined)el.textContent=String(text);if(cls)el.className=cls;return el;}
+ function toast(message,type=''){const el=$('toast');el.textContent=message;el.className='toast show'+(type?' '+type:'');clearTimeout(toast.timer);toast.timer=setTimeout(()=>el.className='toast',2800);}
+ function showView(name){const target=$('view-'+name);if(!target)return;document.querySelectorAll('.view').forEach(v=>{v.hidden=true;v.classList.remove('active');});target.hidden=false;target.classList.add('active');document.querySelectorAll('[data-view]').forEach(b=>b.classList.toggle('active',b.dataset.view===name));state.view=name;if(location.hash!=='#'+name)history.replaceState(null,'','#'+name);if(name==='lista')renderList();}
+ document.querySelectorAll('[data-view]').forEach(b=>b.addEventListener('click',()=>showView(b.dataset.view)));
+ document.querySelectorAll('[data-go]').forEach(b=>b.addEventListener('click',()=>showView(b.dataset.go)));
+ function updateCount(){const n=Object.values(state.list).reduce((a,b)=>a+b,0);$('listBadge').textContent=n;$('listSummary').textContent=n+' unidades seleccionadas';}
+ function renderProducts(){const grid=$('productGrid'),query=$('productSearch').value.trim().toLocaleLowerCase('es');grid.replaceChildren();const rows=state.products.filter(p=>(state.filter==='todos'||p.category===state.filter)&&(p.name+' '+p.type+' '+p.description).toLocaleLowerCase('es').includes(query));if(!rows.length){grid.append(node('p','No encontramos marcas con ese criterio.','empty-state'));return;}rows.forEach(p=>{const card=node('article',undefined,'product-card'),art=node('div',undefined,'product-art'),img=node('img');img.src=p.image;img.alt='Logotipo de '+p.name;img.loading='lazy';img.decoding='async';img.addEventListener('error',()=>{img.remove();art.append(node('strong',p.name,'logo-fallback'));},{once:true});art.append(img);const body=node('div',undefined,'product-body');body.append(node('small',p.type),node('h3',p.name),node('p',p.description));const foot=node('div',undefined,'product-foot'),price=node('span','Consultar precio'),button=node('button',state.list[p.id]?'Añadido ✓':'Añadir a mi lista +');button.type='button';button.addEventListener('click',()=>{state.list[p.id]=(state.list[p.id]||0)+1;save();updateCount();renderProducts();toast(p.name+' añadido.');});foot.append(price,button);body.append(foot);card.append(art,body);grid.append(card);});}
+ function renderList(){const area=$('selectedList');area.replaceChildren();const rows=state.products.filter(p=>state.list[p.id]);if(!rows.length){area.append(node('p','Todavía no agregaste marcas.','empty-state'));updateCount();return;}rows.forEach(p=>{const row=node('article',undefined,'selected-row'),info=node('div');info.append(node('strong',p.name),node('small',p.type+' · '+(state.list[p.id]||0)+' unidad(es)'));const controls=node('div',undefined,'quantity-controls'),minus=node('button','−'),amount=node('b',state.list[p.id]),plus=node('button','+');minus.type=plus.type='button';minus.setAttribute('aria-label','Quitar una unidad de '+p.name);plus.setAttribute('aria-label','Agregar una unidad de '+p.name);minus.addEventListener('click',()=>{state.list[p.id]--;if(state.list[p.id]<=0)delete state.list[p.id];save();renderList();});plus.addEventListener('click',()=>{state.list[p.id]++;save();renderList();});controls.append(minus,amount,plus);row.append(info,controls);area.append(row);});updateCount();}
+ document.querySelectorAll('[data-filter]').forEach(b=>b.addEventListener('click',()=>{document.querySelectorAll('[data-filter]').forEach(x=>x.classList.remove('active'));b.classList.add('active');state.filter=b.dataset.filter;renderProducts();}));
+ $('productSearch').addEventListener('input',renderProducts);
+ document.querySelectorAll('[data-category]').forEach(b=>b.addEventListener('click',()=>{state.filter=b.dataset.category;document.querySelectorAll('[data-filter]').forEach(x=>x.classList.toggle('active',x.dataset.filter===state.filter));showView('catalogo');renderProducts();}));
+ $('clearList').addEventListener('click',()=>{state.list={};save();renderList();renderProducts();toast('Lista vaciada.');});
+ $('copyList').addEventListener('click',async()=>{const text='Mi lista de marcas TaDa\\n'+state.products.filter(p=>state.list[p.id]).map(p=>(state.list[p.id]||0)+' × '+p.name).join('\\n')+'\\nConsultar precio y disponibilidad en TaDa Delivery.';try{await navigator.clipboard.writeText(text);toast('Lista copiada.');}catch(_){toast('No se pudo copiar.','error');}});
+ async function load(){try{const response=await fetch('./data/marcas.json',{cache:'no-store'});if(!response.ok)throw new Error('HTTP '+response.status);const data=await response.json();if(!Array.isArray(data))throw new Error('JSON inválido');state.products=data;try{const cache=await caches.open('tada-data-v2');await cache.put('./data/marcas.json',new Response(JSON.stringify(data),{headers:{'Content-Type':'application/json'}}));}catch(_){}}catch(error){try{const response=await caches.match('./data/marcas.json');if(!response)throw error;state.products=await response.json();}catch(_){$('productGrid').replaceChildren(node('p','No se pudo cargar el catálogo. Conéctate y vuelve a intentarlo.','empty-state'));return;}}renderProducts();renderList();}
+ const gate=$('ageGate');
+ let hasAge=false;
+ try{hasAge=localStorage.getItem(ageKey)==='yes';}catch(_){}
+ function allow(){try{localStorage.setItem(ageKey,'yes');}catch(_){}gate.hidden=true;load();}
+ if(hasAge){gate.hidden=true;load();}else{gate.hidden=false;}
+ $('confirmAge').addEventListener('click',allow);
+ $('denyAge').addEventListener('click',()=>{$('ageTitle').textContent='Acceso no disponible';$('ageMessage').textContent='Este catálogo solo está disponible para personas mayores de 18 años.';$('confirmAge').disabled=true;$('denyAge').disabled=true;$('denyAge').textContent='Acceso restringido';});
+ state.list=read();updateCount();const start=location.hash.replace('#','');showView(['inicio','catalogo','lista','informacion'].includes(start)?start:'inicio');
+ let seq=0;async function check(){const id=++seq,controller=new AbortController(),timeout=setTimeout(()=>controller.abort(),4000);try{const r=await fetch('./manifest.json?__health='+Date.now(),{cache:'no-store',signal:controller.signal}),m=r.ok?await r.json():null;const online=Boolean(m&&m.short_name==='TaDa Bolivia');if(id!==seq)return;$('networkStatus').dataset.state=online?'online':'offline';$('networkStatus').querySelector('b').textContent=online?'Online':'Offline';}catch(_){if(id===seq){$('networkStatus').dataset.state='offline';$('networkStatus').querySelector('b').textContent='Offline';}}finally{clearTimeout(timeout);controller.abort();}}
+ check();window.addEventListener('online',check);window.addEventListener('offline',check);const timer=setInterval(check,25000);window.addEventListener('pagehide',()=>clearInterval(timer));if('serviceWorker'in navigator&&(location.protocol==='https:'||location.hostname==='localhost'))navigator.serviceWorker.register('./sw.js').catch(console.warn);
 })();
