@@ -115,7 +115,7 @@
   $('bookingForm').addEventListener('submit',event=>{
     event.preventDefault();
     const name=$('clientName').value.trim(),phone=$('clientPhone').value.trim(),service=state.services.find(x=>x.id===$('bookingService').value),date=$('bookingDate').value,time=$('bookingTime').value,noteText=$('bookingNote').value.trim();
-    if(name.length<2||!/^\\d{8}$/.test(phone)||!service||!date||!time){$('bookingMessage').textContent='Revisa nombre, celular de 8 dígitos, servicio, fecha y hora.';return;}
+    if(name.length<2||!/^\d{8}$/.test(phone)||!service||!date||!time){$('bookingMessage').textContent='Revisa nombre, celular de 8 dígitos, servicio, fecha y hora.';return;}
     const start=new Date(date+'T'+time+':00');if(Number.isNaN(start.getTime())||start<=new Date()){$('bookingMessage').textContent='Elige una fecha y hora futuras.';return;}
     const conflict=state.requests.some(r=>{const d=r.request_data||{};return r.request_type==='appointment'&&d.date===date&&d.time===time&&r.status!=='cancelled';});
     if(conflict){toast('Ya tienes una solicitud para ese horario. Elige otra hora.','error');return;}
@@ -132,7 +132,7 @@
   });
   $('profileForm').addEventListener('submit',async event=>{
     event.preventDefault();const p=profilePayload();
-    if(p.display_name.length<2||!/^\\d{8}$/.test(p.phone)){$('profileMessage').textContent='Ingresa un nombre válido y un celular boliviano de 8 dígitos.';return;}
+    if(p.display_name.length<2||!/^\d{8}$/.test(p.phone)){$('profileMessage').textContent='Ingresa un nombre válido y un celular boliviano de 8 dígitos.';return;}
     try{state.profile=await state.cloud.saveProfile(STORE,p);$('profileMessage').textContent='Perfil guardado en tu cuenta en línea.';renderProfile();fillProfileToBooking();toast('Perfil sincronizado.');}
     catch(error){$('profileMessage').textContent='No se pudo guardar en la nube: '+error.message;}
   });
