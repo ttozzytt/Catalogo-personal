@@ -97,7 +97,7 @@
     $('qrPaymentTitle').textContent='Pago con QR · Navaja 27';
     $('qrPaymentService').textContent=(data.serviceName||'Servicio')+' · '+toDate(row);
     $('qrPaymentAmount').textContent=amount===null?'Precio por confirmar':'Bs '+amount.toLocaleString('es-BO');
-    $('qrPaymentStatus').textContent='Solicitud pendiente de confirmación del local.';
+    $('qrPaymentStatus').textContent='Confirma primero disponibilidad y precio con Navaja 27 antes de transferir.';
     $('qrPaymentUnavailable').hidden=false;
     $('qrPaymentModal').hidden=false;
     $('closeQrPayment').focus();
