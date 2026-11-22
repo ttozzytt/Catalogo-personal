@@ -375,5 +375,157 @@
       "features": "Ventilador 120 mm · +12 V 70.8 A",
       "warranty": "12 meses según publicación"
     }
+  },
+  {
+    "id": "gpu-rtx5060-asus",
+    "name": "ASUS PRIME GeForce RTX 5060 8GB GDDR7",
+    "brand": "NVIDIA · ASUS",
+    "category": "gpu",
+    "categoryLabel": "Tarjeta gráfica",
+    "price": null,
+    "shortDescription": "8 GB GDDR7, bus de 128 bits, PCIe 5.0 y triple ventilador Axial-tech. Fuente sugerida de 550 W.",
+    "image": "https://files.pccasegear.com/images/PRIME-RTX5060-8G-thumb.jpg",
+    "url": "https://www.asus.com/latin/motherboards-components/graphics-cards/prime/prime-rtx5060-o8g/techspec/",
+    "specs": {
+      "memory": "8 GB GDDR7",
+      "bus": "128 bits",
+      "interface": "PCI Express 5.0",
+      "clock": "Hasta 2595 MHz en modo OC",
+      "power": "Fuente recomendada 550 W · 1 × 8 pines",
+      "outputs": "1 × HDMI 2.1b · 3 × DisplayPort 2.1b"
+    }
+  },
+  {
+    "id": "gpu-rx9060xt-sapphire",
+    "name": "Sapphire PULSE Radeon RX 9060 XT 16GB",
+    "brand": "AMD · SAPPHIRE",
+    "category": "gpu",
+    "categoryLabel": "Tarjeta gráfica",
+    "price": null,
+    "shortDescription": "16 GB GDDR6, bus de 128 bits, PCIe 5.0 y refrigeración Dual-X de dos ventiladores.",
+    "image": "https://www.centralcomputer.com/media/catalog/product/cache/694d1f3d5d7b05f515d49458eb2ae581/v/g/vgasap906x1r-100_1.jpg",
+    "url": "https://www.sapphiretech.co/en/consumer/pulse-radeon-rx-9060-xt-16g-gddr6",
+    "specs": {
+      "memory": "16 GB GDDR6",
+      "bus": "128 bits · 20 Gbps",
+      "interface": "PCI Express 5.0 x16",
+      "clock": "Game Clock 2700 MHz · Boost hasta 3290 MHz",
+      "power": "170 W típicos · Fuente mínima indicada 450 W",
+      "outputs": "DisplayPort 2.1a · HDMI 2.1"
+    }
+  },
+  {
+    "id": "cpu-ryzen5600",
+    "name": "AMD Ryzen 5 5600",
+    "brand": "AMD",
+    "category": "cpu",
+    "categoryLabel": "Procesador AMD · AM4",
+    "price": null,
+    "shortDescription": "6 núcleos y 12 hilos, boost hasta 4.4 GHz, 32 MB de caché L3 y TDP de 65 W. Compatible con plataforma AM4.",
+    "image": "https://www.pbtech.co.nz/imgprod/C/P/CPUAMD05600.jpg?h=1798930352",
+    "url": "https://www.amd.com/en/products/processors/desktops/ryzen/5000-series/amd-ryzen-5-5600.html",
+    "specs": {
+      "socket": "AMD AM4",
+      "cores": "6 núcleos / 12 hilos",
+      "clock": "3.5 GHz base · hasta 4.4 GHz boost",
+      "cache": "32 MB L3",
+      "tdp": "65 W",
+      "memory": "DDR4 · confirmar compatibilidad de BIOS y placa"
+    }
+  },
+  {
+    "id": "cpu-ryzen7600",
+    "name": "AMD Ryzen 5 7600",
+    "brand": "AMD",
+    "category": "cpu",
+    "categoryLabel": "Procesador AMD · AM5",
+    "price": null,
+    "shortDescription": "6 núcleos y 12 hilos, boost hasta 5.1 GHz, plataforma AM5 y soporte DDR5.",
+    "image": "https://cdn.ibertronica.es/product/MI100-100001015BOX_00001.jpeg",
+    "url": "https://www.amd.com/en/products/processors/desktops/ryzen/7000-series/amd-ryzen-5-7600.html",
+    "specs": {
+      "socket": "AMD AM5",
+      "cores": "6 núcleos / 12 hilos",
+      "clock": "3.8 GHz base · hasta 5.1 GHz boost",
+      "cache": "38 MB total (L2 + L3)",
+      "tdp": "65 W",
+      "memory": "DDR5 · gráficos Radeon integrados"
+    }
+  },
+  {
+    "id": "cpu-i5-12400f",
+    "name": "Intel Core i5-12400F",
+    "brand": "Intel",
+    "category": "cpu",
+    "categoryLabel": "Procesador Intel · LGA1700",
+    "price": null,
+    "shortDescription": "6 núcleos y 12 hilos, turbo máximo de 4.4 GHz y 18 MB de caché. Requiere tarjeta gráfica dedicada.",
+    "image": "https://d9os1j6dl6svx.cloudfront.net/images/CSHO-031-793.JPG",
+    "url": "https://www.intel.com/content/www/us/en/products/sku/134587/intel-core-i512400f-processor-18m-cache-up-to-4-40-ghz/specifications.html",
+    "specs": {
+      "socket": "Intel LGA1700",
+      "cores": "6 núcleos / 12 hilos",
+      "clock": "Hasta 4.4 GHz turbo",
+      "cache": "18 MB Intel Smart Cache",
+      "power": "65 W Processor Base Power",
+      "graphics": "Modelo F · requiere GPU dedicada",
+      "memory": "DDR4-3200 o DDR5-4800 según placa"
+    }
+  },
+  {
+    "id": "ram-kingston-32-ddr5",
+    "name": "Kingston FURY Beast 32GB DDR5-6000 (2 × 16GB)",
+    "brand": "Kingston",
+    "category": "ram",
+    "categoryLabel": "Memoria RAM DDR5",
+    "price": null,
+    "shortDescription": "Kit de 32 GB en doble canal, 6000 MT/s y latencia CL30. Verifica soporte XMP/EXPO en la placa.",
+    "image": "https://www.dateks.lv/images/pic/2400/2400/094/1686.jpg",
+    "url": "https://www.kingston.com/en/memory/gaming/kingston-fury-beast-ddr5-memory",
+    "specs": {
+      "capacity": "32 GB (2 × 16 GB)",
+      "type": "DDR5 UDIMM",
+      "speed": "6000 MT/s · CL30",
+      "formFactor": "DIMM 288 pines",
+      "profiles": "Perfiles de overclock · confirmar compatibilidad con placa"
+    }
+  },
+  {
+    "id": "ram-corsair-32-ddr4",
+    "name": "Corsair Vengeance LPX 32GB DDR4-3200 (2 × 16GB)",
+    "brand": "Corsair",
+    "category": "ram",
+    "categoryLabel": "Memoria RAM DDR4",
+    "price": null,
+    "shortDescription": "Kit de 32 GB en doble canal, 3200 MT/s y perfil bajo de aluminio. Perfil XMP 2.0.",
+    "image": "https://image.made-in-china.com/202f0j00fYGcZLHdsUkR/Corsair-Vengeance-Lpx-32GB-2-X-16GB-DDR4-3200-PC4-25600-Intel-Xmp-2-0-Desktop-Memory-RAM.webp",
+    "url": "https://www.corsair.com/us/en/c/memory",
+    "specs": {
+      "capacity": "32 GB (2 × 16 GB)",
+      "type": "DDR4 UDIMM",
+      "speed": "3200 MT/s · CL16",
+      "voltage": "1.35 V",
+      "formFactor": "DIMM 288 pines",
+      "profiles": "Intel XMP 2.0"
+    }
+  },
+  {
+    "id": "ssd-kingston-nv3-1tb",
+    "name": "Kingston NV3 1TB M.2 NVMe",
+    "brand": "Kingston",
+    "category": "m2",
+    "categoryLabel": "SSD M.2 NVMe",
+    "price": null,
+    "shortDescription": "1 TB, formato M.2 2280 y conexión PCIe 4.0 x4 NVMe. Hasta 6000 MB/s de lectura según ficha de producto.",
+    "image": "https://www.proshop.pl/Images/915x900/3284682_52527562b9cb.png",
+    "url": "https://www.kingston.com/en/ssd/nv3-nvme-pcie-ssd",
+    "specs": {
+      "capacity": "1 TB",
+      "type": "SSD M.2 2280 NVMe",
+      "interface": "PCIe 4.0 x4",
+      "read": "Hasta 6000 MB/s",
+      "write": "Consultar variante exacta",
+      "warranty": "Consultar garantía y disponibilidad con la tienda"
+    }
   }
 ]
