@@ -1,85 +1,28 @@
+'use strict';
 (() => {
- const img = {
-  burger:'https://images.pexels.com/photos/109400/pexels-photo-109400.jpeg?auto=compress&cs=tinysrgb&w=900',
-  cheese:'https://images.pexels.com/photos/9278698/pexels-photo-9278698.jpeg?auto=compress&cs=tinysrgb&w=900',
-  grill:'https://images.pexels.com/photos/12880799/pexels-photo-12880799.jpeg?auto=compress&cs=tinysrgb&w=900',
-  double:'https://images.pexels.com/photos/6111948/pexels-photo-6111948.jpeg?auto=compress&cs=tinysrgb&w=900',
-  fries:'https://images.pexels.com/photos/11710525/pexels-photo-11710525.jpeg?auto=compress&cs=tinysrgb&w=900'
- };
- const products=[
-  {id:'simple',name:'Hamburguesa simple',cat:'parrilla',price:30,desc:'Pan brioche, lechuga, carne de res a la parrilla, tomate y salsa de la casa. Incluye papas fritas.',img:img.burger,backup:'./media/hero.webp'},
-  {id:'pacena',name:'Hamburguesa Paceña',cat:'parrilla',price:31,desc:'Pan brioche, lechuga, carne de res a la parrilla y chorrelana tradicional con un toque de cerveza.',img:img.cheese,backup:'./media/paceña.webp'},
-  {id:'mani',name:'Hamburguesa picante de maní',cat:'parrilla',price:36,desc:'Carne a la parrilla, queso mozzarella y salsa picante de maní.',img:img.grill,backup:'./media/mani.webp',tag:'PICANTE'},
-  {id:'maracuya',name:'Hamburguesa Maracuyá',cat:'parrilla',price:35,desc:'Carne de res a la parrilla, cebolla y salsa dulce de maracuyá.',img:img.double,backup:'./media/maracuya.webp'},
-  {id:'bbq',name:'Hamburguesa a la barbacoa',cat:'parrilla',price:41,desc:'Carne a la parrilla, tocino, aros de cebolla sofritas y salsa barbacoa.',img:img.cheese,backup:'./media/barbacoa.webp'},
-  {id:'pina-grill',name:'Hamburguesa piña grill',cat:'parrilla',price:46,desc:'Carne a la parrilla, piña grillada y queso mozzarella.',img:img.burger,backup:'./media/piña.webp'},
-  {id:'simple-doble',name:'Simple Doble',cat:'dobles',price:41,desc:'Pan brioche, lechuga y doble porción de carne a la parrilla, tomate y salsa de la casa.',img:img.double,backup:'./media/doble.webp'},
-  {id:'pacena-doble',name:'Paceña Doble',cat:'dobles',price:42,desc:'Doble porción de carne a la parrilla con chorrelana tradicional.',img:img.cheese,backup:'./media/paceña.webp'},
-  {id:'maracuya-doble',name:'Maracuyá Doble',cat:'dobles',price:46,desc:'Doble porción de carne, cebolla y salsa dulce de maracuyá.',img:img.double,backup:'./media/maracuya.webp'},
-  {id:'mani-doble',name:'Maní Doble',cat:'dobles',price:47,desc:'Doble porción de carne, queso mozzarella y salsa picante de maní.',img:img.grill,backup:'./media/mani.webp',tag:'PICANTE'},
-  {id:'bbq-doble',name:'Barbacoa Doble',cat:'dobles',price:51,desc:'Doble porción de carne, tocino, aros de cebolla y salsa barbacoa.',img:img.cheese,backup:'./media/barbacoa.webp'},
-  {id:'pina-doble',name:'Piña Doble',cat:'dobles',price:56,desc:'Doble porción de carne con piña grillada a la parrilla.',img:img.burger,backup:'./media/piña.webp'},
-  {id:'simple-mixta',name:'Simple Mixta',cat:'mixtas',price:41,desc:'Hamburguesa simple acompañada de salchipapas.',img:img.double,backup:'./media/doble.webp'},
-  {id:'pacena-mixta',name:'Paceña Mixta',cat:'mixtas',price:42,desc:'Hamburguesa paceña acompañada de salchipapas.',img:img.cheese,backup:'./media/paceña.webp'},
-  {id:'mani-mixta',name:'Maní Mixta',cat:'mixtas',price:47,desc:'Hamburguesa picante de maní acompañada de salchipapas.',img:img.grill,backup:'./media/mani.webp',tag:'PICANTE'},
-  {id:'maracuya-mixta',name:'Maracuyá Mixta',cat:'mixtas',price:46,desc:'Hamburguesa dulce de maracuyá acompañada de salchipapas.',img:img.double,backup:'./media/maracuya.webp'},
-  {id:'bbq-mixta',name:'Barbacoa Mixta',cat:'mixtas',price:51,desc:'Hamburguesa barbacoa acompañada de salchipapas.',img:img.cheese,backup:'./media/barbacoa.webp'},
-  {id:'pina-mixta',name:'Piña Mixta',cat:'mixtas',price:56,desc:'Hamburguesa piña grill acompañada de salchipapas.',img:img.burger,backup:'./media/piña.webp'},
-  {id:'salchipapas',name:'Salchipapas',cat:'salchipapas',price:28,desc:'Papas fritas, salchicha, salsa de la casa y ketchup.',img:img.fries,backup:'./media/salchipapas.webp'}
- ];
- const grid=document.getElementById('foodGrid'),search=document.getElementById('searchInput'),bar=document.getElementById('cartBar'),count=document.getElementById('cartCount'),total=document.getElementById('cartTotal');
- let filter='todos';
- const storage='el-local-pedido-v1';
- let cart={};try{cart=JSON.parse(localStorage.getItem(storage)||'{}')||{}}catch(_){cart={};}
- const money=n=>'Bs '+n;
- function render(){
-  const q=(search.value||'').toLocaleLowerCase('es');
-  const items=products.filter(p=>(filter==='todos'||filter===p.cat)&&(p.name+' '+p.desc).toLocaleLowerCase('es').includes(q));
-  grid.innerHTML=items.map(p=>'<article class="food-card"><img src="'+p.img+'" data-fallback="'+p.backup+'" alt="'+p.name+'" loading="lazy"><div class="food-body"><small>'+p.cat.toUpperCase()+(p.tag?' · '+p.tag:'')+'</small><h3>'+p.name+'</h3><p>'+p.desc+'</p><div class="food-foot"><strong>'+money(p.price)+'</strong><button type="button" data-add="'+p.id+'">Agregar +</button></div></div></article>').join('')||'<p>No encontramos ese antojo.</p>';
-  updateCart();
- }
- function updateCart(){
-  const n=Object.values(cart).reduce((a,b)=>a+b,0);
-  const sum=products.reduce((a,p)=>a+p.price*(cart[p.id]||0),0);
-  count.textContent=n+' '+(n===1?'producto':'productos');
-  total.textContent=money(sum);
-  bar.hidden=n===0;
-  localStorage.setItem(storage,JSON.stringify(cart));
- }
- grid.addEventListener('error',e=>{
-  const image=e.target;
-  if(image instanceof HTMLImageElement && image.dataset.fallback && image.src!==new URL(image.dataset.fallback,location.href).href) image.src=image.dataset.fallback;
- },true);
- document.querySelectorAll('[data-filter]').forEach(b=>b.addEventListener('click',()=>{
-  document.querySelectorAll('[data-filter]').forEach(x=>x.classList.remove('active'));
-  b.classList.add('active');filter=b.dataset.filter;render();
- }));
- search.addEventListener('input',render);
- grid.addEventListener('click',e=>{
-  const b=e.target.closest('[data-add]');if(!b)return;
-  cart[b.dataset.add]=(cart[b.dataset.add]||0)+1;updateCart();b.textContent='Agregado ✓';
-  setTimeout(()=>{if(b.isConnected)b.textContent='Agregar +'},900);
- });
- const modal=document.getElementById('orderModal'),lines=document.getElementById('orderLines');
- function showOrder(){
-  const chosen=products.filter(p=>cart[p.id]);
-  const sum=chosen.reduce((a,p)=>a+p.price*cart[p.id],0);
-  lines.innerHTML=chosen.map(p=>'<div class="order-line"><span>'+cart[p.id]+' × '+p.name+'</span><span>'+money(p.price*cart[p.id])+'</span></div>').join('')+'<div class="order-line"><strong>Total</strong><strong>'+money(sum)+'</strong></div>';
-  modal.hidden=false;
- }
- document.getElementById('showOrder').addEventListener('click',showOrder);
- document.getElementById('closeModal').addEventListener('click',()=>modal.hidden=true);
- modal.addEventListener('click',e=>{if(e.target===modal)modal.hidden=true;});
- document.getElementById('copyOrder').addEventListener('click',async()=>{
-  const chosen=products.filter(p=>cart[p.id]);
-  const sum=chosen.reduce((a,p)=>a+p.price*cart[p.id],0);
-  const text='Pedido El Local\\n'+chosen.map(p=>cart[p.id]+' x '+p.name+' - Bs '+p.price*cart[p.id]).join('\\n')+'\\nTotal: Bs '+sum;
-  try{await navigator.clipboard.writeText(text);document.getElementById('copyOrder').textContent='Copiado ✓';}
-  catch(_){document.getElementById('copyOrder').textContent='No se pudo copiar';}
- });
- document.getElementById('clearOrder').addEventListener('click',()=>{cart={};updateCart();modal.hidden=true;render();});
- const st=document.getElementById('appStatus'),up=()=>st.textContent=navigator.onLine?'En línea':'Modo sin conexión';
- up();addEventListener('online',up);addEventListener('offline',up);
- if('serviceWorker'in navigator&&(location.protocol==='https:'||location.hostname==='localhost'))navigator.serviceWorker.register('./sw.js').catch(console.warn);
- render();
+ const $=id=>document.getElementById(id),state={products:[],filter:'todos',view:'inicio',cart:{},note:'',visibleCount:8},cartKey='el-local-order-v2';
+ function node(tag,text,cls){const el=document.createElement(tag);if(text!==undefined)el.textContent=String(text);if(cls)el.className=cls;return el;}
+ function toast(message,type=''){const el=$('toast');el.textContent=message;el.className='toast show'+(type?' '+type:'');clearTimeout(toast.timer);toast.timer=setTimeout(()=>el.className='toast',2800);}
+ function readCart(){try{const value=JSON.parse(localStorage.getItem(cartKey)||'{}');return value&&typeof value==='object'?value:{}}catch(_){return{};}}
+ function saveCart(){try{localStorage.setItem(cartKey,JSON.stringify(state.cart));}catch(_){toast('No se pudo guardar el pedido.','error');}}
+ function money(value){return 'Bs '+Number(value).toLocaleString('es-BO');}
+ function showView(name){const target=$('view-'+name);if(!target)return;document.querySelectorAll('.view').forEach(v=>{v.hidden=true;v.classList.remove('active');});target.hidden=false;target.classList.add('active');document.querySelectorAll('[data-view]').forEach(b=>b.classList.toggle('active',b.dataset.view===name));state.view=name;if(location.hash!=='#'+name)history.replaceState(null,'','#'+name);if(name==='pedido')renderOrder();}
+ document.querySelectorAll('[data-view]').forEach(b=>b.addEventListener('click',()=>showView(b.dataset.view)));
+ document.querySelectorAll('[data-go]').forEach(b=>b.addEventListener('click',()=>showView(b.dataset.go)));
+ function cartCount(){return Object.values(state.cart).reduce((a,b)=>a+b,0);}
+ function cartTotal(){return state.products.reduce((a,p)=>a+p.price*(state.cart[p.id]||0),0);}
+ function updateBadge(){$('cartBadge').textContent=cartCount();}
+ function renderProducts(){const grid=$('productGrid'),query=$('productSearch').value.trim().toLocaleLowerCase('es');grid.replaceChildren();const rows=state.products.filter(p=>(state.filter==='todos'||p.category===state.filter)&&(p.name+' '+p.description).toLocaleLowerCase('es').includes(query));if(!rows.length){grid.append(node('p','No encontramos productos con ese criterio.','empty-state'));$('showMore').hidden=true;return;}rows.slice(0,state.visibleCount).forEach(p=>{const card=node('article',undefined,'food-card'),img=node('img');img.src=p.image;img.alt=p.name;img.loading='lazy';img.decoding='async';img.width=640;img.height=420;img.addEventListener('error',()=>{if(p.fallback)img.src=p.fallback;},{once:true});const body=node('div',undefined,'food-body');body.append(node('small',p.category.toUpperCase()),node('h3',p.name),node('p',p.description));const foot=node('div',undefined,'food-foot'),price=node('strong',money(p.price)),button=node('button',state.cart[p.id]?'Añadir otro +':'Agregar +');button.type='button';button.addEventListener('click',()=>{state.cart[p.id]=(state.cart[p.id]||0)+1;saveCart();updateBadge();button.textContent='Agregado ✓';setTimeout(()=>{if(button.isConnected)button.textContent='Añadir otro +';},750);toast(p.name+' agregado al pedido.');});foot.append(price,button);body.append(foot);card.append(img,body);grid.append(card);});const more=$('showMore');more.hidden=rows.length<=state.visibleCount;more.textContent='Mostrar '+Math.min(8,rows.length-state.visibleCount)+' productos más · '+rows.length+' en total';}
+ function renderOrder(){const list=$('orderLines');list.replaceChildren();const selected=state.products.filter(p=>state.cart[p.id]);if(!selected.length)list.append(node('p','Todavía no agregaste productos.','empty-state'));selected.forEach(p=>{const row=node('article',undefined,'order-row'),info=node('div');info.append(node('strong',p.name),node('small',money(p.price)+' por unidad · Subtotal '+money(p.price*state.cart[p.id])));const controls=node('div',undefined,'quantity-controls'),minus=node('button','−'),count=node('b',state.cart[p.id]),plus=node('button','+');minus.type=plus.type='button';minus.setAttribute('aria-label','Quitar una unidad de '+p.name);plus.setAttribute('aria-label','Agregar una unidad de '+p.name);minus.addEventListener('click',()=>{state.cart[p.id]--;if(state.cart[p.id]<=0)delete state.cart[p.id];saveCart();renderOrder();updateBadge();});plus.addEventListener('click',()=>{state.cart[p.id]++;saveCart();renderOrder();updateBadge();});controls.append(minus,count,plus);row.append(info,controls);list.append(row);});$('orderTotal').textContent=money(cartTotal());$('orderNote').value=state.note;}
+ document.querySelectorAll('[data-filter]').forEach(b=>b.addEventListener('click',()=>{document.querySelectorAll('[data-filter]').forEach(x=>x.classList.remove('active'));b.classList.add('active');state.filter=b.dataset.filter;state.visibleCount=8;renderProducts();}));
+ $('productSearch').addEventListener('input',()=>{state.visibleCount=8;renderProducts();});
+ $('showMore').addEventListener('click',()=>{state.visibleCount+=8;renderProducts();});
+ document.querySelectorAll('[data-category]').forEach(b=>b.addEventListener('click',()=>{state.filter=b.dataset.category;state.visibleCount=8;document.querySelectorAll('[data-filter]').forEach(x=>x.classList.toggle('active',x.dataset.filter===state.filter));showView('menu');renderProducts();}));
+ $('orderNote').addEventListener('input',()=>{state.note=$('orderNote').value;try{localStorage.setItem('el-local-order-note-v1',state.note);}catch(_){}});
+ $('clearCart').addEventListener('click',()=>{state.cart={};saveCart();renderOrder();updateBadge();toast('Pedido vaciado.');});
+ $('copyOrder').addEventListener('click',async()=>{if(!cartCount()){toast('Agrega al menos un producto.','error');return;}const text='PEDIDO · EL LOCAL\\n'+state.products.filter(p=>state.cart[p.id]).map(p=>state.cart[p.id]+' × '+p.name+' — '+money(p.price*state.cart[p.id])).join('\\n')+'\\nTOTAL: '+money(cartTotal())+(state.note?'\\nOBSERVACIONES: '+state.note:'')+'\\nPendiente de confirmar con el local.';try{await navigator.clipboard.writeText(text);toast('Resumen copiado.');}catch(_){toast('No se pudo copiar.','error');}});
+ async function load(){try{const response=await fetch('./data/menu.json',{cache:'no-store'});if(!response.ok)throw new Error('HTTP '+response.status);const data=await response.json();if(!Array.isArray(data))throw new Error('Formato JSON no válido');state.products=data;try{const cache=await caches.open('el-local-data-v2');await cache.put('./data/menu.json',new Response(JSON.stringify(data),{headers:{'Content-Type':'application/json'}}));}catch(_){}}catch(error){try{const response=await caches.match('./data/menu.json');if(!response)throw error;state.products=await response.json();}catch(_){$('productGrid').replaceChildren(node('p','No se pudo cargar el menú. Conéctate y vuelve a intentarlo.','empty-state'));return;}}renderProducts();updateBadge();if(state.view==='pedido')renderOrder();}
+ state.cart=readCart();try{state.note=localStorage.getItem('el-local-order-note-v1')||'';}catch(_){}const start=location.hash.replace('#','');showView(['inicio','menu','pedido'].includes(start)?start:'inicio');load();
+ let seq=0;async function check(){const id=++seq,controller=new AbortController(),timeout=setTimeout(()=>controller.abort(),4000);try{const r=await fetch('./manifest.json?__health='+Date.now(),{cache:'no-store',signal:controller.signal}),m=r.ok?await r.json():null;const online=Boolean(m&&m.short_name==='El Local');if(id!==seq)return;$('networkStatus').dataset.state=online?'online':'offline';$('networkStatus').querySelector('b').textContent=online?'Online':'Offline';}catch(_){if(id===seq){$('networkStatus').dataset.state='offline';$('networkStatus').querySelector('b').textContent='Offline';}}finally{clearTimeout(timeout);controller.abort();}}
+ check();window.addEventListener('online',check);window.addEventListener('offline',check);const timer=setInterval(check,25000);window.addEventListener('pagehide',()=>clearInterval(timer));if('serviceWorker'in navigator&&(location.protocol==='https:'||location.hostname==='localhost'))navigator.serviceWorker.register('./sw.js').catch(console.warn);
 })();

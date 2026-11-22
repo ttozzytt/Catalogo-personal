@@ -1,3 +1,47 @@
-<!doctype html><html lang="es"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover"><meta name="theme-color" content="#142338"><meta name="description" content="Catálogo de tarjetas gráficas basado en productos publicados por CompuCenter Bolivia."><link rel="manifest" href="./manifest.json"><link rel="icon" href="./icons/icon.svg"><link rel="stylesheet" href="./pwa.css"><title>Tarjetas de video · CompuCenter</title><script defer src="./pwa.js"></script></head>
-<body class="gpu"><header class="topbar"><a class="brand" href="./index.html"><span class="brand-mark">CC</span><span>COMPUCENTER · GPU</span></a><span id="appStatus">Conectando…</span></header><main class="wrap"><section class="hero"><div><p class="eyebrow">COMPONENTES PC</p><h1>Tarjetas de video</h1><p>Modelos NVIDIA y AMD con sus características principales.</p><a href="https://compucenter.store/category/componentes-pc/tarjeta-de-video" target="_blank" rel="noopener" class="source-link">Ver catálogo de referencia ↗</a></div><img src="https://app.compucenter.store/products/Y0MuneBhXXRmllkkrUikB0kjVKpjhbcdwezdNG54.jpg" alt="Tarjeta gráfica ASUS Radeon RX 7600" loading="lazy"></section>
-<section class="head"><div><p class="eyebrow">CATÁLOGO</p><h2>Modelos destacados</h2></div><label class="search">⌕ <input id="searchInput" type="search" placeholder="Buscar modelo…" aria-label="Buscar tarjeta"></label></section><nav class="filters"><button class="active" data-filter="todos">Todas</button><button data-filter="nvidia">NVIDIA</button><button data-filter="amd">AMD</button></nav><section class="products" id="productGrid"></section><p class="notice">Los precios corresponden a la consulta del catálogo público y pueden cambiar. Confirma stock, precio final y garantía con la tienda.</p><section class="store-info"><div><p class="eyebrow">TIENDA DE REFERENCIA</p><h2>CompuCenter Bolivia · La Paz</h2><p>C/ Eloy Salmon #859, Gal. San Silvestre, piso 1, local 6.<br>Lunes a viernes: 10:00–12:30 y 14:00–18:30.<br>Sábados: 10:00–13:00 y 14:00–16:00.</p></div><a href="https://wa.me/59174055209" target="_blank" rel="noopener">Consultar por WhatsApp ↗</a></section><footer class="app-footer"><a href="./index.html">Volver a portada</a><a href="https://compucenter.store/category/componentes-pc/tarjeta-de-video" target="_blank" rel="noopener">Fuente de catálogo</a></footer></main></body></html>
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="theme-color" content="#14253d"><meta name="description" content="Compara especificaciones de tarjetas gráficas de CompuCenter Bolivia.">
+<link rel="manifest" href="./manifest.json"><link rel="icon" href="./icons/icon.svg"><link rel="stylesheet" href="./pwa.css">
+<title>CompuCenter · GPU</title><script defer src="./pwa.js"></script>
+</head>
+<body class="gpu-app">
+<header class="app-header">
+  <a class="app-brand" href="./index.html"><span class="brand-mark">CC</span><span>COMPUCENTER<small>GPU · LA PAZ</small></span></a>
+  <nav class="main-nav" aria-label="Navegación principal">
+    <button class="nav-link active" data-view="inicio" type="button">Inicio</button>
+    <button class="nav-link" data-view="catalogo" type="button">Catálogo</button>
+    <button class="nav-link" data-view="comparar" type="button">Comparar <b id="compareBadge">0</b></button>
+    <button class="nav-link" data-view="tienda" type="button">Tienda</button>
+  </nav>
+  <span class="network-pill" id="networkStatus" data-state="checking"><i></i><b>Conectando…</b></span>
+</header>
+<main class="app-main">
+  <section class="view active" id="view-inicio" aria-labelledby="homeTitle">
+    <div class="hero">
+      <div class="hero-copy"><p class="eyebrow">COMPONENTES PARA PC</p><h1 id="homeTitle">Más información.<br><em>Mejor elección.</em></h1><p>Consulta memoria, interfaz, consumo y dimensiones antes de elegir una tarjeta gráfica.</p><div class="hero-actions"><button class="button-primary" type="button" data-go="catalogo">Explorar modelos</button><button class="button-secondary" type="button" data-go="comparar">Comparar tarjetas</button></div></div>
+      <img src="https://app.compucenter.store/products/Y0MuneBhXXRmllkkrUikB0kjVKpjhbcdwezdNG54.jpg" alt="Tarjeta de video ASUS Radeon RX 7600" fetchpriority="high">
+    </div>
+    <div class="feature-grid"><article><span>01</span><strong>Ficha técnica</strong><small>Especificaciones por modelo.</small></article><article><span>02</span><strong>Comparador</strong><small>Revisa hasta tres tarjetas a la vez.</small></article><article><span>03</span><strong>Consulta directa</strong><small>Precio, stock y garantía con la tienda.</small></article></div>
+    <p class="fine-note">Precios publicados como referencia; confirma disponibilidad, garantía y precio final con CompuCenter.</p>
+  </section>
+  <section class="view" id="view-catalogo" aria-labelledby="catalogTitle" hidden>
+    <div class="view-head"><div><p class="eyebrow">CATÁLOGO DE TARJETAS</p><h1 id="catalogTitle">Modelos disponibles en referencia</h1><p>Busca por modelo, fabricante o memoria.</p></div><label class="search"><span>⌕</span><input id="productSearch" type="search" placeholder="Buscar modelo…" aria-label="Buscar tarjeta"></label></div>
+    <nav class="filter-row" aria-label="Fabricantes"><button class="filter active" type="button" data-filter="todos">Todas</button><button class="filter" type="button" data-filter="NVIDIA">NVIDIA</button><button class="filter" type="button" data-filter="AMD">AMD</button></nav>
+    <div class="catalog-grid" id="productGrid"><p class="loading">Cargando modelos…</p></div>
+  </section>
+  <section class="view" id="view-comparar" aria-labelledby="compareTitle" hidden>
+    <div class="view-head"><div><p class="eyebrow">COMPARACIÓN TÉCNICA</p><h1 id="compareTitle">Compara antes de elegir</h1><p>Selecciona hasta tres modelos desde el catálogo.</p></div><button class="button-secondary" id="clearCompare" type="button">Limpiar comparación</button></div>
+    <div class="comparison" id="comparison"><p class="empty-state">Aún no seleccionaste tarjetas para comparar.</p></div>
+  </section>
+  <section class="view" id="view-tienda" aria-labelledby="storeTitle" hidden>
+    <div class="store-hero"><div><p class="eyebrow">COMPUCENTER BOLIVIA</p><h1 id="storeTitle">Consulta con el equipo de ventas.</h1><p>La sucursal de La Paz publica atención en la Galería San Silvestre, calle Eloy Salmón.</p><a class="button-primary" href="https://wa.me/59174055209" target="_blank" rel="noopener">WhatsApp tienda ↗</a></div><div class="store-mark">CC<span>·</span></div></div>
+    <div class="store-grid"><article><strong>Dirección</strong><p>C/ Eloy Salmón #859, Galería San Silvestre, piso 1, local 6, La Paz, Bolivia.</p></article><article><strong>Teléfono</strong><p>+591 74055209</p><a href="tel:+59174055209">Llamar a la tienda ↗</a></article><article><strong>Horario publicado</strong><p>Lunes a viernes: 10:00–12:30 y 14:00–18:30.<br>Sábados: 10:00–13:00 y 14:00–16:00.</p></article><article><strong>Antes de comprar</strong><p>Confirma stock, precio final, garantía y compatibilidad con tu fuente y gabinete.</p><a href="https://www.compucenter.store/category/componentes-pc/tarjeta-de-video" target="_blank" rel="noopener">Catálogo de tienda ↗</a></article></div>
+  </section>
+</main>
+<footer class="app-footer"><a href="./index.html">Volver a portada</a><span>Referencia de catálogo · CompuCenter Bolivia</span><span>Precios sujetos a cambio</span></footer>
+<div class="modal" id="detailModal" hidden><section class="modal-card" role="dialog" aria-modal="true" aria-labelledby="detailTitle"><button class="close" id="closeDetail" type="button" aria-label="Cerrar">×</button><p class="eyebrow">FICHA TÉCNICA</p><h2 id="detailTitle"></h2><div id="detailSpecs"></div><a id="detailLink" class="button-primary" href="#" target="_blank" rel="noopener">Ver producto en tienda ↗</a></section></div>
+<div class="toast" id="toast" role="status" aria-live="polite"></div>
+</body>
+</html>

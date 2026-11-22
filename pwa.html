@@ -1,20 +1,61 @@
 <!doctype html>
 <html lang="es">
 <head>
-  <meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
-  <meta name="theme-color" content="#1d3027"><meta name="description" content="Servicios de Navaja 27 Barber Studio en La Paz.">
-  <link rel="manifest" href="./manifest.json"><link rel="icon" href="./icons/icon.svg"><link rel="stylesheet" href="./pwa.css">
-  <title>Servicios · Navaja 27</title><script defer src="./pwa.js"></script>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="theme-color" content="#172d24"><meta name="description" content="Carta de servicios y solicitudes de turno de Navaja 27.">
+<link rel="manifest" href="./manifest.json"><link rel="icon" href="./icons/icon.svg"><link rel="stylesheet" href="./pwa.css">
+<title>Navaja 27 · Servicios y turnos</title><script defer src="./pwa.js"></script>
 </head>
-<body class="n27">
-<header class="topbar"><a class="brand" href="./index.html"><span class="brand-mark">N27</span><span>NAVAJA 27</span></a><span class="top-status" id="appStatus">Conectando…</span></header>
-<main class="app-wrap">
-  <section class="app-hero"><div><p class="eyebrow">PRECISIÓN · CARÁCTER · ESTILO</p><h1>Tu estilo,<br><em>bien trabajado.</em></h1><p>Cortes actuales, barba y cuidado personal con atención al detalle.</p></div><img src="https://images.pexels.com/photos/7447150/pexels-photo-7447150.jpeg?auto=compress&cs=tinysrgb&w=1400" alt="Barbero trabajando en un corte" fetchpriority="high"></section>
-  <section class="catalog-head"><div><p class="eyebrow">CATÁLOGO</p><h2>Servicios</h2></div><label class="search"><span>⌕</span><input id="searchInput" type="search" placeholder="Buscar servicio…" aria-label="Buscar servicio"></label></section>
-  <nav class="filters" aria-label="Filtrar servicios"><button class="active" data-filter="todos">Todos</button><button data-filter="cabello">Cabello</button><button data-filter="barba">Barba</button><button data-filter="cejas">Cejas</button><button data-filter="combos">Combos</button></nav>
-  <section class="service-grid" id="serviceGrid" aria-live="polite"></section>
-  <p class="selection-note" id="selectionNote" role="status">Selecciona un servicio para ver el resumen.</p>
-  <footer class="app-footer"><a href="./index.html">Volver a portada</a><span>Navaja 27 · Barber Studio</span></footer>
+<body class="barber-app">
+<header class="app-header">
+  <a class="app-brand" href="./index.html"><span class="brand-mark">N27</span><span>NAVAJA 27<small>BARBER STUDIO</small></span></a>
+  <nav class="main-nav" aria-label="Navegación principal">
+    <button class="nav-link active" data-view="inicio" type="button">Inicio</button>
+    <button class="nav-link" data-view="servicios" type="button">Servicios</button>
+    <button class="nav-link" data-view="turnos" type="button">Solicitar turno</button>
+    <button class="nav-link" data-view="mis-turnos" type="button">Mis solicitudes</button>
+  </nav>
+  <span class="network-pill" id="networkStatus" data-state="checking"><i></i><b>Conectando…</b></span>
+</header>
+<main class="app-main" id="mainContent">
+  <section class="view active" id="view-inicio" aria-labelledby="homeTitle">
+    <div class="hero">
+      <div class="hero-copy"><p class="eyebrow">CORTE · BARBA · CUIDADO PERSONAL</p><h1 id="homeTitle">Una buena imagen empieza con un buen corte.</h1><p>Servicios claros, tiempos orientativos y una solicitud de turno sencilla desde tu teléfono.</p><div class="hero-actions"><button class="button-primary" type="button" data-go="servicios">Explorar servicios</button><button class="button-secondary" type="button" data-go="turnos">Solicitar turno</button></div></div>
+      <img src="https://images.pexels.com/photos/7447150/pexels-photo-7447150.jpeg?auto=compress&cs=tinysrgb&w=1400" alt="Barbero realizando un corte" fetchpriority="high">
+    </div>
+    <div class="quick-grid">
+      <article class="quick-card"><span>01</span><strong>Elige tu servicio</strong><small>Cortes, barba, cejas y combos.</small></article>
+      <article class="quick-card"><span>02</span><strong>Selecciona un horario</strong><small>Envía tu solicitud desde la app.</small></article>
+      <article class="quick-card"><span>03</span><strong>Confirma con el local</strong><small>El envío no reserva automáticamente.</small></article>
+    </div>
+    <div class="section-foot"><span>Atención personalizada</span><span>Diseño adaptable · PWA instalable</span></div>
+  </section>
+  <section class="view" id="view-servicios" aria-labelledby="servicesTitle" hidden>
+    <div class="view-head"><div><p class="eyebrow">CARTA DE BARBERÍA</p><h1 id="servicesTitle">Servicios</h1><p>Consulta el detalle y elige lo que necesitas.</p></div><label class="search"><span>⌕</span><input id="serviceSearch" type="search" placeholder="Buscar servicio…" aria-label="Buscar servicio"></label></div>
+    <nav class="filter-row" aria-label="Filtrar servicios"><button class="filter active" data-filter="todos" type="button">Todos</button><button class="filter" data-filter="cabello" type="button">Cabello</button><button class="filter" data-filter="barba" type="button">Barba</button><button class="filter" data-filter="cejas" type="button">Cejas</button><button class="filter" data-filter="combos" type="button">Combos</button></nav>
+    <div class="catalog-grid" id="serviceGrid" aria-live="polite"><p class="loading">Cargando servicios…</p></div>
+  </section>
+  <section class="view" id="view-turnos" aria-labelledby="bookingTitle" hidden>
+    <div class="view-head"><div><p class="eyebrow">SOLICITUD DE ATENCIÓN</p><h1 id="bookingTitle">Solicita tu turno</h1><p>Completa tus datos y guarda la solicitud en este dispositivo.</p></div></div>
+    <div class="form-layout">
+      <form class="booking-form" id="bookingForm" novalidate>
+        <label>Nombre completo<input name="name" id="clientName" autocomplete="name" minlength="2" maxlength="60" required placeholder="Tu nombre"></label>
+        <label>Celular<input name="phone" id="clientPhone" inputmode="numeric" autocomplete="tel" pattern="[0-9]{8}" maxlength="8" required placeholder="8 dígitos"></label>
+        <label>Servicio<select name="service" id="bookingService" required><option value="">Selecciona un servicio</option></select></label>
+        <div class="form-row"><label>Fecha<input type="date" id="bookingDate" name="date" required></label><label>Hora<input type="time" id="bookingTime" name="time" required></label></div>
+        <label>Nota adicional <span class="optional">Opcional</span><textarea name="note" id="bookingNote" maxlength="180" rows="2" placeholder="Preferencia de corte o detalle importante"></textarea></label>
+        <button class="button-primary" type="submit">Guardar solicitud</button>
+        <p class="form-message" id="bookingMessage" role="status">La solicitud queda guardada localmente; todavía debes confirmar el turno con el negocio.</p>
+      </form>
+      <aside class="info-panel"><p class="eyebrow">ANTES DE ENVIAR</p><h2>Tu turno aún no está confirmado.</h2><p>Este catálogo no está conectado a un sistema de agenda compartido. Guarda la solicitud y comparte el resumen para coordinar disponibilidad con la barbería.</p><button class="button-secondary" type="button" data-go="mis-turnos">Ver mis solicitudes</button></aside>
+    </div>
+  </section>
+  <section class="view" id="view-mis-turnos" aria-labelledby="historyTitle" hidden>
+    <div class="view-head"><div><p class="eyebrow">GUARDADO EN ESTE DISPOSITIVO</p><h1 id="historyTitle">Mis solicitudes</h1><p>Revisa, copia o elimina las solicitudes guardadas en este navegador.</p></div><button class="button-secondary" id="clearRequests" type="button">Borrar historial</button></div>
+    <div class="request-list" id="requestList"><p class="empty-state">Todavía no tienes solicitudes guardadas.</p></div>
+  </section>
 </main>
+<footer class="app-footer"><a href="./index.html">Volver a portada</a><span>Navaja 27 · Barber Studio</span><span>Precios en Bs</span></footer>
+<div class="toast" id="toast" role="status" aria-live="polite"></div>
 </body>
 </html>

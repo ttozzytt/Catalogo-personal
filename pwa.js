@@ -1,44 +1,27 @@
+'use strict';
 (() => {
-  const services = [
-    {name:'Corte clásico',category:'cabello',price:25,time:'35 min',desc:'Corte tradicional con laterales limpios y acabado a tu gusto.',image:'https://images.pexels.com/photos/7447150/pexels-photo-7447150.jpeg?auto=compress&cs=tinysrgb&w=900'},
-    {name:'Corte con degradado',category:'cabello',price:30,time:'45 min',desc:'Transición progresiva en laterales y nuca, con definición arriba.',image:'https://images.pexels.com/photos/32329615/pexels-photo-32329615.jpeg?auto=compress&cs=tinysrgb&w=900'},
-    {name:'Corte infantil',category:'cabello',price:20,time:'30 min',desc:'Un acabado cómodo y limpio para los más pequeños.',image:'https://images.pexels.com/photos/8867538/pexels-photo-8867538.jpeg?auto=compress&cs=tinysrgb&w=900'},
-    {name:'Barba más diseño',category:'barba',price:25,time:'30 min',desc:'Perfilado de barba y definición de líneas.',image:'https://images.pexels.com/photos/9992817/pexels-photo-9992817.jpeg?auto=compress&cs=tinysrgb&w=900'},
-    {name:'Corte más barba',category:'combos',price:50,time:'65 min',desc:'Servicio combinado de cabello y barba.',image:'https://images.pexels.com/photos/12464843/pexels-photo-12464843.jpeg?auto=compress&cs=tinysrgb&w=900'},
-    {name:'Depilación con hilo',category:'cejas',price:25,time:'20 min',desc:'Limpieza y definición del contorno de las cejas.',image:'https://images.pexels.com/photos/7447150/pexels-photo-7447150.jpeg?auto=compress&cs=tinysrgb&w=900'},
-    {name:'Perfilación y diseño',category:'cejas',price:20,time:'25 min',desc:'Diseño de cejas adaptado a la forma del rostro.',image:'https://images.pexels.com/photos/8867538/pexels-photo-8867538.jpeg?auto=compress&cs=tinysrgb&w=900'},
-    {name:'Experiencia VIP',category:'combos',price:null,time:'75 min',desc:'Cuidado premium y detalles especiales. Consultar precio.',image:'https://images.pexels.com/photos/32329615/pexels-photo-32329615.jpeg?auto=compress&cs=tinysrgb&w=900'}
-  ];
-  const grid = document.getElementById('serviceGrid');
-  const search = document.getElementById('searchInput');
-  const note = document.getElementById('selectionNote');
-  let filter = 'todos';
-  let selected = '';
-  const money = value => value === null ? 'Consultar' : 'Bs ' + value;
-  function render() {
-    const query = (search.value || '').toLocaleLowerCase('es');
-    const items = services.filter(service => (filter === 'todos' || service.category === filter) && (service.name + ' ' + service.desc).toLocaleLowerCase('es').includes(query));
-    grid.innerHTML = items.map(service => '<article class="service-card ' + (selected === service.name ? 'selected' : '') + '"><img src="' + service.image + '" alt="' + service.name + '" loading="lazy"><div class="service-body"><small>' + service.category.toUpperCase() + ' · ' + service.time + '</small><h3>' + service.name + '</h3><p>' + service.desc + '</p><div class="service-bottom"><strong>' + money(service.price) + '</strong><button type="button" data-select="' + service.name + '">' + (selected === service.name ? 'Seleccionado' : 'Elegir servicio') + '</button></div></div></article>').join('') || '<p>No hay servicios con ese nombre.</p>';
-  }
-  document.querySelectorAll('[data-filter]').forEach(button => button.addEventListener('click', () => {
-    document.querySelectorAll('[data-filter]').forEach(item => item.classList.remove('active'));
-    button.classList.add('active');
-    filter = button.dataset.filter;
-    render();
-  }));
-  grid.addEventListener('click', event => {
-    const button = event.target.closest('[data-select]');
-    if (!button) return;
-    selected = button.dataset.select;
-    note.textContent = 'Servicio seleccionado: ' + selected + '. Coordina el turno directamente con Navaja 27.';
-    render();
-  });
-  search.addEventListener('input', render);
-  render();
-  const status = document.getElementById('appStatus');
-  const update = () => status.textContent = navigator.onLine ? 'En línea' : 'Modo sin conexión';
-  update();
-  window.addEventListener('online', update);
-  window.addEventListener('offline', update);
-  if ('serviceWorker' in navigator && (location.protocol === 'https:' || location.hostname === 'localhost')) navigator.serviceWorker.register('./sw.js').catch(console.warn);
+  const $=id=>document.getElementById(id);
+  const storeKey='navaja27-turnos-v2';
+  const state={services:[],filter:'todos',view:'inicio',requests:[]};
+  const safeRead=()=>{try{const value=JSON.parse(localStorage.getItem(storeKey)||'[]');return Array.isArray(value)?value:[];}catch(_){return[];}};
+  const save=()=>{try{localStorage.setItem(storeKey,JSON.stringify(state.requests));}catch(_){toast('El navegador no permitió guardar la solicitud.','error');}};
+  function node(tag,text,className){const item=document.createElement(tag);if(className)item.className=className;if(text!==undefined)item.textContent=String(text);return item;}
+  function toast(message,type=''){const box=$('toast');box.textContent=message;box.className='toast show'+(type?' '+type:'');clearTimeout(toast.timer);toast.timer=setTimeout(()=>box.className='toast',3000);}
+  function showView(name){const view=$('view-'+name);if(!view)return;document.querySelectorAll('.view').forEach(item=>{item.hidden=true;item.classList.remove('active');});view.hidden=false;view.classList.add('active');document.querySelectorAll('[data-view]').forEach(button=>button.classList.toggle('active',button.dataset.view===name));state.view=name;if(location.hash!=='#'+name)history.replaceState(null,'','#'+name);if(name==='mis-turnos')renderRequests();if(name==='turnos')setMinimumDate();}
+  document.querySelectorAll('[data-view]').forEach(button=>button.addEventListener('click',()=>showView(button.dataset.view)));
+  document.querySelectorAll('[data-go]').forEach(button=>button.addEventListener('click',()=>showView(button.dataset.go)));
+  function setMinimumDate(){const date=$('bookingDate');const now=new Date();const local=new Date(now.getTime()-now.getTimezoneOffset()*60000).toISOString().slice(0,10);date.min=local;if(!date.value||date.value<local)date.value=local;}
+  async function loadServices(){try{const response=await fetch('./data/servicios.json',{cache:'no-store'});if(!response.ok)throw new Error('HTTP '+response.status);const data=await response.json();if(!Array.isArray(data))throw new Error('Formato no válido');state.services=data;try{const cache=await caches.open('navaja27-data-v2');await cache.put('./data/servicios.json',new Response(JSON.stringify(data),{headers:{'Content-Type':'application/json'}}));}catch(_){} }catch(error){try{const cached=await caches.match('./data/servicios.json');if(cached)state.services=await cached.json();else throw error;}catch(_){$('serviceGrid').replaceChildren(node('p','No se pudo cargar el catálogo. Conéctate y vuelve a intentarlo.','empty-state'));return;}}populateSelect();renderServices();}
+  function populateSelect(){const select=$('bookingService');state.services.forEach(service=>{const option=node('option',service.name);option.value=service.id;select.append(option);});}
+  function renderServices(){const grid=$('serviceGrid'),query=$('serviceSearch').value.trim().toLocaleLowerCase('es');grid.replaceChildren();const rows=state.services.filter(item=>(state.filter==='todos'||item.category===state.filter)&&(item.name+' '+item.description).toLocaleLowerCase('es').includes(query));if(!rows.length){grid.append(node('p','No hay servicios que coincidan.','empty-state'));return;}rows.forEach(service=>{const card=node('article',undefined,'service-card'),image=node('img');image.src=service.image;image.alt=service.name;image.loading='lazy';image.decoding='async';image.width=640;image.height=420;image.addEventListener('error',()=>{image.src='./imagenes/imagen-respaldo.svg';},{once:true});const body=node('div',undefined,'service-body');body.append(node('small',service.category.toUpperCase()+' · '+service.duration),node('h3',service.name),node('p',service.description));const foot=node('div',undefined,'service-bottom');foot.append(node('strong',service.price===null?'Consultar':'Bs '+service.price));const button=node('button','Elegir servicio');button.type='button';button.addEventListener('click',()=>{$('bookingService').value=service.id;showView('turnos');toast('Servicio seleccionado: '+service.name);});foot.append(button);body.append(foot);card.append(image,body);grid.append(card);});}
+  document.querySelectorAll('[data-filter]').forEach(button=>button.addEventListener('click',()=>{document.querySelectorAll('[data-filter]').forEach(item=>item.classList.remove('active'));button.classList.add('active');state.filter=button.dataset.filter;renderServices();}));
+  $('serviceSearch').addEventListener('input',renderServices);
+  function renderRequests(){const list=$('requestList');list.replaceChildren();if(!state.requests.length){list.append(node('p','Todavía no tienes solicitudes guardadas.','empty-state'));return;}[...state.requests].reverse().forEach(request=>{const card=node('article',undefined,'request-card'),copy=node('div'),title=node('h3',request.service),detail=node('p',request.date+' · '+request.time+' · '+request.name+' · '+request.phone+(request.status?' · '+request.status:''));copy.append(title,detail);const actions=node('div',undefined,'request-actions'),copyButton=node('button','Copiar resumen'),removeButton=node('button','Eliminar');copyButton.type=removeButton.type='button';copyButton.addEventListener('click',()=>copyRequest(request));removeButton.addEventListener('click',()=>{state.requests=state.requests.filter(item=>item.id!==request.id);save();renderRequests();toast('Solicitud eliminada.');});actions.append(copyButton,removeButton);card.append(copy,actions);list.append(card);});}
+  async function copyRequest(request){const text='Solicitud de turno · Navaja 27\\nNombre: '+request.name+'\\nCelular: '+request.phone+'\\nServicio: '+request.service+'\\nFecha: '+request.date+'\\nHora: '+request.time+(request.note?'\\nNota: '+request.note:'')+'\\nPendiente de confirmación.';try{await navigator.clipboard.writeText(text);toast('Resumen copiado.');}catch(_){toast('No se pudo copiar en este navegador.','error');}}
+  $('bookingForm').addEventListener('submit',event=>{event.preventDefault();const form=event.currentTarget,name=$('clientName').value.trim(),phone=$('clientPhone').value.trim(),service=state.services.find(item=>item.id===$('bookingService').value),date=$('bookingDate').value,time=$('bookingTime').value,noteText=$('bookingNote').value.trim();if(name.length<2||!/^[0-9]{8}$/.test(phone)||!service||!date||!time){$('bookingMessage').textContent='Revisa nombre, celular, servicio, fecha y hora.';return;}const chosen=new Date(date+'T'+time),now=new Date();if(Number.isNaN(chosen.getTime())||chosen<=now){$('bookingMessage').textContent='Elige una fecha y hora futuras.';return;}const request={id:Date.now().toString(36),name,phone,service:service.name,date,time,note:noteText,createdAt:new Date().toISOString(),status:'Pendiente de confirmación'};state.requests.push(request);save();form.reset();setMinimumDate();$('bookingMessage').textContent='Solicitud guardada en este dispositivo. Compártela y confirma disponibilidad con la barbería.';toast('Solicitud guardada.');showView('mis-turnos');});
+  $('clearRequests').addEventListener('click',()=>{if(!state.requests.length)return;state.requests=[];save();renderRequests();toast('Historial eliminado.');});
+  state.requests=safeRead();const start=location.hash.replace('#','');showView(['inicio','servicios','turnos','mis-turnos'].includes(start)?start:'inicio');setMinimumDate();loadServices();
+  let seq=0;async function networkCheck(){const id=++seq,controller=new AbortController(),timeout=setTimeout(()=>controller.abort(),4000);try{const response=await fetch('./manifest.json?__health='+Date.now(),{cache:'no-store',signal:controller.signal});const data=response.ok?await response.json():null;const online=Boolean(data&&data.short_name==='Navaja 27');$('networkStatus').dataset.state=online?'online':'offline';$('networkStatus').querySelector('b').textContent=online?'Online':'Offline';}catch(_){if(id===seq){$('networkStatus').dataset.state='offline';$('networkStatus').querySelector('b').textContent='Offline';}}finally{clearTimeout(timeout);controller.abort();}}
+  networkCheck();window.addEventListener('online',networkCheck);window.addEventListener('offline',networkCheck);const networkTimer=setInterval(networkCheck,25000);window.addEventListener('pagehide',()=>clearInterval(networkTimer));
+  if('serviceWorker'in navigator&&(location.protocol==='https:'||location.hostname==='localhost'))navigator.serviceWorker.register('./sw.js').catch(console.warn);
 })();

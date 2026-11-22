@@ -1,29 +1,13 @@
 'use strict';
-const CACHE = "catalogo-antojitos-v2";
-const APP_SHELL = ["./","./index.html","./styles.css","./app.js","./pwa.html","./pwa.css","./pwa.js","./manifest.json","./icons/icon.svg","./media/hero.webp","./media/paceña.webp","./media/mani.webp","./media/maracuya.webp","./media/barbacoa.webp","./media/piña.webp","./media/doble.webp","./media/salchipapas.webp"];
-self.addEventListener("install", event => {
-  event.waitUntil(caches.open(CACHE).then(cache => cache.addAll(APP_SHELL)).then(() => self.skipWaiting()));
-});
-self.addEventListener("activate", event => {
-  event.waitUntil(caches.keys().then(keys => Promise.all(keys.filter(key => key.startsWith("catalogo-antojitos") && key !== CACHE).map(key => caches.delete(key)))).then(() => self.clients.claim()));
-});
-self.addEventListener("fetch", event => {
-  const request = event.request;
-  if (request.method !== "GET") return;
-  const url = new URL(request.url);
-  if (url.origin !== self.location.origin && request.destination !== "image") return;
-  event.respondWith((async () => {
-    const saved = await caches.match(request);
-    if (saved) return saved;
-    try {
-      const response = await fetch(request);
-      if (response.ok || response.type === "opaque") {
-        const cache = await caches.open(CACHE);
-        await cache.put(request, response.clone());
-      }
-      return response;
-    } catch (_) {
-      return (await caches.match("./pwa.html")) || new Response("Recurso no disponible sin conexión.", {status:503,headers:{"Content-Type":"text/plain; charset=utf-8"}});
-    }
-  })());
+const CACHE='el-local-pwa-v3';
+const SHELL=['./','./index.html','./styles.css','./app.js','./pwa.html','./pwa.css','./pwa.js','./manifest.json','./icons/icon.svg','./data/menu.json','./media/hero.webp','./media/paceña.webp','./media/mani.webp','./media/maracuya.webp','./media/barbacoa.webp','./media/piña.webp','./media/doble.webp','./media/salchipapas.webp'];
+self.addEventListener('install',event=>event.waitUntil(caches.open(CACHE).then(cache=>cache.addAll(SHELL)).then(()=>self.skipWaiting())));
+self.addEventListener('activate',event=>event.waitUntil(caches.keys().then(keys=>Promise.all(keys.filter(key=>key.startsWith('el-local-pwa-')&&key!==CACHE).map(key=>caches.delete(key)))).then(()=>self.clients.claim())));
+self.addEventListener('fetch',event=>{
+ const req=event.request;if(req.method!=='GET')return;const url=new URL(req.url);
+ if(url.origin===self.location.origin&&url.searchParams.has('__health')){event.respondWith(fetch(req));return;}
+ if(req.mode==='navigate'){event.respondWith(fetch(req).then(res=>{if(res.ok)caches.open(CACHE).then(cache=>cache.put(req,res.clone()));return res;}).catch(async()=>await caches.match(req)||await caches.match('./pwa.html')));return;}
+ if(url.origin!==self.location.origin&&req.destination!=='image')return;
+ if(req.destination==='image'){event.respondWith((async()=>{const cached=await caches.match(req);if(cached)return cached;try{const res=await fetch(req);if(res.ok||res.type==='opaque')await(await caches.open(CACHE)).put(req,res.clone());return res;}catch(_){return new Response('',{status:504});}})());return;}
+ event.respondWith(caches.match(req).then(cached=>cached||fetch(req).then(res=>{if(res.ok)caches.open(CACHE).then(cache=>cache.put(req,res.clone()));return res;})));
 });

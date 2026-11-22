@@ -1,0 +1,23 @@
+[
+ {
+  "id":"rx7600","name":"ASUS Dual Radeon RX 7600 8GB","brand":"AMD","price":7124,
+  "shortDescription":"8 GB GDDR6, bus de 128 bits y refrigeración Dual Fan Axial-tech.",
+  "image":"https://app.compucenter.store/products/Y0MuneBhXXRmllkkrUikB0kjVKpjhbcdwezdNG54.jpg",
+  "url":"https://compucenter.store/product/tarjeta-de-video-asus-amd-radeon-rx-7600-8gb-gddr6-pci-express-40",
+  "specs":{"memory":"8 GB GDDR6","bus":"128 bits","interface":"PCI Express 4.0","power":"Fuente recomendada 550 W · Conector 8-pin","recommendedPower":"550 W","outputs":"1 HDMI 2.1 · 3 DisplayPort 1.4a","warranty":"30 días local, contra defectos de fábrica"}
+ },
+ {
+  "id":"rtx3050","name":"ZOTAC Gaming GeForce RTX 3050 6GB OC","brand":"NVIDIA","price":5421,
+  "shortDescription":"6 GB GDDR6, bus de 96 bits y refrigeración de doble ventilador.",
+  "image":"https://app.compucenter.store/products/m83ePT86nmEK6LxGpwdNbnPPrTZBZbNFMhI6nKT1.jpg",
+  "url":"https://compucenter.store/product/tarjeta-de-video-zotac-gaming-twin-edge-nvidia-geforce-rtx-3050-6gb-gddr6-pci-express-40-salidas-3-displayport-y-1-x-hdmi",
+  "specs":{"memory":"6 GB GDDR6","bus":"96 bits","interface":"PCI Express 4.0 x8","power":"Consumo indicado 70 W · Fuente recomendada 450 W","recommendedPower":"450 W","outputs":"3 DisplayPort 1.4a · 1 HDMI 2.1","warranty":"30 días local, contra defectos de fábrica"}
+ },
+ {
+  "id":"gt710","name":"MSI GeForce GT 710 2GB DDR3","brand":"NVIDIA","price":1378,
+  "shortDescription":"2 GB DDR3, perfil bajo y salidas HDMI, DVI-D y VGA.",
+  "image":"https://app.compucenter.store/products/msi-gt710-2gb-ddr3.jpg",
+  "url":"https://compucenter.store/product/msi-tarjeta-de-video-2gb-ddr3-low-profile-64bits-pci-express-20-x16-opera-en-x8-hdmi-vga-dvi-d",
+  "specs":{"memory":"2 GB DDR3","bus":"64 bits","interface":"PCI Express 2.0 x16 (opera en x8)","power":"Consumo indicado 19 W · Fuente recomendada 300 W","recommendedPower":"300 W","outputs":"HDMI 1.4a · DVI-D · VGA","warranty":"30 días local, contra defectos de fábrica"}
+ }
+]

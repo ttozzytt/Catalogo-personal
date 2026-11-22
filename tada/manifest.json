@@ -1,12 +1,1 @@
-{
-  "id":"./pwa.html",
-  "name":"TaDa · Bebidas para cada plan",
-  "short_name":"TaDa Bolivia",
-  "description":"Catálogo referencial de bebidas basado en marcas del portafolio público de TaDa Bolivia.",
-  "start_url":"./pwa.html",
-  "scope":"./",
-  "display":"standalone",
-  "background_color":"#f7f5f1",
-  "theme_color":"#28164d",
-  "icons":[{"src":"./icons/icon.svg","sizes":"any","type":"image/svg+xml"}]
-}
+{"id":"./pwa.html","name":"TaDa Bolivia · Tienda de bebidas","short_name":"TaDa Bolivia","description":"Catálogo referencial de marcas y bebidas de TaDa Bolivia.","start_url":"./pwa.html","scope":"./","display":"standalone","background_color":"#f7f5f1","theme_color":"#29154f","icons":[{"src":"./icons/icon.svg","sizes":"any","type":"image/svg+xml"}]}
