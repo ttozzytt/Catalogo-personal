@@ -3,10 +3,10 @@
 <head>
 <meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
 <meta name="theme-color" content="#172d24"><meta name="description" content="Servicios, turnos y perfil de cliente de Navaja 27 Barber Studio.">
-<link rel="manifest" href="./manifest.json"><link rel="icon" href="./icons/icon.svg"><link rel="stylesheet" href="./pwa.css?v=n27-qr-payment-v6">
+<link rel="manifest" href="./manifest.json"><link rel="icon" href="./icons/icon.svg"><link rel="stylesheet" href="./pwa.css?v=n27-altoke-qr-v7">
 <title>Navaja 27 · Servicios y reservas</title><script defer src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.119.2"></script>
 <script defer src="./catalog-db.js"></script>
-<script defer src="./pwa.js?v=n27-qr-payment-v6"></script>
+<script defer src="./pwa.js?v=n27-altoke-qr-v7"></script>
 </head>
 <body class="barber-app">
 <header class="app-header">
@@ -94,11 +94,10 @@
   <p id="qrPaymentService"></p>
   <strong class="qr-payment-amount" id="qrPaymentAmount"></strong>
   <p class="qr-payment-status" id="qrPaymentStatus"></p>
-  <div class="qr-payment-placeholder" id="qrPaymentUnavailable">
-   <span aria-hidden="true">▦</span>
-   <strong>Falta el QR oficial de cobro</strong>
-   <p>El pago se habilitará cuando se cargue el código QR verificado de Navaja 27. No transfieras a un QR de otra persona.</p>
-  </div>
+  <div class="altoke-qr-brand" aria-label="Altoke">altoke<span></span></div>
+  <canvas id="qrPaymentCanvas" width="680" height="680" role="img" aria-label="Código QR Altoke de Navaja 27"></canvas>
+  <div class="altoke-qr-meta"><span>Válido hasta <strong>04 de noviembre de 2028</strong></span><span>CTA <strong>2968496-000-001</strong></span></div>
+  <p class="qr-payment-instructions">Escanea este QR desde tu aplicación bancaria. Antes de autorizar, comprueba que el nombre del beneficiario y el monto sean los acordados con Navaja 27. El pago debe verificarse con el comprobante en el local.</p>
   <div class="confirm-actions"><button class="button-secondary" id="closeQrPaymentBottom" type="button">Cerrar</button></div>
  </section>
 </div>
