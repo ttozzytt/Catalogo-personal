@@ -1,5 +1,5 @@
 'use strict';
-const CACHE='tada-pwa-v12-variedades';
+const CACHE='tada-pwa-v13-variedades';
 const SHELL=['./','./index.html','./styles.css','./app.js','./pwa.html','./pwa.css','./pwa.js','./manifest.json','./icons/icon.svg',];
 self.addEventListener('install',event=>event.waitUntil(caches.open(CACHE).then(cache=>cache.addAll(SHELL)).then(()=>self.skipWaiting())));
 self.addEventListener('activate',event=>event.waitUntil(caches.keys().then(keys=>Promise.all(keys.filter(key=>(key.startsWith('tada-pwa-')||key.startsWith('catalogo-tada-')||key.startsWith('tada-data-'))&&key!==CACHE).map(key=>caches.delete(key)))).then(()=>self.clients.claim())));
