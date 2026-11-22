@@ -4,7 +4,9 @@
 <meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
 <meta name="theme-color" content="#172d24"><meta name="description" content="Servicios, turnos y perfil de cliente de Navaja 27 Barber Studio.">
 <link rel="manifest" href="./manifest.json"><link rel="icon" href="./icons/icon.svg"><link rel="stylesheet" href="./pwa.css?v=n27-booking-60s-20261122">
-<title>Navaja 27 · Servicios y reservas</title><script defer src="./pwa.js?v=n27-booking-60s-20261122"></script>
+<title>Navaja 27 · Servicios y reservas</title><script defer src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.119.2"></script>
+<script defer src="./catalog-db.js"></script>
+<script defer src="./pwa.js?v=n27-booking-60s-20261122"></script>
 </head>
 <body class="barber-app">
 <header class="app-header">
@@ -49,13 +51,13 @@
     <div class="form-row"><label>Fecha<input id="bookingDate" type="date" name="date" required></label><label>Hora<select id="bookingTime" name="time" required><option value="">Selecciona</option><option>09:00</option><option>09:30</option><option>10:00</option><option>10:30</option><option>11:00</option><option>11:30</option><option>12:00</option><option>14:00</option><option>14:30</option><option>15:00</option><option>15:30</option><option>16:00</option><option>16:30</option><option>17:00</option><option>17:30</option><option>18:00</option></select></label></div>
     <label>Nota adicional <span class="optional">Opcional</span><textarea id="bookingNote" name="note" maxlength="180" rows="2" placeholder="Preferencia de corte o detalle"></textarea></label>
     <button class="button-primary" type="submit">Revisar y reservar</button>
-    <p class="form-message" id="bookingMessage" role="status">El turno requiere confirmación del establecimiento. La demo guarda solicitudes en este dispositivo.</p>
+    <p class="form-message" id="bookingMessage" role="status">El turno requiere confirmación del establecimiento. La solicitud queda guardada en tu historial en línea.</p>
    </form>
    <aside class="info-panel"><p class="eyebrow">CONFIRMACIÓN CON TIEMPO</p><h2>60 segundos para confirmar.</h2><p>Al enviar el formulario, el turno queda apartado temporalmente en esta demostración. Confírmalo antes de que termine el contador; si vence, se libera y puedes intentarlo otra vez.</p><div class="profile-shortcut"><strong>¿Ya tienes tus datos?</strong><button class="text-button" type="button" data-go="cuenta">Completar mi cuenta ↗</button></div></aside>
   </div>
  </section>
  <section class="view" id="view-mis-turnos" aria-labelledby="historyTitle" hidden>
-  <div class="view-head"><div><p class="eyebrow">HISTORIAL LOCAL</p><h1 id="historyTitle">Mis turnos</h1><p>Solicitudes guardadas en este dispositivo.</p></div><button class="button-secondary" id="clearRequests" type="button">Borrar historial</button></div>
+  <div class="view-head"><div><p class="eyebrow">HISTORIAL EN LÍNEA</p><h1 id="historyTitle">Mis turnos</h1><p>Solicitudes guardadas en tu cuenta en la nube.</p></div><button class="button-secondary" id="clearRequests" type="button">Borrar historial</button></div>
   <div class="request-list" id="requestList"><p class="empty-state">Todavía no tienes solicitudes guardadas.</p></div>
  </section>
  <section class="view" id="view-cuenta" aria-labelledby="accountTitle" hidden>
@@ -66,9 +68,9 @@
     <label>Celular<input id="profilePhone" inputmode="numeric" autocomplete="tel" pattern="[0-9]{8}" maxlength="8" required placeholder="8 dígitos"></label>
     <label>Preferencia de contacto<select id="profileContact"><option value="WhatsApp">WhatsApp</option><option value="Llamada">Llamada</option></select></label>
     <button class="button-primary" type="submit">Guardar mis datos</button>
-    <p class="form-message" id="profileMessage" role="status">Los datos quedan guardados localmente en este navegador.</p>
+    <p class="form-message" id="profileMessage" role="status">Tus datos se guardan en una base de datos en línea.</p>
    </form>
-   <aside class="info-panel"><p class="eyebrow">TU INFORMACIÓN</p><h2 id="profileGreeting">Aún no guardaste tu perfil.</h2><p>El perfil no es una cuenta de acceso ni está sincronizado con una base de datos. Puedes borrar tus datos desde este dispositivo.</p><button class="button-secondary" type="button" id="deleteProfile">Eliminar mis datos</button></aside>
+   <aside class="info-panel"><p class="eyebrow">TU INFORMACIÓN</p><h2 id="profileGreeting">Aún no guardaste tu perfil.</h2><p>Tu perfil se guarda en línea y queda asociado a esta sesión segura. Puedes eliminarlo desde aquí.</p><button class="button-secondary" type="button" id="deleteProfile">Eliminar mis datos</button></aside>
   </div>
  </section>
 </main>
