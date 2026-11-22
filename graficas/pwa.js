@@ -112,7 +112,7 @@
       budget:$('requestBudget').value?Number($('requestBudget').value):null,details:$('requestDetails').value.trim(),
       name:$('requestName').value.trim(),phone:$('requestPhone').value.trim(),city:$('requestCity').value,
       delivery:$('requestDelivery').value,address:$('requestAddress').value.trim()};
-    if(!d.category||d.name.length<2||!/^\\d{8}$/.test(d.phone)||!d.city||!Number.isInteger(d.quantity)||d.quantity<1||d.quantity>10||!$('requestConsent').checked){
+    if(!d.category||d.name.length<2||!/^\d{8}$/.test(d.phone)||!d.city||!Number.isInteger(d.quantity)||d.quantity<1||d.quantity>10||!$('requestConsent').checked){
       $('requestMessage').textContent='Revisa componente, nombre, celular, ciudad, cantidad y aceptación de la solicitud.';return;
     }
     if(d.budget!==null&&(!Number.isFinite(d.budget)||d.budget<0)){$('requestMessage').textContent='Escribe un presupuesto válido.';return;}
