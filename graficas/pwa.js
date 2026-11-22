@@ -143,7 +143,6 @@
     try{await state.cloud.deleteRequests(STORE);state.requests=[];renderHistory();toast('Historial eliminado de la base de datos.');}
     catch(error){toast('No se pudo borrar: '+error.message,'error');}
   });
-  $('clearHistory').addEventListener?.('click',()=>{});
   $('clearRequests').setAttribute('aria-label','Borrar historial de solicitudes');
   const cpuButton=document.querySelector('[data-request-cpu]');if(cpuButton)cpuButton.addEventListener('click',()=>startRequest(null));
   async function init(){
