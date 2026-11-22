@@ -13,7 +13,7 @@
     const s=row.specs||{};
     return{id:row.item_code,name:row.name,category:row.category,brand:row.brand||'',type:s.type||row.category,
       description:row.description||'',image:row.image_url||'',price:row.price===null?null:Number(row.price),
-      priceLabel:s.priceLabel||'Consultar',priceSource:s.priceSource||'TaDa · consultar',
+      priceLabel:s.priceLabel||'Consultar',priceSource:s.priceSource||'TaDa · consultar',priceSourceUrl:s.priceSourceUrl||'',
       priceNote:s.priceNote||'',formatGroup:s.presentationGroup==='cajas'?'packs':(s.presentationGroup||'botellas'),ageRestricted:Boolean(s.ageRestricted)};
   }
   function updateBadges(){const n=totalUnits();$('listBadge').textContent=n;$('mobileBadge').textContent=n;$('listSummary').textContent=n+' unidades seleccionadas';}
@@ -21,7 +21,7 @@
   function formatPrice(p){
     if(p.price===null)return p.type==='Caja full'?'Caja full · consultar':'Consultar precio en TaDa';
     const amount='Bs '+p.price.toLocaleString('es-BO',{minimumFractionDigits:p.price%1?2:0,maximumFractionDigits:2});
-    return amount+' · ref. '+p.priceSource;
+    return amount;
   }
   function renderProducts(){
     const grid=$('productGrid'),q=$('productSearch').value.trim().toLocaleLowerCase('es');grid.replaceChildren();
@@ -34,7 +34,10 @@
       const body=node('div',undefined,'product-body');
       body.append(node('small',(p.brand||p.type)+' · '+p.type+(p.ageRestricted?' · +18':'')),node('h3',p.name),node('p',p.description));
       const foot=node('div',undefined,'product-foot'),priceWrap=node('div',undefined,'product-price-wrap');
-      priceWrap.append(node('strong',formatPrice(p)),node('small',p.priceNote||'Precio y stock final sujetos a confirmación del canal TaDa.'));
+      priceWrap.append(node('strong',formatPrice(p)));
+      if(p.priceSourceUrl){const source=node('a',p.priceSource);source.href=p.priceSourceUrl;source.target='_blank';source.rel='noopener noreferrer';priceWrap.append(source);}
+      else priceWrap.append(node('small',p.priceSource));
+      priceWrap.append(node('small',p.priceNote||'Precio y stock final sujetos a confirmación del canal TaDa.'));
       const button=node('button',state.list[p.id]?'Añadido ✓':'Añadir +');button.type='button';
       button.addEventListener('click',async()=>{state.list[p.id]=(state.list[p.id]||0)+1;updateBadges();button.textContent='Añadido ✓';await saveList();toast(p.name+' agregado a tu lista.');});
       foot.append(priceWrap,button);body.append(foot);card.append(art,body);grid.append(card);
