@@ -1,0 +1,34 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+  <meta name="theme-color" content="#28164d">
+  <meta name="description" content="Catálogo de bebidas inspirado en TaDa Bolivia.">
+  <link rel="manifest" href="./manifest.json">
+  <link rel="icon" href="./icons/icon.svg">
+  <link rel="stylesheet" href="./pwa.css">
+  <title>Bebidas · TaDa Bolivia</title>
+  <script defer src="./pwa.js"></script>
+</head>
+<body class="tada">
+<header class="topbar">
+  <a class="brand" href="./index.html"><span class="brand-mark">Ta<span>·</span>Da</span><small>BOLIVIA</small></a>
+  <div class="top-actions"><span id="appStatus">Conectando…</span><a href="https://www.tada.com.bo/" target="_blank" rel="noopener">TaDa oficial ↗</a></div>
+</header>
+<main class="wrap">
+  <section class="hero">
+    <div class="hero-copy"><p class="eyebrow">UNA MARCA PARA CADA MOMENTO</p><h1>Lo bueno se<br><em>comparte.</em></h1><p>Descubre cervezas, destilados y opciones sin alcohol de marcas del portafolio TaDa Bolivia.</p><a class="hero-link" href="https://tadadelivery.com.bo/" target="_blank" rel="noopener">Ver canal de delivery ↗</a></div>
+    <img src="https://tada.com.bo/images/cards/delivery.jpg" alt="Servicio de bebidas TaDa" fetchpriority="high">
+  </section>
+  <section class="catalog-head"><div><p class="eyebrow">SELECCIÓN DE MARCAS</p><h2>Encuentra tu favorita</h2></div><label class="search"><span>⌕</span><input id="searchInput" type="search" placeholder="Buscar bebida o marca…" aria-label="Buscar bebida"></label></section>
+  <nav class="filters" aria-label="Filtrar bebidas"><button class="active" data-filter="todos">Todas</button><button data-filter="cervezas">Cervezas</button><button data-filter="destilados">Destilados</button><button data-filter="singani">Singani</button><button data-filter="sin-alcohol">Sin alcohol</button></nav>
+  <section class="products" id="productGrid" aria-live="polite"></section>
+  <aside class="selection-bar" id="selectionBar" hidden><div><strong id="selectionCount">0 productos</strong><small>Tu selección en este dispositivo</small></div><button id="showSelection">Ver selección <span>↗</span></button></aside>
+  <section class="store-note"><div><p class="eyebrow">TA·DA BOLIVIA</p><h2>Una buena elección, bien fría.</h2><p>Consulta precios, stock y entrega directamente en el canal oficial de TaDa.</p></div><a href="https://tadadelivery.com.bo/" target="_blank" rel="noopener">Ir a TaDa Delivery ↗</a></section>
+  <p class="responsible">Venta de bebidas alcohólicas únicamente a mayores de 18 años. Consume con responsabilidad.</p>
+  <footer class="app-footer"><a href="./index.html">Volver a portada</a><span>Catálogo académico · Marcas del portafolio público</span><a href="https://franquicias.tada.com.bo/" target="_blank" rel="noopener">Conocer TaDa ↗</a></footer>
+</main>
+<div class="modal" id="selectionModal" hidden><section class="modal-card" role="dialog" aria-modal="true" aria-labelledby="modalTitle"><button class="close" id="closeModal" aria-label="Cerrar">×</button><p class="eyebrow">TU LISTA</p><h2 id="modalTitle">Selección de bebidas</h2><div id="selectionLines"></div><div class="modal-actions"><button id="copySelection">Copiar selección</button><button class="secondary" id="clearSelection">Vaciar</button></div><p class="modal-note">Esta lista no es una compra ni confirma disponibilidad. Verifica precio, stock y entrega en TaDa Delivery.</p></section></div>
+</body>
+</html>

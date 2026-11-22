@@ -1,6 +1,6 @@
 'use strict';
-const CACHE = "catalogo-navaja27-v1";
-const APP_SHELL = ["./", "./index.html", "./styles.css", "./app.js", "./pwa.html", "./pwa.css", "./pwa.js", "./manifest.json", "./icons/icon.svg"];
+const CACHE = "catalogo-navaja27-v2";
+const APP_SHELL = ["./","./index.html","./styles.css","./app.js","./pwa.html","./pwa.css","./pwa.js","./manifest.json","./icons/icon.svg"];
 self.addEventListener("install", event => {
   event.waitUntil(caches.open(CACHE).then(cache => cache.addAll(APP_SHELL)).then(() => self.skipWaiting()));
 });
@@ -23,7 +23,7 @@ self.addEventListener("fetch", event => {
       }
       return response;
     } catch (_) {
-      return (await caches.match("./pwa.html")) || new Response("Recurso no disponible sin conexión.", {status:503, headers:{"Content-Type":"text/plain; charset=utf-8"}});
+      return (await caches.match("./pwa.html")) || new Response("Recurso no disponible sin conexión.", {status:503,headers:{"Content-Type":"text/plain; charset=utf-8"}});
     }
   })());
 });
