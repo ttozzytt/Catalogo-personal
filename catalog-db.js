@@ -52,7 +52,7 @@
     },
     async saveProfile(storeCode, profile) {
       const { data, error } = await client.from('catalog_profiles')
-        .upsert({ store_code: storeCode, user_id: this.user.id, ...profile },
+        .upsert({ store_code: storeCode, user_id: this.user.id, ...profile, updated_at: new Date().toISOString() },
           { onConflict: 'store_code,user_id' }).select().single();
       if (error) throw error;
       return data;
@@ -98,7 +98,7 @@
     },
     async saveUserState(storeCode, key, stateData) {
       const { error } = await client.from('catalog_user_state').upsert({
-        store_code: storeCode, user_id: this.user.id, state_key: key, state_data: stateData
+        store_code: storeCode, user_id: this.user.id, state_key: key, state_data: stateData, updated_at: new Date().toISOString()
       }, { onConflict: 'store_code,user_id,state_key' });
       if (error) throw error;
     },
