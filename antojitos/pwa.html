@@ -3,45 +3,110 @@
 <head>
 <meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
 <meta name="theme-color" content="#8f3925"><meta name="description" content="Menú digital de El Local. Hamburguesas a la parrilla, dobles, mixtas y salchipapas.">
-<link rel="manifest" href="./manifest.json"><link rel="icon" href="./icons/icon.svg"><link rel="stylesheet" href="./pwa.css">
-<title>El Local · Menú digital</title><script defer src="./pwa.js"></script>
+<link rel="manifest" href="./manifest.json"><link rel="icon" href="./icons/icon.svg"><link rel="stylesheet" href="./pwa.css?v=checkout-60s-profile-v2">
+<title>El Local · Menú y pedidos</title><script defer src="./pwa.js?v=checkout-60s-profile-v2"></script>
 </head>
 <body class="food-app">
 <header class="app-header">
-  <a class="app-brand" href="./index.html"><span class="brand-mark">EL</span><span>EL LOCAL<small>ANTOJITOS · LA PAZ</small></span></a>
-  <nav class="main-nav" aria-label="Navegación principal">
-    <button class="nav-link active" data-view="inicio" type="button">Inicio</button>
-    <button class="nav-link" data-view="menu" type="button">Menú</button>
-    <button class="nav-link" data-view="pedido" type="button">Mi pedido <b id="cartBadge">0</b></button>
-  </nav>
-  <span class="network-pill" id="networkStatus" data-state="checking"><i></i><b>Conectando…</b></span>
+ <a class="app-brand" href="./index.html"><span class="brand-mark">EL</span><span>EL LOCAL<small>ANTOJITOS · LA PAZ</small></span></a>
+ <nav class="main-nav" aria-label="Navegación principal">
+  <button class="nav-link active" data-view="inicio" type="button">Inicio</button>
+  <button class="nav-link" data-view="menu" type="button">Menú</button>
+  <button class="nav-link" data-view="pedido" type="button">Mi pedido <b id="cartBadge">0</b></button>
+  <button class="nav-link" data-view="cuenta" type="button">Mi cuenta</button>
+  <button class="nav-link" data-view="historial" type="button">Mis pedidos</button>
+ </nav>
+ <span class="network-pill" id="networkStatus" data-state="checking"><i></i><b>Conectando…</b></span>
 </header>
+<nav class="mobile-nav" aria-label="Navegación móvil">
+ <button class="nav-link active" data-view="inicio" type="button">Inicio</button><button class="nav-link" data-view="menu" type="button">Menú</button><button class="nav-link" data-view="pedido" type="button">Pedido <b id="mobileCartBadge">0</b></button><button class="nav-link" data-view="cuenta" type="button">Cuenta</button><button class="nav-link" data-view="historial" type="button">Historial</button>
+</nav>
 <main class="app-main">
-  <section class="view active" id="view-inicio" aria-labelledby="homeTitle">
-    <div class="hero">
-      <div class="hero-copy"><p class="eyebrow">SABOR · PARRILLA · ANTOJO</p><h1 id="homeTitle">Arma tu pedido<br><em>a tu manera.</em></h1><p>Explora el menú completo, añade tus favoritos y revisa el total en bolivianos antes de compartirlo.</p><button class="button-primary" type="button" data-go="menu">Ver el menú</button></div>
-      <img src="https://images.pexels.com/photos/109400/pexels-photo-109400.jpeg?auto=compress&cs=tinysrgb&w=1400" alt="Hamburguesa servida con acompañamiento" fetchpriority="high">
+ <section class="view active" id="view-inicio" aria-labelledby="homeTitle">
+  <div class="hero">
+   <div class="hero-copy"><p class="eyebrow">SABOR · PARRILLA · ANTOJO</p><h1 id="homeTitle">Arma tu pedido<br><em>a tu manera.</em></h1><p>Explora el menú, añade tus favoritos y revisa el total antes de confirmar el pedido.</p><button class="button-primary" type="button" data-go="menu">Ver el menú</button></div>
+   <img src="https://images.pexels.com/photos/109400/pexels-photo-109400.jpeg?auto=compress&cs=tinysrgb&w=1400" alt="Hamburguesa servida con acompañamiento" fetchpriority="high">
+  </div>
+  <div class="category-tiles">
+   <button type="button" data-category="parrilla"><span>01</span><strong>A la parrilla</strong><small>Hamburguesas de la casa</small></button>
+   <button type="button" data-category="dobles"><span>02</span><strong>Dobles</strong><small>Más carne, más sabor</small></button>
+   <button type="button" data-category="mixtas"><span>03</span><strong>Mixtas</strong><small>Hamburguesa y salchipapas</small></button>
+   <button type="button" data-category="salchipapas"><span>04</span><strong>Salchipapas</strong><small>Un clásico para compartir</small></button>
+  </div>
+  <div class="order-process"><article><b>01 · Selecciona</b><small>Elige platos y cantidades.</small></article><article><b>02 · Organiza</b><small>Retiro o entrega a domicilio.</small></article><article><b>03 · Confirma</b><small>60 segundos para confirmar la solicitud.</small></article></div>
+  <p class="fine-note">La confirmación se guarda en este dispositivo. El pedido debe coordinarse con el local; no existe conexión automática con cocina ni reparto.</p>
+ </section>
+ <section class="view" id="view-menu" aria-labelledby="menuTitle" hidden>
+  <div class="view-head"><div><p class="eyebrow">MENÚ DEL LOCAL</p><h1 id="menuTitle">¿Qué se te antoja?</h1><p>Precios en Bs. Ajusta la cantidad de cada producto.</p></div><label class="search"><span>⌕</span><input id="productSearch" type="search" placeholder="Buscar producto…" aria-label="Buscar producto"></label></div>
+  <nav class="filter-row" aria-label="Categorías del menú"><button class="filter active" type="button" data-filter="todos">Todo</button><button class="filter" type="button" data-filter="parrilla">A la parrilla</button><button class="filter" type="button" data-filter="dobles">Dobles</button><button class="filter" type="button" data-filter="mixtas">Mixtas</button><button class="filter" type="button" data-filter="salchipapas">Salchipapas</button></nav>
+  <div class="catalog-grid" id="productGrid"><p class="loading">Cargando menú…</p></div>
+  <button class="more-button" id="showMore" type="button" hidden>Mostrar más productos</button>
+ </section>
+ <section class="view" id="view-pedido" aria-labelledby="orderTitle" hidden>
+  <div class="view-head"><div><p class="eyebrow">RESUMEN DE COMPRA</p><h1 id="orderTitle">Mi pedido</h1><p>Comprueba productos, cantidades y total.</p></div><button class="button-secondary" id="clearCart" type="button">Vaciar pedido</button></div>
+  <div class="order-layout">
+   <div class="order-lines" id="orderLines"><p class="empty-state">Todavía no agregaste productos.</p></div>
+   <aside class="order-summary">
+    <p class="eyebrow">TOTAL DEL PEDIDO</p><strong id="orderTotal">Bs 0</strong>
+    <label>Observaciones<textarea id="orderNote" rows="3" maxlength="180" placeholder="Sin cebolla, retirar en local, etc."></textarea></label>
+    <button class="button-primary" id="goCheckout" type="button">Continuar con el pedido ↗</button>
+    <small>El total se calcula con los precios publicados en el menú. Confirma disponibilidad al coordinar con el local.</small>
+   </aside>
+  </div>
+ </section>
+ <section class="view" id="view-cuenta" aria-labelledby="accountTitle" hidden>
+  <div class="view-head"><div><p class="eyebrow">PERFIL DEL CLIENTE</p><h1 id="accountTitle">Mi cuenta</h1><p>Guarda los datos de contacto para futuros pedidos.</p></div></div>
+  <div class="form-layout">
+   <form class="account-form" id="profileForm">
+    <label>Nombre completo<input id="profileName" autocomplete="name" minlength="2" maxlength="60" required placeholder="Tu nombre"></label>
+    <label>Celular<input id="profilePhone" autocomplete="tel" inputmode="numeric" pattern="[0-9]{8}" maxlength="8" required placeholder="8 dígitos"></label>
+    <label>Preferencia habitual<select id="profileMode"><option value="Retiro en local">Retiro en local</option><option value="Entrega a domicilio">Entrega a domicilio</option></select></label>
+    <label>Zona / barrio <span class="optional">Para futuras entregas</span><input id="profileZone" maxlength="60" placeholder="Ej. Sopocachi"></label>
+    <label>Dirección habitual <span class="optional">Opcional</span><input id="profileAddress" maxlength="100" placeholder="Calle, número, edificio"></label>
+    <button class="button-primary" type="submit">Guardar mi perfil</button>
+    <p class="form-message" id="profileMessage" role="status">El perfil se guarda en este dispositivo y no crea una cuenta en un servidor.</p>
+   </form>
+   <aside class="info-panel"><p class="eyebrow">TUS DATOS</p><h2 id="profileGreeting">Completa tu perfil.</h2><p>Estos datos se reutilizan para completar el checkout. Puedes modificarlos o eliminarlos desde aquí.</p><button class="button-secondary" id="deleteProfile" type="button">Eliminar mis datos</button></aside>
+  </div>
+ </section>
+ <section class="view" id="view-checkout" aria-labelledby="checkoutTitle" hidden>
+  <div class="view-head"><div><p class="eyebrow">DATOS DEL PEDIDO</p><h1 id="checkoutTitle">¿Cómo lo recibes?</h1><p>Selecciona retiro o entrega y revisa los datos.</p></div></div>
+  <div class="checkout-layout">
+   <form class="checkout-form" id="checkoutForm" novalidate>
+    <div class="mode-switch" role="group" aria-label="Modalidad del pedido"><button class="mode-button active" data-mode="Retiro en local" type="button">Retiro en local</button><button class="mode-button" data-mode="Entrega a domicilio" type="button">Entrega a domicilio</button></div>
+    <input type="hidden" id="checkoutMode" value="Retiro en local">
+    <div class="form-section-title">Datos de contacto</div>
+    <label>Nombre completo<input id="checkoutName" autocomplete="name" maxlength="60" required></label>
+    <label>Celular boliviano<input id="checkoutPhone" autocomplete="tel" inputmode="numeric" maxlength="8" placeholder="8 dígitos" required></label>
+    <div id="deliveryFields" hidden>
+     <div class="form-section-title">Dirección de entrega</div>
+     <label>Zona / barrio<input id="checkoutZone" maxlength="60" placeholder="Ej. Sopocachi"></label>
+     <label>Calle y número<input id="checkoutAddress" maxlength="100" placeholder="Dirección del domicilio"></label>
+     <label>Referencia<textarea id="checkoutReference" maxlength="120" rows="2" placeholder="Entre calles, edificio, color de puerta…"></textarea></label>
     </div>
-    <div class="category-tiles">
-      <button type="button" data-category="parrilla"><span>01</span><strong>A la parrilla</strong><small>Hamburguesas de la casa</small></button>
-      <button type="button" data-category="dobles"><span>02</span><strong>Dobles</strong><small>Más carne, más sabor</small></button>
-      <button type="button" data-category="mixtas"><span>03</span><strong>Mixtas</strong><small>Hamburguesa y salchipapas</small></button>
-      <button type="button" data-category="salchipapas"><span>04</span><strong>Salchipapas</strong><small>Un clásico para compartir</small></button>
-    </div>
-    <p class="fine-note">Los pedidos se preparan como resumen en este dispositivo. El envío y la disponibilidad deben confirmarse directamente con el local.</p>
-  </section>
-  <section class="view" id="view-menu" aria-labelledby="menuTitle" hidden>
-    <div class="view-head"><div><p class="eyebrow">MENÚ DEL LOCAL</p><h1 id="menuTitle">¿Qué se te antoja?</h1><p>Precios en Bs. Ajusta la cantidad de cada producto.</p></div><label class="search"><span>⌕</span><input id="productSearch" type="search" placeholder="Buscar producto…" aria-label="Buscar producto"></label></div>
-    <nav class="filter-row" aria-label="Categorías del menú"><button class="filter active" type="button" data-filter="todos">Todo</button><button class="filter" type="button" data-filter="parrilla">A la parrilla</button><button class="filter" type="button" data-filter="dobles">Dobles</button><button class="filter" type="button" data-filter="mixtas">Mixtas</button><button class="filter" type="button" data-filter="salchipapas">Salchipapas</button></nav>
-    <div class="catalog-grid" id="productGrid"><p class="loading">Cargando menú…</p></div>
-    <button class="more-button" id="showMore" type="button" hidden>Mostrar más productos</button>
-  </section>
-  <section class="view" id="view-pedido" aria-labelledby="orderTitle" hidden>
-    <div class="view-head"><div><p class="eyebrow">RESUMEN</p><h1 id="orderTitle">Mi pedido</h1><p>Revisa cantidades, observaciones y total antes de copiar.</p></div><button class="button-secondary" id="clearCart" type="button">Vaciar pedido</button></div>
-    <div class="order-layout"><div class="order-lines" id="orderLines"><p class="empty-state">Todavía no agregaste productos.</p></div><aside class="order-summary"><p class="eyebrow">TOTAL</p><strong id="orderTotal">Bs 0</strong><label>Observaciones<textarea id="orderNote" rows="3" maxlength="180" placeholder="Sin cebolla, retirar en local, etc."></textarea></label><button class="button-primary" id="copyOrder" type="button">Copiar pedido</button><small>Este resumen no se envía automáticamente ni confirma una compra.</small></aside></div>
-  </section>
+    <label>Indicaciones para el pedido <span class="optional">Opcional</span><textarea id="checkoutInstructions" maxlength="180" rows="2" placeholder="Timbre, referencia o indicación adicional"></textarea></label>
+    <label class="check-line"><input id="checkoutConsent" type="checkbox" required><span>Entiendo que es una solicitud local y que el local debe confirmar el pedido.</span></label>
+    <p class="form-message" id="checkoutMessage" role="status"></p>
+    <button class="button-primary" type="submit">Revisar y confirmar</button>
+   </form>
+   <aside class="order-summary"><p class="eyebrow">TU PEDIDO</p><strong id="checkoutTotal">Bs 0</strong><div id="checkoutItems" class="checkout-items"></div><button class="button-secondary" type="button" data-go="pedido">Volver a modificar</button></aside>
+  </div>
+ </section>
+ <section class="view" id="view-historial" aria-labelledby="historyTitle" hidden>
+  <div class="view-head"><div><p class="eyebrow">HISTORIAL EN ESTE DISPOSITIVO</p><h1 id="historyTitle">Mis pedidos</h1><p>Solicitudes confirmadas localmente.</p></div><button class="button-secondary" id="clearHistory" type="button">Borrar historial</button></div>
+  <div class="history-list" id="historyList"><p class="empty-state">Todavía no tienes pedidos guardados.</p></div>
+ </section>
 </main>
 <footer class="app-footer"><a href="./index.html">Volver a portada</a><span>El Local · Antojitos La Paz</span><span>Precios en Bs</span></footer>
 <div class="toast" id="toast" role="status" aria-live="polite"></div>
+<div class="confirm-layer" id="orderConfirm" hidden>
+ <section class="confirm-card" role="dialog" aria-modal="true" aria-labelledby="confirmTitle">
+  <button class="confirm-close" id="closeConfirm" type="button" aria-label="Cancelar confirmación">×</button>
+  <p class="eyebrow">PEDIDO PREPARADO</p><h2 id="confirmTitle">Confirma tu pedido</h2><p id="confirmSummary"></p>
+  <div class="countdown-label">TIEMPO PARA CONFIRMAR</div><strong class="countdown" id="confirmCountdown">01:00</strong><div class="countdown-track"><span id="confirmCountdownBar"></span></div>
+  <p class="confirm-note">Al confirmar se guarda una solicitud local con el resumen y el total. No se procesa pago ni se envía automáticamente al local.</p>
+  <div class="confirm-actions"><button class="button-secondary" id="cancelConfirm" type="button">Cancelar</button><button class="button-primary" id="acceptConfirm" type="button">Confirmar pedido</button></div>
+ </section>
+</div>
 </body>
 </html>
