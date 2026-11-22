@@ -108,7 +108,7 @@
     state.requests.forEach(row=>{
       const d=row.request_data||{},card=node('article',undefined,'request-card'),info=node('div');
       const amount=requestAmount(row);
-      info.append(node('h3',d.serviceName||'Turno solicitado'),node('p',toDate(row)+' · '+row.contact_name+' · '+row.phone),node('small','Estado: '+(row.status||'pending')),node('small',amount===null?'Precio por confirmar':'Total: Bs '+amount.toLocaleString('es-BO')));
+      info.append(node('h3',d.serviceName||'Turno solicitado'),node('p',toDate(row)+' · '+row.contact_name+' · '+row.phone),node('small','Estado: '+(row.status||'pending')),node('small',amount===null?'Precio por confirmar':'Precio de referencia: Bs '+amount.toLocaleString('es-BO')));
       const actions=node('div',undefined,'request-actions'),pay=node('button',amount===null?'Consultar precio':'Pagar con QR');
       pay.type='button';pay.disabled=amount===null;pay.addEventListener('click',()=>openQrPayment(row));
       actions.append(pay);card.append(info,actions);list.append(card);
@@ -123,7 +123,7 @@
       state.profile=await state.cloud.profile(STORE);
       await state.cloud.submit(STORE,'appointment',data.name,data.phone,{
         requested_for:new Date(data.date+'T'+data.time+':00').toISOString(),
-        request_data:{serviceCode:data.serviceCode,serviceName:data.service,date:data.date,time:data.time,note:data.note,durationMinutes:data.duration,referencePrice:data.priceLabel,priceAmount:data.priceAmount,currency:'BOB',paymentMethod:'qr',paymentStatus:data.priceAmount===null?'quote_required':'pending'}
+        request_data:{serviceCode:data.serviceCode,serviceName:data.service,date:data.date,time:data.time,note:data.note,durationMinutes:data.duration,referencePrice:data.priceLabel,priceAmount:data.priceAmount,currency:'BOB',paymentMethod:'qr',paymentStatus:data.priceAmount===null?'quote_required':'qr_pending_configuration'}
       });
       state.requests=await state.cloud.requests(STORE);
       closeConfirm('Solicitud registrada en tu historial en línea. Falta la confirmación real de Navaja 27.');
