@@ -13,7 +13,7 @@
     const s=row.specs||{};
     return{id:row.item_code,name:row.name,category:row.category,brand:row.brand||'',type:s.type||row.category,
       description:row.description||'',image:row.image_url||'',imageAlt:row.image_alt||row.name,price:row.price===null?null:Number(row.price),
-      formatGroup:s.presentationGroup==='cajas'?'packs':(s.presentationGroup||'botellas'),ageRestricted:Boolean(s.ageRestricted),priceSource:s.priceSource||'',priceCheckedAt:s.priceCheckedAt||'',priceNote:s.priceNote||''};
+      formatGroup:s.presentationGroup==='cajas'?'packs':(s.presentationGroup||'botellas'),ageRestricted:Boolean(s.ageRestricted)};
   }
   function listTotal(){
     const rows=state.products.filter(p=>state.list[p.id]);
@@ -43,8 +43,6 @@
       img.addEventListener('error',()=>{img.remove();art.append(node('span',p.brand||p.name,'brand-fallback'));},{once:true});art.append(img);
       const body=node('div',undefined,'product-body');
       body.append(node('small',(p.brand||p.type)+' · '+p.type+(p.ageRestricted?' · +18':'')),node('h3',p.name),node('p',p.description));
-      if(p.priceSource)body.append(node('small','Precio de referencia: '+p.priceSource+' · '+p.priceCheckedAt,'price-source-note'));
-      else if(p.priceNote)body.append(node('small',p.priceNote,'price-source-note'));
       const foot=node('div',undefined,'product-foot'),priceWrap=node('div',undefined,'product-price-wrap');
       priceWrap.append(node('strong',formatPrice(p)));
 
