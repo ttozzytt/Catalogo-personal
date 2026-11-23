@@ -158,3 +158,5 @@ body[data-theme=dark] button:disabled{opacity:.42}
 :where(button,a).button-primary:focus-visible,:where(button,a).button-secondary:focus-visible,.filter:focus-visible,.agenda-day:focus-visible,.theme-toggle:focus-visible{outline:3px solid #c89b5c;outline-offset:3px}
 
 @media(min-width:768px){.catalog-grid{grid-template-columns:repeat(auto-fit,minmax(220px,1fr))}}
+
+.price-source-note{display:block;margin-top:6px;color:var(--muted);font-size:10px;line-height:1.4}
