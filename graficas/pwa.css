@@ -134,3 +134,5 @@ body[data-theme=dark] .product-actions button.selected{background:#8ab0ff;color:
 body[data-theme=dark] .close,body[data-theme=dark] .confirm-close{color:#d5e3f3}
 body[data-theme=dark] button:disabled{opacity:.42}
 :where(button,a).button-primary:focus-visible,:where(button,a).button-secondary:focus-visible,.filter:focus-visible,.category-tiles button:focus-visible,.theme-toggle:focus-visible{outline:3px solid #8ab0ff;outline-offset:3px}
+
+.price-source-note{display:block;margin-top:6px;color:var(--muted);font-size:10px;line-height:1.4}
