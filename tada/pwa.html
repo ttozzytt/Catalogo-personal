@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
 <meta name="theme-color" content="#29154f"><meta name="description" content="TaDa Bolivia: catálogo de bebidas, lista de pedidos y solicitud de delivery.">
-<link rel="manifest" href="./manifest.json"><link rel="icon" href="./icons/icon.svg"><link rel="stylesheet" href="./pwa.css?v=tada-sales-clean-v16-theme-v8">
+<link rel="manifest" href="./manifest.json"><link rel="icon" href="./icons/icon.svg"><link rel="stylesheet" href="./pwa.css?v=tada-sales-clean-v17-theme-v9">
 <title>TaDa Bolivia · Catálogo y delivery</title><script defer src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.119.2"></script>
 <script defer src="../catalog-db.js"></script>
 <script defer src="./pwa.js?v=tada-sales-clean-v14"></script>
@@ -27,7 +27,7 @@
 <main class="app-main">
  <section class="view active" id="view-inicio" aria-labelledby="homeTitle">
   <div class="hero">
-   <div class="hero-copy"><p class="eyebrow">BEBIDAS FRÍAS · TIENDAS · DELIVERY</p><h1 id="homeTitle">Lo bueno se<br><em>comparte.</em></h1><p>Explora marcas y presentaciones: latas, botellas, packs y cajas full. Precios claros y consulta directa de disponibilidad.</p><div class="hero-actions"><button class="button-primary" data-go="catalogo" type="button">Explorar catálogo</button><a class="button-secondary" href="https://tadadelivery.com.bo/" target="_blank" rel="noopener">Delivery oficial ↗</a></div></div>
+   <div class="hero-copy"><p class="eyebrow">BEBIDAS FRÍAS · TIENDAS · DELIVERY</p><h1 id="homeTitle">Lo bueno se<br><em>comparte.</em></h1><p>Explora latas, botellas, packs y cajas de tus marcas favoritas.</p><div class="hero-actions"><button class="button-primary" data-go="catalogo" type="button">Explorar catálogo</button><a class="button-secondary" href="https://tadadelivery.com.bo/" target="_blank" rel="noopener">Delivery oficial ↗</a></div></div>
    <img src="https://cdn.shopify.com/s/files/1/0517/5495/9018/files/7772116030112.jpg?v=1774569691" alt="Presentaciones de cerveza Paceña en botella y lata" fetchpriority="high">
   </div>
   <div class="category-tiles">
@@ -36,9 +36,9 @@
    <button type="button" data-category="singani"><span>03</span><strong>Singani</strong><small>Casa Real y presentaciones</small></button>
    <button type="button" data-category="sin-alcohol"><span>04</span><strong>Sin alcohol</strong><small>Gaseosas y otras bebidas</small></button>
    <button type="button" data-category="latas"><span>05</span><strong>Latas</strong><small>Presentaciones individuales</small></button>
-   <button type="button" data-category="packs"><span>06</span><strong>Packs y cajas</strong><small>Paquetes y cajas full por cotizar</small></button>
+   <button type="button" data-category="packs"><span>06</span><strong>Packs y cajas</strong><small>Paquetes y cajas de bebidas</small></button>
   </div>
-  <div class="delivery-strip"><div><strong>¿Lo llevamos a tu domicilio?</strong><small>Prepara el pedido y verifica cobertura y disponibilidad.</small></div><button class="button-primary" data-go="lista" type="button">Armar pedido ↗</button></div>
+  <div class="delivery-strip"><div><strong>¿Lo llevamos a tu domicilio?</strong><small>Prepara tu pedido y solicita entrega a domicilio.</small></div><button class="button-primary" data-go="lista" type="button">Armar pedido ↗</button></div>
  </section>
  <section class="view" id="view-catalogo" aria-labelledby="catalogTitle" hidden>
   <div class="view-head"><div><p class="eyebrow">PORTAFOLIO DE MARCAS</p><h1 id="catalogTitle">Encuentra tu favorita</h1><p>Elige una marca y su presentación. Agrégala a tu pedido.</p></div><label class="search"><span>⌕</span><input id="productSearch" type="search" placeholder="Buscar bebida o marca…" aria-label="Buscar bebida"></label></div>
@@ -98,7 +98,7 @@
  <div class="age-card"><div class="age-logo">Ta<span>·</span>Da</div><p class="eyebrow">CONTROL DE EDAD</p><h2 id="ageTitle">¿Tienes 18 años o más?</h2><p id="ageMessage">Este catálogo incluye bebidas alcohólicas. Debes confirmar tu mayoría de edad para continuar.</p><button class="button-primary" id="confirmAge" type="button">Sí, tengo 18 años o más</button><button class="age-minor" id="denyAge" type="button">No, soy menor de edad</button><small>Consume con responsabilidad.</small></div>
 </div>
 <div class="confirm-layer" id="deliveryConfirm" hidden>
- <section class="confirm-card" role="dialog" aria-modal="true" aria-labelledby="deliveryConfirmTitle"><button class="confirm-close" id="closeDeliveryConfirm" type="button" aria-label="Cancelar">×</button><p class="eyebrow">SOLICITUD DE DELIVERY</p><h2 id="deliveryConfirmTitle">Confirma los datos del pedido</h2><p id="deliveryConfirmSummary"></p><div class="countdown-label">TIEMPO PARA CONFIRMAR</div><strong class="countdown" id="deliveryCountdown">01:00</strong><div class="countdown-track"><span id="deliveryCountdownBar"></span></div><p class="confirm-note">Pedido enviado. Revisa su estado en Mis pedidos.</p><div class="confirm-actions"><button class="button-secondary" id="cancelDeliveryPending" type="button">Cancelar</button><button class="button-primary" id="confirmDeliveryPending" type="button">Confirmar solicitud</button></div></section>
+ <section class="confirm-card" role="dialog" aria-modal="true" aria-labelledby="deliveryConfirmTitle"><button class="confirm-close" id="closeDeliveryConfirm" type="button" aria-label="Cancelar">×</button><p class="eyebrow">SOLICITUD DE DELIVERY</p><h2 id="deliveryConfirmTitle">Confirma los datos del pedido</h2><p id="deliveryConfirmSummary"></p><div class="countdown-label">TIEMPO PARA CONFIRMAR</div><strong class="countdown" id="deliveryCountdown">01:00</strong><div class="countdown-track"><span id="deliveryCountdownBar"></span></div><p class="confirm-note">Pedido registrado. Revisa Mis pedidos.</p><div class="confirm-actions"><button class="button-secondary" id="cancelDeliveryPending" type="button">Cancelar</button><button class="button-primary" id="confirmDeliveryPending" type="button">Confirmar solicitud</button></div></section>
 </div>
 <div class="toast" id="toast" role="status" aria-live="polite"></div>
 <script defer src="../theme-toggle.js?v=light-dark-v1"></script>
