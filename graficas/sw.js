@@ -1,5 +1,5 @@
 'use strict';
-const CACHE='compucenter-pwa-v21-image-first';
+const CACHE='compucenter-pwa-v22-image-first';
 const SDK_URL='https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.119.2';
 const SHELL=['./','./index.html','./styles.css','./app.js','./pwa.html','./pwa.css','./pwa.js','./manifest.json','../catalog-db.js','./icons/icon.svg','../theme-toggle.js?v=light-dark-v1','./brand-logo.svg','./styles.css?v=compucenter-brand-logo-v5','./pwa.css?v=compucenter-image-first-v14','./pwa.js?v=compucenter-image-first-v12'];
 self.addEventListener('install',event=>event.waitUntil((async()=>{
