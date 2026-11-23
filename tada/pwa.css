@@ -97,3 +97,10 @@ body[data-theme=dark] .age-minor,body[data-theme=dark] .text-button{color:#d5b8f
 body[data-theme=dark] .confirm-close{color:#eee5f6}
 body[data-theme=dark] button:disabled{opacity:.42}
 :where(button,a).button-primary:focus-visible,:where(button,a).button-secondary:focus-visible,.filter:focus-visible,.category-tiles button:focus-visible,.theme-toggle:focus-visible{outline:3px solid #ffbd63;outline-offset:3px}
+
+.list-totals{display:grid;gap:4px;min-width:0}
+.list-totals span{color:var(--muted);font-size:10px}
+.list-totals strong{color:var(--purple);font-size:16px;font-weight:950}
+body[data-theme=dark] .list-totals span{color:#b3aabd}
+body[data-theme=dark] .list-totals strong{color:#ffbd63}
+@media(max-width:430px){.list-totals strong{font-size:15px}}
