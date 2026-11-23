@@ -130,7 +130,7 @@
       info.append(node('strong',title),
         node('p',(d.brand||'Marca por definir')+' · '+(d.categoryLabel||d.category||'Componente')+(d.budget!==null&&d.budget!==undefined?' · Presupuesto: '+money(d.budget):'')),
         node('small',row.contact_name+' · '+row.phone+' · '+(d.city||'')+' · '+(d.deliveryLabel||row.delivery_method||'')),
-        node('small','Estado: '+row.status));
+        node('small','Estado: '+(row.status==='pending'?'Pendiente':row.status==='confirmed'?'Confirmado':row.status==='cancelled'?'Cancelado':'En revisión')));
       card.append(info);list.append(card);
     });
   }
