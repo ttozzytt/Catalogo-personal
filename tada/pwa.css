@@ -110,3 +110,5 @@ body[data-theme=dark] .list-totals strong{color:#ffbd63}
 .price-source-note{display:block;margin-top:6px;color:var(--muted);font-size:10px;line-height:1.4}
 
 .brand-logo{display:block;width:205px;height:52px;object-fit:contain;object-position:left center}.app-brand .brand-logo{max-width:100%;height:50px}@media(max-width:760px){.app-brand .brand-logo{width:170px;height:44px}}
+
+.age-logo .age-brand-logo{display:block;width:min(220px,70vw);height:62px;object-fit:contain;margin:0 auto}
