@@ -1,5 +1,5 @@
 'use strict';
-const CACHE='tada-pwa-v26-clean-prices';
+const CACHE='tada-pwa-v27-clean-prices';
 const SDK_URL='https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.119.2';
 const SHELL=['./','./index.html','./styles.css','./app.js','./pwa.html','./pwa.css','./pwa.js','./manifest.json','../catalog-db.js','./icons/icon.svg','../theme-toggle.js?v=light-dark-v1','./brand-logo.svg','./styles.css?v=tada-brand-logo-v4','./pwa.css?v=tada-mobile-grid-v20','./pwa.js?v=tada-clean-catalog-v18'];
 self.addEventListener('install',event=>event.waitUntil((async()=>{
