@@ -38,3 +38,64 @@ body[data-theme=dark] .hero-copy>p,body[data-theme=dark] .hero p{color:inherit}
 body[data-theme=dark] .confirm-layer{background:#000b}
 body[data-theme=dark] .toast{background:#33463c;color:#fff}
 @media(max-width:850px){.theme-toggle{min-height:32px;padding:0 8px;font-size:9px}}
+
+/* Agenda semanal de barbería */
+.agenda-toolbar{display:flex;align-items:center;justify-content:space-between;gap:12px;margin:12px 0;padding:12px 14px;border:1px solid var(--line);border-radius:10px;background:#fff}
+.agenda-toolbar>strong{color:var(--green);font:20px Georgia,serif;text-transform:capitalize}
+.agenda-controls{display:flex;align-items:center;gap:6px}
+.agenda-arrow,.agenda-today{min-width:36px;min-height:36px;border:1px solid var(--line);border-radius:8px;background:#f6f7f3;color:var(--green);font-size:18px;font-weight:800;cursor:pointer}
+.agenda-today{padding:0 11px;font-size:10px}
+.agenda-week{display:grid;grid-template-columns:repeat(7,minmax(0,1fr));gap:7px;margin-bottom:20px}
+.agenda-day{display:grid;justify-items:center;gap:4px;min-width:0;padding:11px 4px;border:1px solid var(--line);border-radius:10px;background:#fff;color:var(--muted);cursor:pointer}
+.agenda-day span{font-size:9px;text-transform:uppercase;font-weight:850}
+.agenda-day strong{font:23px Georgia,serif;color:var(--green)}
+.agenda-day small{font-size:8px}
+.agenda-day.active{border-color:var(--green);background:var(--green);color:#fff}
+.agenda-day.active strong{color:#fff}
+.agenda-day.is-today:not(.active){border-color:var(--gold);box-shadow:inset 0 0 0 1px var(--gold)}
+.agenda-day-title{display:flex;align-items:baseline;justify-content:space-between;gap:10px;margin:0 0 12px}
+.agenda-day-title h2{margin:0;color:var(--green);font:25px Georgia,serif;text-transform:capitalize}
+.agenda-day-title small{color:var(--muted);font-size:10px}
+.agenda-timeline{display:grid;gap:9px;max-width:850px}
+.agenda-event{display:grid;grid-template-columns:100px minmax(0,1fr);gap:14px;align-items:center;border:1px solid var(--line);border-left:4px solid var(--gold);border-radius:10px;padding:13px 15px;background:#fff}
+.agenda-time{display:grid;gap:4px}.agenda-time strong{color:var(--green);font:25px Georgia,serif}.agenda-time small{color:var(--muted);font-size:9px}
+.agenda-event-info h3{margin:0 0 4px;color:var(--green);font-size:12px}.agenda-event-info p{margin:0;color:var(--muted);font-size:10px}.agenda-status,.agenda-payment{display:block;margin-top:6px;color:#987247;font-size:9px}
+.agenda-empty{display:grid;justify-items:start;gap:9px;max-width:650px;border:1px dashed var(--line);border-radius:12px;padding:22px;background:#fff}
+.agenda-empty strong{color:var(--green);font:22px Georgia,serif}.agenda-empty p{margin:0 0 4px;color:var(--muted);font-size:11px;line-height:1.5}
+.booking-confirm-card{max-height:92dvh;overflow:auto}
+.booking-qr-panel{display:grid;justify-items:center;gap:8px;margin:12px 0;padding:15px;border:1px solid var(--line);border-radius:12px;background:#f7f8f4}
+.booking-qr-panel[hidden],.quote-only-note[hidden]{display:none!important}
+.booking-qr-heading{justify-self:start;color:var(--green);font-size:11px}
+.booking-qr-panel #qrPaymentCanvas{display:block;width:min(100%,300px);height:auto;margin:0 auto;background:#fff;image-rendering:pixelated}
+.payment-check{display:flex;align-items:flex-start;gap:8px;width:100%;color:var(--green);font-size:10px;line-height:1.5}
+.payment-check input{width:17px;height:17px;flex:0 0 auto;accent-color:var(--green)}
+.quote-only-note{margin:12px 0;padding:13px;border-radius:9px;background:#f5eee2;color:#6e563b;font-size:11px;line-height:1.55}
+body[data-theme=dark] .theme-toggle{background:var(--surface);border-color:var(--line);color:var(--ink)}
+body[data-theme=dark] .agenda-toolbar,body[data-theme=dark] .agenda-day,body[data-theme=dark] .agenda-event,body[data-theme=dark] .agenda-empty{background:var(--surface);border-color:var(--line);color:var(--ink)}
+body[data-theme=dark] .agenda-toolbar>strong,body[data-theme=dark] .agenda-day strong,body[data-theme=dark] .agenda-day-title h2,body[data-theme=dark] .agenda-time strong,body[data-theme=dark] .agenda-event-info h3,body[data-theme=dark] .agenda-empty strong{color:var(--accent)}
+body[data-theme=dark] .agenda-arrow,body[data-theme=dark] .agenda-today{background:#ffffff0c;border-color:var(--line);color:var(--ink)}
+body[data-theme=dark] .agenda-day.active{background:var(--accent);color:#132018;border-color:var(--accent)}
+body[data-theme=dark] .agenda-day.active strong{color:#132018}
+body[data-theme=dark] .agenda-event-info p,body[data-theme=dark] .agenda-empty p,body[data-theme=dark] .agenda-day-title small,body[data-theme=dark] .agenda-time small{color:var(--muted)}
+body[data-theme=dark] .booking-qr-panel{background:var(--surface);border-color:var(--line)}
+body[data-theme=dark] .booking-qr-heading,body[data-theme=dark] .payment-check{color:var(--ink)}
+body[data-theme=dark] .quote-only-note{background:#342b1e;color:#edd5a8}
+@media(max-width:760px){
+ .app-header{display:grid;grid-template-columns:minmax(0,1fr) auto;grid-template-areas:"brand theme" "status status";gap:8px 9px;min-height:0;padding:9px 12px}
+ .app-brand{grid-area:brand;min-width:0}
+ .main-nav{display:none}
+ .theme-toggle{grid-area:theme;justify-self:end;min-height:34px;padding:0 9px;font-size:9px}
+ .network-pill{grid-area:status;justify-self:start;max-width:100%;margin:0;white-space:normal;overflow-wrap:anywhere}
+ .mobile-nav{top:88px;gap:3px;padding:6px 8px}
+ .mobile-nav .nav-link{padding:8px 9px;font-size:9px}
+ .agenda-toolbar{align-items:flex-start;flex-direction:column}
+ .agenda-toolbar>strong{font-size:17px}
+ .agenda-week{gap:4px}
+ .agenda-day{padding:9px 2px}
+ .agenda-day span{font-size:8px}
+ .agenda-day strong{font-size:19px}
+ .agenda-day small{font-size:7px}
+ .agenda-event{grid-template-columns:76px minmax(0,1fr);gap:9px;padding:11px}
+ .agenda-time strong{font-size:21px}
+ .agenda-day-title h2{font-size:21px}
+}
