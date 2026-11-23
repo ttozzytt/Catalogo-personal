@@ -24,7 +24,7 @@
   function setMinimumDate() { const input=$('bookingDate');input.min=localDate();if(!input.value||input.value<input.min)input.value=input.min; }
   function mapService(row) {
     const s=row.specs||{};
-    return { id:row.item_code,name:row.name,category:row.category||'otros',price:row.price===null||row.price===undefined?null:Number(row.price),priceLabel:s.priceLabel||money(row.price),duration:Number(row.duration_minutes)||30,durationLabel:s.durationLabel||(row.duration_minutes+' min'),description:row.description||'',details:s.details||row.description||'',image:row.image_url||'',imageAlt:row.image_alt||row.name,photoUrl:s.photoUrl,photoCredit:s.photoCredit };
+    return { id:row.item_code,name:row.name,category:row.category||'otros',price:row.price===null||row.price===undefined?null:Number(row.price),priceLabel:s.priceLabel||money(row.price),duration:Number(row.duration_minutes)||30,durationLabel:s.durationLabel||(row.duration_minutes+' min'),description:row.description||'',details:s.details||row.description||'',image:row.image_url||'',imageAlt:row.image_alt||row.name };
   }
   function populateSelect() {
     const select=$('bookingService');select.replaceChildren(new Option('Selecciona un servicio',''));
@@ -39,7 +39,6 @@
       img.addEventListener('error',()=>{img.src='./imagenes/imagen-respaldo.svg';},{once:true});
       const body=node('div',undefined,'service-body');
       body.append(node('small',s.category.toUpperCase()+' · '+s.durationLabel),node('h3',s.name),node('p',s.description));
-      if(s.photoUrl&&s.photoCredit){const credit=node('a','Foto: '+s.photoCredit+' · Pexels ↗','photo-credit');credit.href=s.photoUrl;credit.target='_blank';credit.rel='noopener noreferrer';body.append(credit);}
       const detail=node('details',undefined,'service-detail-wrap');detail.append(node('summary','Ver detalles'),node('p',s.details));
       const foot=node('div',undefined,'service-bottom'),price=node('strong',s.priceLabel),button=node('button','Elegir servicio');button.type='button';
       button.addEventListener('click',()=>{$('bookingService').value=s.id;showView('turnos');toast('Servicio seleccionado: '+s.name);});
