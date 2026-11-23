@@ -12,6 +12,22 @@
       price:row.price,shortDescription:row.description||s.shortDescription||'',image:row.image_url||'',imageAlt:row.image_alt||row.name,url:s.url||'https://www.compucenter.store/category/componentes-pc',
       specs:s,compare:s.compare!==false,artLabel:s.artLabel||row.brand||'COMPONENTE'};
   }
+  function componentPlaceholder(category){
+    const art={
+      gpu:'<rect x="105" y="115" width="430" height="190" rx="20" fill="#263d5b" stroke="#0d1c31" stroke-width="12"/><circle cx="250" cy="210" r="65" fill="#14253d" stroke="#52c7ed" stroke-width="12"/><circle cx="250" cy="210" r="22" fill="#52c7ed"/><path d="M250 150l18 42-18 18-18-18ZM310 210l-42 18-18-18 18-18ZM250 270l-18-42 18-18 18 18ZM190 210l42-18 18 18-18 18Z" fill="#77d8f0"/><circle cx="405" cy="210" r="55" fill="#14253d" stroke="#52c7ed" stroke-width="10"/><path d="M535 170h30v80h-30" fill="#7c8fa7"/>',
+      cpu:'<rect x="180" y="95" width="280" height="230" rx="24" fill="#253d5d" stroke="#52c7ed" stroke-width="12"/><rect x="230" y="145" width="180" height="130" rx="12" fill="#12243b"/><text x="320" y="225" text-anchor="middle" font-family="Arial" font-size="42" font-weight="700" fill="#75d8f2">CPU</text><path d="M150 130h30m-30 55h30m-30 55h30m-30 55h30m280-165h30m-30 55h30m-30 55h30m-30 55h30M235 65v30m55-30v30m55-30v30m55-30v30m-165 230v30m55-30v30m55-30v30m55-30v30" stroke="#9eb3cd" stroke-width="12" stroke-linecap="round"/>',
+      ram:'<rect x="90" y="160" width="460" height="110" rx="12" fill="#244361" stroke="#52c7ed" stroke-width="10"/><g fill="#12243b" stroke="#80dff5" stroke-width="5"><rect x="135" y="180" width="70" height="68" rx="7"/><rect x="225" y="180" width="70" height="68" rx="7"/><rect x="315" y="180" width="70" height="68" rx="7"/><rect x="405" y="180" width="70" height="68" rx="7"/></g><path d="M130 270v25m38-25v25m38-25v25m38-25v25m38-25v25m38-25v25m38-25v25m38-25v25m38-25v25m38-25v25" stroke="#cfaa55" stroke-width="9"/>',
+      ssd:'<rect x="125" y="125" width="390" height="170" rx="22" fill="#243c5a" stroke="#52c7ed" stroke-width="12"/><rect x="165" y="165" width="310" height="90" rx="10" fill="#13253d"/><text x="320" y="220" text-anchor="middle" font-family="Arial" font-size="38" font-weight="700" fill="#75d8f2">SSD</text>',
+      m2:'<rect x="105" y="185" width="430" height="72" rx="12" fill="#244361" stroke="#52c7ed" stroke-width="10"/><rect x="150" y="195" width="72" height="52" rx="6" fill="#13253d"/><rect x="240" y="195" width="65" height="52" rx="6" fill="#13253d"/><rect x="325" y="195" width="65" height="52" rx="6" fill="#13253d"/><circle cx="500" cy="220" r="12" fill="#cfaa55"/>',
+      hdd:'<rect x="165" y="85" width="310" height="250" rx="25" fill="#d7e2ef" stroke="#73859b" stroke-width="12"/><circle cx="320" cy="205" r="92" fill="#243c5a" stroke="#52c7ed" stroke-width="10"/><circle cx="320" cy="205" r="18" fill="#dbe8f4"/><path d="M320 205l95 65" stroke="#dbe8f4" stroke-width="16" stroke-linecap="round"/>',
+      board:'<rect x="145" y="70" width="350" height="280" rx="16" fill="#245544" stroke="#52c7ed" stroke-width="10"/><rect x="245" y="135" width="125" height="115" rx="10" fill="#172b3e" stroke="#b8c9dd" stroke-width="7"/><path d="M180 105h48v135h-20m210-135h32v160h-32M180 280h110m45 35v-35h120" fill="none" stroke="#b2d5bd" stroke-width="12"/>',
+      power:'<rect x="115" y="100" width="410" height="230" rx="18" fill="#273d58" stroke="#52c7ed" stroke-width="12"/><circle cx="310" cy="215" r="84" fill="#14253d" stroke="#8aa3bd" stroke-width="10"/><circle cx="310" cy="215" r="20" fill="#52c7ed"/><path d="M310 135q62 34 0 80q-62-46 0-80ZM390 215q-34 62-80 0q46-62 80 0ZM310 295q-62-34 0-80q62 46 0 80ZM230 215q34-62 80 0q-46 62-80 0Z" fill="#7dd8ee"/>',
+      case:'<rect x="205" y="45" width="230" height="330" rx="24" fill="#263d5b" stroke="#52c7ed" stroke-width="12"/><rect x="235" y="78" width="170" height="265" rx="12" fill="#13253d"/><circle cx="320" cy="165" r="58" fill="#254866" stroke="#75d8f2" stroke-width="10"/><circle cx="320" cy="165" r="18" fill="#75d8f2"/><path d="M260 270h120m-120 30h120" stroke="#7189a3" stroke-width="9" stroke-linecap="round"/>'
+    };
+    const drawing=art[category]||art.cpu;
+    const svg='<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 420"><defs><linearGradient id="bg" x2="1" y2="1"><stop stop-color="#edf5fc"/><stop offset="1" stop-color="#cbdced"/></linearGradient></defs><rect width="640" height="420" rx="24" fill="url(#bg)"/>'+drawing+'<text x="320" y="395" text-anchor="middle" font-family="Arial,sans-serif" font-size="18" font-weight="700" letter-spacing="5" fill="#14253d">COMPUCENTER</text></svg>';
+    return 'data:image/svg+xml;charset=UTF-8,'+encodeURIComponent(svg);
+  }
   function showView(name){
     const target=$('view-'+name);if(!target)return;
     document.querySelectorAll('.view').forEach(v=>{v.hidden=true;v.classList.remove('active');});
@@ -38,8 +54,8 @@
     rows.forEach(p=>{
       const card=node('article',undefined,'product-card'),art=node('div',undefined,'product-art'),body=node('div',undefined,'product-body');
       if(p.image){
-        const img=node('img');img.src=p.image;img.alt=p.imageAlt;img.loading='lazy';img.decoding='async';
-        img.addEventListener('error',()=>{img.remove();art.append(node('span',p.artLabel,'product-art-fallback'));},{once:true});art.append(img);
+        const img=node('img');img.src=p.image;img.alt=p.imageAlt;img.loading='lazy';img.decoding='async';img.referrerPolicy='no-referrer';
+        img.addEventListener('error',()=>{img.src=componentPlaceholder(p.category);img.alt=p.name+' · ilustración local';img.classList.add('image-fallback');},{once:true});art.append(img);
       }else art.append(node('span',p.artLabel,'product-art-fallback'));
       body.append(node('small',(p.brand||'A cotizar')+' · '+p.categoryLabel),node('h3',p.name),node('p',p.shortDescription));
       const foot=node('div',undefined,'product-foot'),price=node('strong',money(p.price)),actions=node('div',undefined,'product-actions');
