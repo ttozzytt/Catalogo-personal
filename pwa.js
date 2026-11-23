@@ -172,6 +172,7 @@
         request_data:{serviceCode:data.serviceCode,serviceName:data.service,date:data.date,time:data.time,note:data.note,durationMinutes:data.duration,referencePrice:data.priceLabel,priceAmount:data.priceAmount,currency:'BOB',paymentMethod:data.priceAmount===null?null:'Altoke QR',paymentStatus:data.priceAmount===null?'quote_required':'reported_paid_pending_manual_review',customerDeclaredPaid:data.priceAmount!==null&&$('paymentAcknowledged').checked,paymentVerification:'manual'}
       });
       state.requests=await state.cloud.requests(STORE);
+      state.agendaDate=data.date;
       closeConfirm('Solicitud registrada en tu historial en línea. Falta la confirmación real de Navaja 27.');
       $('bookingForm').reset();fillProfileToBooking();setMinimumDate();showView('mis-turnos');
     } catch(error) { toast('No se pudo guardar: '+error.message,'error'); }
