@@ -224,3 +224,39 @@ body[data-theme=dark] .empty-state{background:#261d19;border-color:#564035;color
 
 
 @media(max-width:650px){.food-media{height:130px}}
+
+/* Botones Antojitos: estados claros y oscuros */
+.button-primary{background:#963f2b;color:#fff;border:1px solid #963f2b}
+.button-primary:hover{background:#7f3424;color:#fff;border-color:#7f3424}
+.button-secondary{background:#fff;color:#7f3424;border:1px solid #d9c9bd}
+.button-secondary:hover{background:#f6e9df;color:#6e2d20;border-color:#b98f7d}
+.filter{background:#fff;color:#754333;border-color:#e4d5ca}
+.filter:hover{background:#fbede4;color:#753723}
+.filter.active{background:#8f3925;color:#fff;border-color:#8f3925}
+.category-tiles button{background:#fff;color:#7e3525;border-color:#e3d2c6}
+.category-tiles button:hover{background:#fbede4;border-color:#c89c87}
+.food-foot button,.quantity-controls button,.mode-button{background:#f4e6da;color:#783624;border:1px solid #dfc5b5}
+.food-foot button:hover,.quantity-controls button:hover,.mode-button:hover{background:#ead4c4;color:#622b1c;border-color:#c79c84}
+.mode-button.active{background:#8f3925;color:#fff;border-color:#8f3925}
+.more-button{background:#8f3925;color:#fff;border:1px solid #8f3925}
+.more-button:hover{background:#74301f;color:#fff}
+.text-button{color:#8f3925}
+.confirm-close{color:#7b5b4d}
+body[data-theme=dark] .button-primary{background:#da8b6b;color:#271711;border-color:#da8b6b}
+body[data-theme=dark] .button-primary:hover{background:#edaa8d;color:#271711}
+body[data-theme=dark] .button-secondary{background:#3a2a23;color:#f8ece3;border-color:#745242}
+body[data-theme=dark] .button-secondary:hover{background:#50372d;color:#fff;border-color:#ba896d}
+body[data-theme=dark] .filter{background:#30221d;color:#e9d8cc;border-color:#654538}
+body[data-theme=dark] .filter:hover{background:#443027;color:#fff}
+body[data-theme=dark] .filter.active,body[data-theme=dark] .mode-button.active{background:#d77a5a;color:#26160f;border-color:#d77a5a}
+body[data-theme=dark] .category-tiles button{background:#2b211c;color:#f4e7dc;border-color:#5d4437}
+body[data-theme=dark] .category-tiles button:hover{background:#3a2a22;border-color:#bd8a70}
+body[data-theme=dark] .category-tiles strong{color:#f0c3a8}
+body[data-theme=dark] .food-foot button,body[data-theme=dark] .quantity-controls button,body[data-theme=dark] .mode-button{background:#433027;color:#f7eae0;border-color:#704f3c}
+body[data-theme=dark] .food-foot button:hover,body[data-theme=dark] .quantity-controls button:hover,body[data-theme=dark] .mode-button:hover{background:#563b2e;color:#fff}
+body[data-theme=dark] .more-button{background:#d77a5a;color:#271711;border-color:#d77a5a}
+body[data-theme=dark] .more-button:hover{background:#edaa8d;color:#271711}
+body[data-theme=dark] .text-button{color:#f1b392}
+body[data-theme=dark] .confirm-close{color:#ead5c8}
+body[data-theme=dark] button:disabled{opacity:.42}
+:where(button,a).button-primary:focus-visible,:where(button,a).button-secondary:focus-visible,.filter:focus-visible,.category-tiles button:focus-visible,.theme-toggle:focus-visible{outline:3px solid #d98a69;outline-offset:3px}
