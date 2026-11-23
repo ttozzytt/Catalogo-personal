@@ -103,3 +103,34 @@ body[data-theme=dark] .button-primary{background:#8ab0ff;color:#101e31}
 body[data-theme=dark] .network-pill{background:#1a293a;border-color:#34485f;color:#c5d4e6}
 body[data-theme=dark] .empty-state{background:#1a293a;border-color:#3b536e;color:#b0c0d1}
 
+
+/* Botones CompuCenter: estados claros y oscuros */
+.button-primary{background:#18304f;color:#fff;border:1px solid #18304f}
+.button-primary:hover{background:#284d7a;color:#fff;border-color:#284d7a}
+.button-secondary{background:#fff;color:#18304f;border:1px solid #bdcde0}
+.button-secondary:hover{background:#eaf1fa;color:#18304f;border-color:#91aaca}
+.filter{background:#fff;color:#445b78;border-color:#d2dce8}
+.filter:hover{background:#eef4fb;color:#18304f}
+.filter.active{background:#18304f;color:#fff;border-color:#18304f}
+.category-tiles button{background:#fff;color:#18304f;border-color:#d2dce8}
+.category-tiles button:hover{background:#eef4fb;border-color:#9eb6d3}
+.product-actions button{background:#eaf1fa;color:#18304f;border:1px solid #c8d7e8}
+.product-actions button:hover{background:#d7e5f6;color:#10243e;border-color:#91aaca}
+.product-actions button.selected{background:#18304f;color:#fff;border-color:#18304f}
+.close,.confirm-close{color:#536780}
+body[data-theme=dark] .button-primary{background:#8ab0ff;color:#101e31;border-color:#8ab0ff}
+body[data-theme=dark] .button-primary:hover{background:#b2cbff;color:#101e31}
+body[data-theme=dark] .button-secondary{background:#263b55;color:#eaf2fb;border-color:#57708e}
+body[data-theme=dark] .button-secondary:hover{background:#314d6c;color:#fff;border-color:#8ba9cb}
+body[data-theme=dark] .filter{background:#21354b;color:#cfdeef;border-color:#3d5874}
+body[data-theme=dark] .filter:hover{background:#2d4763;color:#fff}
+body[data-theme=dark] .filter.active{background:#8ab0ff;color:#101e31;border-color:#8ab0ff}
+body[data-theme=dark] .category-tiles button{background:#1d3045;color:#eaf0f8;border-color:#405974}
+body[data-theme=dark] .category-tiles button:hover{background:#29405c;border-color:#82a6d1}
+body[data-theme=dark] .category-tiles strong{color:#d2e2fb}
+body[data-theme=dark] .product-actions button{background:#2a425d;color:#eaf0f8;border-color:#4a6684}
+body[data-theme=dark] .product-actions button:hover{background:#385574;color:#fff}
+body[data-theme=dark] .product-actions button.selected{background:#8ab0ff;color:#10213a;border-color:#8ab0ff}
+body[data-theme=dark] .close,body[data-theme=dark] .confirm-close{color:#d5e3f3}
+body[data-theme=dark] button:disabled{opacity:.42}
+:where(button,a).button-primary:focus-visible,:where(button,a).button-secondary:focus-visible,.filter:focus-visible,.category-tiles button:focus-visible,.theme-toggle:focus-visible{outline:3px solid #8ab0ff;outline-offset:3px}
