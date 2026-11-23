@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
 <meta name="theme-color" content="#172d24"><meta name="description" content="Servicios, turnos y perfil de cliente de Navaja 27 Barber Studio.">
-<link rel="manifest" href="./manifest.json"><link rel="icon" href="./icons/icon.svg"><link rel="stylesheet" href="./pwa.css?v=n27-altoke-qr-v9-theme-v1">
+<link rel="manifest" href="./manifest.json"><link rel="icon" href="./icons/icon.svg"><link rel="stylesheet" href="./pwa.css?v=n27-agenda-qr-v10-theme-v2">
 <title>Navaja 27 · Servicios y reservas</title><script defer src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.119.2"></script>
 <script defer src="./catalog-db.js"></script>
 <script defer src="./pwa.js?v=n27-altoke-qr-v9"></script>
@@ -15,14 +15,14 @@
   <button class="nav-link active" data-view="inicio" type="button">Inicio</button>
   <button class="nav-link" data-view="servicios" type="button">Servicios</button>
   <button class="nav-link" data-view="turnos" type="button">Reservar turno</button>
-  <button class="nav-link" data-view="mis-turnos" type="button">Mis turnos</button>
+  <button class="nav-link" data-view="mis-turnos" type="button">Agenda</button>
   <button class="nav-link" data-view="cuenta" type="button">Mi cuenta</button>
  </nav>
  <button class="theme-toggle" id="themeToggle" type="button" aria-pressed="false">☾ Modo noche</button>
  <span class="network-pill" id="networkStatus" data-state="checking"><i></i><b>Conectando…</b></span>
 </header>
 <nav class="mobile-nav" id="mobileNav" aria-label="Navegación móvil">
- <button class="nav-link active" data-view="inicio" type="button">Inicio</button><button class="nav-link" data-view="servicios" type="button">Servicios</button><button class="nav-link" data-view="turnos" type="button">Reservar</button><button class="nav-link" data-view="mis-turnos" type="button">Mis turnos</button><button class="nav-link" data-view="cuenta" type="button">Mi cuenta</button>
+ <button class="nav-link active" data-view="inicio" type="button">Inicio</button><button class="nav-link" data-view="servicios" type="button">Servicios</button><button class="nav-link" data-view="turnos" type="button">Reservar</button><button class="nav-link" data-view="mis-turnos" type="button">Agenda</button><button class="nav-link" data-view="cuenta" type="button">Mi cuenta</button>
 </nav>
 <main class="app-main" id="mainContent">
  <section class="view active" id="view-inicio" aria-labelledby="homeTitle">
@@ -58,7 +58,7 @@
   </div>
  </section>
  <section class="view" id="view-mis-turnos" aria-labelledby="historyTitle" hidden>
-  <div class="view-head"><div><p class="eyebrow">HISTORIAL EN LÍNEA</p><h1 id="historyTitle">Mis turnos</h1><p>Solicitudes guardadas en tu cuenta en la nube.</p></div><button class="button-secondary" id="clearRequests" type="button">Borrar historial</button></div>
+  <div class="view-head"><div><p class="eyebrow">HISTORIAL EN LÍNEA</p><h1 id="historyTitle">Agenda de turnos</h1><p>Consulta tus cortes por fecha y hora. Los turnos nuevos quedan pendientes de confirmación.</p></div><button class="button-secondary" id="clearRequests" type="button">Borrar historial</button></div>
   <div class="request-list" id="requestList"><p class="empty-state">Todavía no tienes solicitudes guardadas.</p></div>
  </section>
  <section class="view" id="view-cuenta" aria-labelledby="accountTitle" hidden>
@@ -78,30 +78,26 @@
 <footer class="app-footer"><a href="./index.html">Volver a portada</a><span>Navaja 27 · Barber Studio</span><span>Precios de referencia en Bs</span></footer>
 <div class="toast" id="toast" role="status" aria-live="polite"></div>
 <div class="confirm-layer" id="bookingConfirm" hidden>
- <section class="confirm-card" role="dialog" aria-modal="true" aria-labelledby="confirmTitle">
+ <section class="confirm-card booking-confirm-card" role="dialog" aria-modal="true" aria-labelledby="confirmTitle">
   <button class="confirm-close" id="closeConfirm" type="button" aria-label="Cancelar confirmación">×</button>
-  <p class="eyebrow">TURNO EN ESPERA</p><h2 id="confirmTitle">Confirma tu solicitud</h2>
+  <p class="eyebrow">PAGO Y CONFIRMACIÓN DEL TURNO</p>
+  <h2 id="confirmTitle">Confirma tu turno</h2>
   <p id="confirmDetails"></p>
+  <div class="booking-qr-panel" id="bookingQrPanel" hidden>
+   <strong class="booking-qr-heading">1. Realiza el pago antes de confirmar</strong>
+   <strong class="qr-payment-amount" id="bookingQrAmount"></strong>
+   <div class="altoke-qr-brand" aria-label="Altoke">altoke<span></span></div>
+   <canvas id="qrPaymentCanvas" width="680" height="680" role="img" aria-label="Código QR Altoke de Navaja 27"></canvas>
+   <div class="altoke-qr-meta"><span>Válido hasta <strong>04 de noviembre de 2028</strong></span><span>CTA <strong>2968496-000-001</strong></span></div>
+   <p class="qr-payment-instructions">Escanea el QR desde tu aplicación bancaria. Comprueba que el beneficiario y el monto coincidan con lo acordado con Navaja 27. El negocio verificará el comprobante manualmente.</p>
+   <label class="payment-check"><input id="paymentAcknowledged" type="checkbox"> Ya realicé la transferencia y revisé el beneficiario y el importe.</label>
+  </div>
+  <p class="quote-only-note" id="quoteOnlyNote" hidden>Este servicio requiere cotización. Envía la solicitud para que Navaja 27 confirme el precio; el pago se realiza después de recibir el importe.</p>
   <div class="countdown-label">TIEMPO PARA CONFIRMAR</div><strong class="countdown" id="bookingCountdown">01:00</strong>
   <div class="countdown-track"><span id="countdownBar"></span></div>
-  <p class="confirm-note">Al confirmar, se registra una solicitud en línea pendiente de validación por Navaja 27. No bloquea la agenda real del negocio.</p>
-  <div class="confirm-actions"><button class="button-secondary" id="cancelPending" type="button">Cancelar</button><button class="button-primary" id="confirmPending" type="button">Confirmar solicitud</button></div>
+  <p class="confirm-note">Al continuar, el turno se registra en tu agenda como una solicitud pendiente. Marcar el pago no acredita la transferencia automáticamente; Navaja 27 debe comprobarla.</p>
+  <div class="confirm-actions"><button class="button-secondary" id="cancelPending" type="button">Cancelar</button><button class="button-primary" id="confirmPending" type="button">Confirmar turno</button></div>
  </section>
-<div class="confirm-layer" id="qrPaymentModal" hidden>
- <section class="confirm-card qr-payment-card" role="dialog" aria-modal="true" aria-labelledby="qrPaymentTitle">
-  <button class="confirm-close" id="closeQrPayment" type="button" aria-label="Cerrar">×</button>
-  <p class="eyebrow">PAGO DEL TURNO</p>
-  <h2 id="qrPaymentTitle">Pago con QR · Navaja 27</h2>
-  <p id="qrPaymentService"></p>
-  <strong class="qr-payment-amount" id="qrPaymentAmount"></strong>
-  <p class="qr-payment-status" id="qrPaymentStatus"></p>
-  <div class="altoke-qr-brand" aria-label="Altoke">altoke<span></span></div>
-  <canvas id="qrPaymentCanvas" width="680" height="680" role="img" aria-label="Código QR Altoke de Navaja 27"></canvas>
-  <div class="altoke-qr-meta"><span>Válido hasta <strong>04 de noviembre de 2028</strong></span><span>CTA <strong>2968496-000-001</strong></span></div>
-  <p class="qr-payment-instructions">Escanea este QR desde tu aplicación bancaria. Antes de autorizar, comprueba que el nombre del beneficiario y el monto sean los acordados con Navaja 27. El pago debe verificarse con el comprobante en el local.</p>
-  <div class="confirm-actions"><button class="button-secondary" id="closeQrPaymentBottom" type="button">Cerrar</button></div>
- </section>
-</div>
 </div>
 <script defer src="./theme-toggle.js?v=light-dark-v1"></script>
 </body>
