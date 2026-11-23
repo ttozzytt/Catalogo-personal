@@ -62,7 +62,7 @@
     const area=$('comparison');area.replaceChildren();const products=state.products.filter(p=>state.compare.includes(p.id));
     if(!products.length){area.append(node('p','Aún no seleccionaste componentes.','empty-state'));return;}
     const keys=['capacity','memory','type','speed','bus','interface','socket','chipset','cores','clock','cache','tdp','power','formFactor','warranty'];
-    const fields=[['Fabricante',p=>p.brand],['Precio publicado',p=>money(p.price)],['Tipo',p=>p.categoryLabel],...keys.map(k=>[k.charAt(0).toUpperCase()+k.slice(1),p=>p.specs?.[k]||'—'])];
+    const fields=[['Fabricante',p=>p.brand],['Precio',p=>money(p.price)],['Tipo',p=>p.categoryLabel],...keys.map(k=>[k.charAt(0).toUpperCase()+k.slice(1),p=>p.specs?.[k]||'—'])];
     const table=node('table'),thead=node('thead'),head=node('tr');head.append(node('th','Característica'));
     products.forEach(p=>head.append(node('th',p.name)));thead.append(head);const tbody=node('tbody');
     fields.forEach(([label,get])=>{const row=node('tr');row.append(node('td',label));products.forEach(p=>row.append(node('td',String(get(p)||'—'))));tbody.append(row);});
@@ -101,7 +101,7 @@
         request_data:{category:d.category,categoryLabel:categoryNames[d.category]||d.category,brand:d.brand,model:d.model,quantity:d.quantity,budget:d.budget,details:d.details,city:d.city,deliveryLabel:d.delivery,priceAndStock:'to_confirm',requestPurpose:d.category==='cpu'?'quote_or_restock':'quote'}
       });
       state.requests=await state.cloud.requests(STORE);
-      closeRequest('Solicitud registrada en tu historial en línea. CompuCenter debe confirmar precio, stock y entrega.');
+      closeRequest('Solicitud guardada. Puedes revisarla en Mis solicitudes.');
       $('requestForm').reset();$('requestQuantity').value='1';renderHistory();showView('historial');
     }catch(error){toast('No se pudo guardar: '+error.message,'error');}
     finally{$('acceptRequest').disabled=false;}
