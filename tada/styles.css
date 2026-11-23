@@ -25,3 +25,11 @@ body[data-theme=dark] .brand,body[data-theme=dark] .brand small{color:var(--ink)
 body[data-theme=dark] .eyebrow{color:var(--accent,var(--gold))}
 body[data-theme=dark] .status{background:var(--surface);border:1px solid var(--line);color:var(--muted)}
 body[data-theme=dark] .primary{filter:brightness(1.12)}
+
+/* Botones portada TaDa */
+.primary{background:#50309a;color:#fff;border:1px solid #50309a}
+.primary:hover{background:#29154f;color:#fff}
+.primary:focus-visible,.theme-toggle:focus-visible{outline:3px solid #ffad43;outline-offset:3px}
+body[data-theme=dark] .primary{background:#ffbd63;color:#29154f;border-color:#ffbd63}
+body[data-theme=dark] .primary:hover{background:#ffd28c;color:#29154f}
+body[data-theme=dark] .theme-toggle{background:#211a30;color:#eee9f7;border-color:#57466b}
