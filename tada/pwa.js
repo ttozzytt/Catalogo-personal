@@ -12,7 +12,7 @@
   function mapProduct(row){
     const s=row.specs||{};
     return{id:row.item_code,name:row.name,category:row.category,brand:row.brand||'',type:s.type||row.category,
-      description:row.description||'',image:row.image_url||'',price:row.price===null?null:Number(row.price),
+      description:row.description||'',image:row.image_url||'',imageAlt:row.image_alt||row.name,price:row.price===null?null:Number(row.price),
       priceLabel:s.priceLabel||'Consultar',priceSource:s.priceSource||'TaDa · consultar',priceSourceUrl:s.priceSourceUrl||'',
       priceNote:s.priceNote||'',formatGroup:s.presentationGroup==='cajas'?'packs':(s.presentationGroup||'botellas'),ageRestricted:Boolean(s.ageRestricted)};
   }
@@ -29,7 +29,7 @@
     if(!rows.length){grid.append(node('p','No encontramos presentaciones con ese criterio.','empty-state'));return;}
     rows.forEach(p=>{
       const card=node('article',undefined,'product-card'),art=node('div',undefined,'product-art'),img=node('img');
-      img.src=p.image||'';img.alt=p.name;img.loading='lazy';img.decoding='async';
+      img.src=p.image||'';img.alt=p.imageAlt;img.loading='lazy';img.decoding='async';
       img.addEventListener('error',()=>{img.remove();art.append(node('span',p.brand||p.name,'brand-fallback'));},{once:true});art.append(img);
       const body=node('div',undefined,'product-body');
       body.append(node('small',(p.brand||p.type)+' · '+p.type+(p.ageRestricted?' · +18':'')),node('h3',p.name),node('p',p.description));
