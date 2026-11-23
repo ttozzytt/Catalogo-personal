@@ -10,7 +10,7 @@
     const s=row.specs||{};
     return{id:row.item_code,name:row.name,brand:row.brand||'',category:row.category,categoryLabel:s.categoryLabel||row.category,
       price:row.price,shortDescription:row.description||s.shortDescription||'',image:row.image_url||'',imageAlt:row.image_alt||row.name,url:s.url||'https://www.compucenter.store/category/componentes-pc',
-      specs:s,priceSource:s.priceSource||'',priceCheckedAt:s.priceCheckedAt||'',priceNote:s.priceNote||'',compare:s.compare!==false,artLabel:s.artLabel||row.brand||'COMPONENTE'};
+      specs:s,compare:s.compare!==false,artLabel:s.artLabel||row.brand||'COMPONENTE'};
   }
   function showView(name){
     const target=$('view-'+name);if(!target)return;
@@ -42,8 +42,6 @@
         img.addEventListener('error',()=>{img.remove();art.append(node('span',p.artLabel,'product-art-fallback'));},{once:true});art.append(img);
       }else art.append(node('span',p.artLabel,'product-art-fallback'));
       body.append(node('small',(p.brand||'A cotizar')+' · '+p.categoryLabel),node('h3',p.name),node('p',p.shortDescription));
-      if(p.priceSource)body.append(node('small','Precio publicado por '+p.priceSource+' · '+p.priceCheckedAt,'price-source-note'));
-      else if(p.priceNote)body.append(node('small',p.priceNote,'price-source-note'));
       const foot=node('div',undefined,'product-foot'),price=node('strong',money(p.price)),actions=node('div',undefined,'product-actions');
       const detail=node('button','Ficha'),request=node('button','Solicitar');detail.type=request.type='button';
       detail.addEventListener('click',()=>showDetail(p));request.addEventListener('click',()=>startRequest(p));
