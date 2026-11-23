@@ -1,7 +1,7 @@
 'use strict';
-const CACHE='navaja27-pwa-v23-offline-catalog';
+const CACHE='navaja27-pwa-v24-brand-carta';
 const SDK_URL='https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.119.2';
-const SHELL=['./','./index.html','./styles.css','./app.js','./pwa.html','./pwa.css','./pwa.js','./manifest.json','./catalog-db.js','./icons/icon.svg','./imagenes/imagen-respaldo.svg','./theme-toggle.js?v=light-dark-v1'];
+const SHELL=['./','./index.html','./styles.css','./app.js','./pwa.html','./pwa.css','./pwa.js','./manifest.json','./catalog-db.js','./icons/icon.svg','./imagenes/imagen-respaldo.svg','./theme-toggle.js?v=light-dark-v1','./brand-logo.svg','./carta-precios.svg','./styles.css?v=navaja27-landing-sales-v5','./pwa.css?v=n27-mobile-grid-v17','./pwa.js?v=n27-brand-carta-v16'];
 self.addEventListener('install',event=>event.waitUntil((async()=>{
  const cache=await caches.open(CACHE);
  await cache.addAll(SHELL);
