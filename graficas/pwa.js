@@ -5,7 +5,7 @@
   const node=(tag,text,cls)=>{const el=document.createElement(tag);if(text!==undefined)el.textContent=String(text);if(cls)el.className=cls;return el;};
   function toast(message,type){const el=$('toast');el.textContent=message;el.className='toast show'+(type?' '+type:'');clearTimeout(toast.timer);toast.timer=setTimeout(()=>el.className='toast',3200);}
   function status(s,label){$('networkStatus').dataset.state=s;$('networkStatus').querySelector('b').textContent=label;}
-  function money(v){return v===null||v===undefined?'Cotizar':'Bs '+Number(v).toLocaleString('es-BO');}
+  function money(v){return v===null||v===undefined?'Consultar':'Bs '+Number(v).toLocaleString('es-BO');}
   function mapProduct(row){
     const s=row.specs||{};
     return{id:row.item_code,name:row.name,brand:row.brand||'',category:row.category,categoryLabel:s.categoryLabel||row.category,
@@ -43,7 +43,7 @@
       }else art.append(node('span',p.artLabel,'product-art-fallback'));
       body.append(node('small',(p.brand||'A cotizar')+' · '+p.categoryLabel),node('h3',p.name),node('p',p.shortDescription));
       const foot=node('div',undefined,'product-foot'),price=node('strong',money(p.price)),actions=node('div',undefined,'product-actions');
-      const detail=node('button','Ficha'),request=node('button',p.price===null?'Solicitar':'Cotizar +');detail.type=request.type='button';
+      const detail=node('button','Ficha'),request=node('button','Solicitar');detail.type=request.type='button';
       detail.addEventListener('click',()=>showDetail(p));request.addEventListener('click',()=>startRequest(p));
       if(p.compare===false)detail.classList.add('wide');
       else{const compare=node('button',state.compare.includes(p.id)?'Comparando ✓':'Comparar');compare.type='button';compare.classList.toggle('selected',state.compare.includes(p.id));compare.addEventListener('click',()=>toggleCompare(p.id));actions.append(compare);}
@@ -77,7 +77,7 @@
   $('detailModal').addEventListener('click',e=>{if(e.target===$('detailModal'))$('detailModal').hidden=true;});
   function startRequest(p){
     showView('solicitud');
-    if(p){$('requestCategory').value=p.category;$('requestBrand').value=p.brand;$('requestModel').value=p.name;$('requestQuantity').value='1';$('requestDetails').value=p.shortDescription;$('requestBudget').value=p.price??'';}
+    if(p){$('requestCategory').value=p.category;$('requestBrand').value=p.brand;$('requestModel').value=p.name;$('requestQuantity').value='1';$('requestDetails').value=p.shortDescription;$('requestBudget').value='';}
     else{$('requestCategory').value='cpu';$('requestModel').focus();}
     if(state.profile){$('requestName').value=state.profile.display_name||'';$('requestPhone').value=state.profile.phone||'';$('requestCity').value=state.profile.city||'';$('requestAddress').value=state.profile.address||'';}
   }
