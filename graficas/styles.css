@@ -25,3 +25,11 @@ body[data-theme=dark] .brand,body[data-theme=dark] .brand small{color:var(--ink)
 body[data-theme=dark] .eyebrow{color:var(--accent,var(--gold))}
 body[data-theme=dark] .status{background:var(--surface);border:1px solid var(--line);color:var(--muted)}
 body[data-theme=dark] .primary{filter:brightness(1.12)}
+
+/* Botones portada CompuCenter */
+.primary{background:#14253d;color:#fff;border:1px solid #14253d}
+.primary:hover{background:#2a62c9;color:#fff}
+.primary:focus-visible,.theme-toggle:focus-visible{outline:3px solid #6b98e4;outline-offset:3px}
+body[data-theme=dark] .primary{background:#8ab0ff;color:#101e31;border-color:#8ab0ff}
+body[data-theme=dark] .primary:hover{background:#b2cbff;color:#101e31}
+body[data-theme=dark] .theme-toggle{background:#1a293a;color:#eaf0f8;border-color:#405a78}
