@@ -127,7 +127,7 @@
     state.orders.forEach(row=>{
       const d=row.request_data||{},items=Array.isArray(d.items)?d.items:[],card=node('article',undefined,'history-card'),info=node('div');
       info.append(node('strong',(d.estimatedTotal===null?'Total por cotizar':money(d.estimatedTotal))+' · '+row.id.slice(0,8).toUpperCase()),
-        node('p',items.map(p=>p.quantity+' × '+p.name+).join(' · ')),
+        node('p',items.map(p=>p.quantity+' × '+p.name).join(' · ')),
         node('small',row.contact_name+' · '+row.phone+' · '+(row.delivery_method==='delivery'?'Entrega a domicilio':'Retiro en local')+(row.address?' · '+row.address:'')),
         node('small','Estado: '+(row.status==='pending'?'Pendiente':row.status==='confirmed'?'Confirmado':row.status==='cancelled'?'Cancelado':'En revisión')));
       card.append(info);list.append(card);
