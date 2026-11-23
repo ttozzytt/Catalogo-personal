@@ -84,7 +84,7 @@
     const hasPrice=typeof data.priceAmount==='number'&&Number.isFinite(data.priceAmount);
     $('bookingQrPanel').hidden=!hasPrice;$('quoteOnlyNote').hidden=hasPrice;
     $('paymentAcknowledged').checked=false;$('confirmPending').disabled=hasPrice;
-    $('bookingQrAmount').textContent=hasPrice?'Total a transferir: Bs '+data.priceAmount.toLocaleString('es-BO'):'Precio por confirmar';
+    $('bookingQrAmount').textContent=hasPrice?'Total a transferir: Bs '+data.priceAmount.toLocaleString('es-BO'):'Precio por confirmar';$('confirmPending').textContent=hasPrice?'Confirmar turno':'Enviar solicitud para cotizar';
     if(hasPrice)drawAltokeQr();
     $('bookingConfirm').hidden=false;updateCountdown();state.timer=setInterval(updateCountdown,250);$('confirmPending').focus();
   }
