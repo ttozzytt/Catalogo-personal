@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
 <meta name="theme-color" content="#172d24"><meta name="description" content="Servicios, turnos y perfil de cliente de Navaja 27 Barber Studio.">
-<link rel="manifest" href="./manifest.json"><link rel="icon" href="./icons/icon.svg"><link rel="stylesheet" href="./pwa.css?v=n27-sales-clean-v15-theme-v6">
+<link rel="manifest" href="./manifest.json"><link rel="icon" href="./icons/icon.svg"><link rel="stylesheet" href="./pwa.css?v=n27-mobile-grid-v16">
 <title>Navaja 27 · Servicios y reservas</title><script defer src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.119.2"></script>
 <script defer src="./catalog-db.js"></script>
 <script defer src="./pwa.js?v=n27-sales-clean-v14"></script>
@@ -38,7 +38,7 @@
   <div class="section-foot"><span>Atención personalizada</span><span>Aplicación PWA · Modo sin conexión</span></div>
  </section>
  <section class="view" id="view-servicios" aria-labelledby="servicesTitle" hidden>
-  <div class="view-head"><div><p class="eyebrow">CARTA DE BARBERÍA</p><h1 id="servicesTitle">Servicios</h1><p>Detalles, duración y precio.</p></div><label class="search"><span>⌕</span><input id="serviceSearch" type="search" placeholder="Buscar servicio…" aria-label="Buscar servicio"></label></div>
+  <div class="view-head"><div><p class="eyebrow">CARTA DE BARBERÍA</p><h1 id="servicesTitle">Servicios</h1><p>Detalles, duración y tarifa por confirmar.</p></div><label class="search"><span>⌕</span><input id="serviceSearch" type="search" placeholder="Buscar servicio…" aria-label="Buscar servicio"></label></div>
   <nav class="filter-row" aria-label="Filtrar servicios"><button class="filter active" data-filter="todos" type="button">Todos</button><button class="filter" data-filter="cabello" type="button">Cabello</button><button class="filter" data-filter="barba" type="button">Barba</button><button class="filter" data-filter="cejas" type="button">Cejas</button><button class="filter" data-filter="combos" type="button">Combos</button></nav>
   <div class="catalog-grid" id="serviceGrid" aria-live="polite"><p class="loading">Cargando servicios…</p></div>
  </section>
