@@ -15,7 +15,18 @@
       description:row.description||'',image:row.image_url||'',imageAlt:row.image_alt||row.name,price:row.price===null?null:Number(row.price),
       formatGroup:s.presentationGroup==='cajas'?'packs':(s.presentationGroup||'botellas'),ageRestricted:Boolean(s.ageRestricted)};
   }
-  function updateBadges(){const n=totalUnits();$('listBadge').textContent=n;$('mobileBadge').textContent=n;$('listSummary').textContent=n+' unidades seleccionadas';}
+  function listTotal(){
+    const rows=state.products.filter(p=>state.list[p.id]);
+    if(!rows.length)return 0;
+    if(rows.some(p=>p.price===null||p.price===undefined))return null;
+    return rows.reduce((sum,p)=>sum+(Number(p.price)*Number(state.list[p.id]||0)),0);
+  }
+  function updateBadges(){
+    const n=totalUnits();$('listBadge').textContent=n;$('mobileBadge').textContent=n;
+    $('listSummary').textContent=n+' unidades seleccionadas';
+    const total=listTotal();
+    $('listTotal').textContent=total===null?'Total: Consultar':'Total: '+formatPrice({price:total});
+  }
   async function saveList(){try{await state.cloud.saveUserState(STORE,'cart',{quantities:state.list});}catch(error){toast('No se pudo sincronizar la lista: '+error.message,'error');}}
   function formatPrice(p){
     if(p.price===null)return 'Consultar';
@@ -44,7 +55,7 @@
     const area=$('selectedList');area.replaceChildren();const rows=state.products.filter(p=>state.list[p.id]);
     if(!rows.length){area.append(node('p','Tu lista está vacía. Explora el catálogo para agregar bebidas.','empty-state'));updateBadges();return;}
     rows.forEach(p=>{
-      const row=node('article',undefined,'selected-row'),info=node('div');info.append(node('strong',p.name),node('small',p.type+' · '+state.list[p.id]+' unidad(es) · '+formatPrice(p)));
+      const row=node('article',undefined,'selected-row'),info=node('div');info.append(node('strong',p.name),node('small',p.type+' · '+state.list[p.id]+' unidad(es) · '+formatPrice(p)+(p.price===null?'':' · Subtotal '+formatPrice({price:p.price*state.list[p.id]}))));
       const controls=node('div',undefined,'quantity-controls'),minus=node('button','−'),count=node('b',state.list[p.id]),plus=node('button','+');minus.type=plus.type='button';
       minus.setAttribute('aria-label','Quitar una unidad de '+p.name);plus.setAttribute('aria-label','Agregar una unidad de '+p.name);
       minus.addEventListener('click',async()=>{state.list[p.id]--;if(state.list[p.id]<=0)delete state.list[p.id];updateBadges();renderList();await saveList();});
@@ -83,8 +94,8 @@
       });
       state.orders=await state.cloud.requests(STORE);
       state.list={};await state.cloud.saveUserState(STORE,'cart',{quantities:{}});
-      closeDeliveryConfirm('Solicitud registrada en tu historial en línea. Consulta cobertura, precio y disponibilidad con TaDa Delivery.');
-      updateBadges();renderList();$('deliveryMessage').textContent='Solicitud guardada en la nube. El precio, stock y cobertura deben confirmarse con TaDa Delivery.';
+      closeDeliveryConfirm('Pedido enviado. Revisa el estado en Mis pedidos.');
+      updateBadges();renderList();$('deliveryMessage').textContent='Pedido guardado. Puedes seguirlo en Mis pedidos.';
       showView('pedidos');
     }catch(error){toast('No se pudo registrar el pedido: '+error.message,'error');}
     finally{$('confirmDeliveryPending').disabled=false;}
