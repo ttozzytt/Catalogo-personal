@@ -24,7 +24,7 @@
   function setMinimumDate() { const input=$('bookingDate');input.min=localDate();if(!input.value||input.value<input.min)input.value=input.min; }
   function mapService(row) {
     const s=row.specs||{};
-    return { id:row.item_code,name:row.name,category:row.category||'otros',price:row.price,priceLabel:s.priceLabel||money(row.price),duration:Number(row.duration_minutes)||30,durationLabel:s.durationLabel||(row.duration_minutes+' min'),description:row.description||'',details:s.details||row.description||'',image:row.image_url||'',imageAlt:row.image_alt||row.name,photoUrl:s.photoUrl,photoCredit:s.photoCredit };
+    return { id:row.item_code,name:row.name,category:row.category||'otros',price:row.price===null||row.price===undefined?null:Number(row.price),priceLabel:s.priceLabel||money(row.price),duration:Number(row.duration_minutes)||30,durationLabel:s.durationLabel||(row.duration_minutes+' min'),description:row.description||'',details:s.details||row.description||'',image:row.image_url||'',imageAlt:row.image_alt||row.name,photoUrl:s.photoUrl,photoCredit:s.photoCredit };
   }
   function populateSelect() {
     const select=$('bookingService');select.replaceChildren(new Option('Selecciona un servicio',''));
