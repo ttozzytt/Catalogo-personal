@@ -94,8 +94,8 @@
       });
       state.orders=await state.cloud.requests(STORE);
       state.list={};await state.cloud.saveUserState(STORE,'cart',{quantities:{}});
-      closeDeliveryConfirm('Pedido enviado. Revisa el estado en Mis pedidos.');
-      updateBadges();renderList();$('deliveryMessage').textContent='Pedido guardado. Puedes seguirlo en Mis pedidos.';
+      closeDeliveryConfirm('Pedido registrado. Revisa Mis pedidos.');
+      updateBadges();renderList();$('deliveryMessage').textContent='Pedido registrado.';
       showView('pedidos');
     }catch(error){toast('No se pudo registrar el pedido: '+error.message,'error');}
     finally{$('confirmDeliveryPending').disabled=false;}
@@ -137,7 +137,7 @@
     if(!state.orders.length){list.append(node('p','Todavía no hay solicitudes de delivery.','empty-state'));return;}
     state.orders.forEach(row=>{
       const d=row.request_data||{},items=Array.isArray(d.items)?d.items:[],card=node('article',undefined,'order-card'),main=node('div');
-      main.append(node('strong','TaDa · '+row.id.slice(0,8).toUpperCase()),node('p',items.map(p=>p.quantity+' × '+p.name).join(' · ')),node('small',row.contact_name+' · '+(d.zone||'')+', '+(d.city||'')+' · '+row.phone),node('small','Estado: '+row.status));
+      main.append(node('strong','TaDa · '+row.id.slice(0,8).toUpperCase()),node('p',items.map(p=>p.quantity+' × '+p.name).join(' · ')),node('small',row.contact_name+' · '+(d.zone||'')+', '+(d.city||'')+' · '+row.phone),node('small','Estado: '+(row.status==='pending'?'Pendiente':row.status==='confirmed'?'Confirmado':row.status==='cancelled'?'Cancelado':'En revisión')));
       card.append(main);list.append(card);
     });
   }
