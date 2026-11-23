@@ -11,7 +11,7 @@
   function selectedProducts(){return state.products.filter(p=>state.cart[p.id]);}
   function updateBadge(){const n=count();$('cartBadge').textContent=n;$('mobileCartBadge').textContent=n;}
   async function saveCartState(){try{await state.cloud.saveUserState(STORE,'cart',{quantities:state.cart,note:state.note,mode:state.mode});}catch(error){toast('No se pudo sincronizar el carrito: '+error.message,'error');}}
-  function mapProduct(row){const s=row.specs||{};return{id:row.item_code,name:row.name,category:row.category,price:row.price===null?null:Number(row.price),priceLabel:money(row.price),branch:s.branch||'',description:row.description||'',image:row.image_url||'',imageAlt:row.image_alt||row.name,fallback:s.fallback||''};}
+  function mapProduct(row){const s=row.specs||{};return{id:row.item_code,name:row.name,category:row.category,price:row.price===null?null:Number(row.price),priceLabel:money(row.price),branch:s.branch||'',description:row.description||'',image:row.image_url||'',imageAlt:row.image_alt||row.name,fallback:s.fallback||'',priceSource:s.priceSource||'',priceCheckedAt:s.priceCheckedAt||'',priceNote:s.priceNote||''};}
   function setView(name){
     const target=$('view-'+name);if(!target)return;document.querySelectorAll('.view').forEach(v=>{v.hidden=true;v.classList.remove('active');});
     target.hidden=false;target.classList.add('active');document.querySelectorAll('[data-view]').forEach(b=>b.classList.toggle('active',b.dataset.view===name));
@@ -32,6 +32,8 @@
       img.addEventListener('error',()=>{img.remove();media.append(node('span',p.category.toUpperCase(),'food-image-category'),node('strong',p.name,'food-image-name'),node('small','Foto no disponible','food-image-note'));},{once:true});
       media.append(img);
       const body=node('div',undefined,'food-body');body.append(node('small',p.category.toUpperCase()+(p.branch?' · '+p.branch:'')),node('h3',p.name),node('p',p.description));
+      if(p.priceSource)body.append(node('small','Precio publicado por '+p.priceSource+' · '+p.priceCheckedAt,'price-source-note'));
+      else if(p.priceNote)body.append(node('small',p.priceNote,'price-source-note'));
       const foot=node('div',undefined,'food-foot'),price=node('strong',p.price===null?'Consultar':money(p.price)),button=node('button',state.cart[p.id]?'Añadir otro +':'Agregar +');button.type='button';
       button.addEventListener('click',async()=>{state.cart[p.id]=(state.cart[p.id]||0)+1;updateBadge();button.textContent='Agregado ✓';await saveCartState();toast(p.name+' agregado al pedido.');});
       foot.append(price,button);body.append(foot);card.append(media,body);grid.append(card);
