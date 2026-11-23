@@ -183,3 +183,42 @@ body[data-theme=dark] .hero-copy>p,body[data-theme=dark] .hero p{color:inherit}
 body[data-theme=dark] .confirm-layer{background:#000b}
 body[data-theme=dark] .toast{background:#33463c;color:#fff}
 @media(max-width:850px){.theme-toggle{min-height:32px;padding:0 8px;font-size:9px}}
+
+/* Cabecera compacta para móvil y sin recorte del indicador Online */
+@media(max-width:760px){
+ .app-header{display:grid!important;grid-template-columns:minmax(0,1fr) auto;grid-template-areas:"brand theme" "status status";gap:8px 9px;min-height:0;padding:9px 12px}
+ .app-header .app-brand{grid-area:brand;min-width:0;max-width:100%}
+ .app-header .main-nav{display:none!important}
+ .app-header .theme-toggle{grid-area:theme;justify-self:end;min-height:34px;padding:0 9px;font-size:9px}
+ .app-header .network-pill{grid-area:status;justify-self:start;max-width:100%;margin:0;white-space:normal;overflow-wrap:anywhere}
+ .mobile-nav{top:88px!important;gap:3px;padding:6px 8px}
+ .mobile-nav .nav-link{padding:8px 9px;font-size:9px}
+}
+body[data-theme=dark] .theme-toggle{background:var(--surface);border-color:var(--line);color:var(--ink)}
+
+/* Overrides visuales del modo noche */
+
+.food-media{height:150px;overflow:hidden;background:#f0e5d9}
+.food-media img{display:block;width:100%;height:100%;object-fit:cover;background:#f0e5d9}
+.food-image-category,.food-image-name,.food-image-note{display:block;text-align:center}
+.food-image-category{padding-top:28px;color:var(--orange);font-size:9px;font-weight:900;letter-spacing:1.5px}
+.food-image-name{padding:7px 13px 0;color:var(--red-dark);font:18px Georgia,serif}
+.food-image-note{padding-top:5px;color:var(--muted);font-size:9px}
+body[data-theme=dark] .app-header,body[data-theme=dark] .mobile-nav,body[data-theme=dark] .app-footer{background:#261d19;border-color:#45332b;color:#f3e7dc}
+body[data-theme=dark] .hero{background:#261d19!important;color:#f3e7dc}
+body[data-theme=dark] .hero h1,body[data-theme=dark] .view-head h1{color:#f3e7dc}
+body[data-theme=dark] .hero h1 em{color:#f0a17d}
+body[data-theme=dark] .hero-copy>p:not(.eyebrow),body[data-theme=dark] .view-head p{color:#cbb9ab}
+body[data-theme=dark] .hero>img{background:#261d19;object-fit:cover}
+body[data-theme=dark] .eyebrow{color:#f0a17d}
+body[data-theme=dark] .category-tiles button,body[data-theme=dark] .food-card,body[data-theme=dark] .food-body,body[data-theme=dark] .order-summary,body[data-theme=dark] .info-panel,body[data-theme=dark] .account-form,body[data-theme=dark] .checkout-form,body[data-theme=dark] .history-card,body[data-theme=dark] .order-row{background:#261d19;border-color:#45332b;color:#f3e7dc}
+body[data-theme=dark] .food-media{background:#32241e}
+body[data-theme=dark] .food-image-name,body[data-theme=dark] .food-body h3,body[data-theme=dark] .history-card strong,body[data-theme=dark] .info-panel h2{color:#f0b091}
+body[data-theme=dark] .food-image-category{color:#f0a17d}
+body[data-theme=dark] .food-image-note,body[data-theme=dark] .food-body p,body[data-theme=dark] .view-head p,body[data-theme=dark] .fine-note{color:#c3aea1}
+body[data-theme=dark] .food-foot strong,body[data-theme=dark] .order-summary>strong{color:#f0c39b}
+body[data-theme=dark] .food-foot button,body[data-theme=dark] .button-secondary,body[data-theme=dark] .mode-button,body[data-theme=dark] .more-button,body[data-theme=dark] .quantity-controls button{background:#3b2c24;border-color:#564035;color:#f3e7dc}
+body[data-theme=dark] .button-primary{background:#d77a5a;color:#fff}
+body[data-theme=dark] .network-pill{background:#261d19;border-color:#45332b;color:#d9c8ba}
+body[data-theme=dark] .empty-state{background:#261d19;border-color:#564035;color:#c3aea1}
+
