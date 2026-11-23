@@ -24,7 +24,10 @@
     try { localStorage.removeItem(CACHE_PREFIX + key); } catch (_) {}
   };
   const requireOnlineSession = cloud => {
-    if (!cloud.user?.id) throw new Error('Conéctate a Internet para iniciar una sesión segura antes de enviar datos.');
+    if (!cloud.user?.id) {
+      const reason = cloud.authError?.message || 'No se pudo iniciar una sesión segura.';
+      throw new Error('No se enviaron datos a Supabase: ' + reason);
+    }
     if (!navigator.onLine) throw new Error('Sin Internet: los cambios no se enviaron a Supabase. Vuelve a conectarte e inténtalo otra vez.');
   };
 
@@ -51,36 +54,34 @@
       try {
         sessionResult = await client.auth.getSession();
       } catch (error) {
-        if (!navigator.onLine) {
-          this.offline = true;
-          this.user = null;
-          return this;
-        }
-        throw error;
+        this.authError = error;
+        this.offline = true;
+        this.user = null;
+        return this;
       }
       if (sessionResult.error) {
-        if (!navigator.onLine) {
-          this.offline = true;
-          this.user = null;
-          return this;
-        }
-        throw sessionResult.error;
+        this.authError = sessionResult.error;
+        this.offline = !navigator.onLine;
+        this.user = null;
+        return this;
       }
 
       let session = sessionResult.data?.session || null;
       if (!session && navigator.onLine) {
-        const result = await client.auth.signInAnonymously();
-        if (result.error) {
-          if (/anonymous|disabled|not enabled/i.test(result.error.message || '')) {
-            throw new Error('Activa el acceso anónimo en Supabase: Authentication → Sign In / Providers → Anonymous Sign-Ins.');
-          }
-          throw result.error;
+        try {
+          const result = await client.auth.signInAnonymously();
+          if (result.error) throw result.error;
+          session = result.data?.session || null;
+        } catch (error) {
+          this.authError = error;
+          this.user = null;
+          this.offline = true;
+          return this;
         }
-        session = result.data?.session || null;
       }
 
       this.user = session?.user?.id ? session.user : null;
-      this.offline = !navigator.onLine;
+      this.offline = !navigator.onLine || !this.user;
       return this;
     },
     async items(storeCode) {
