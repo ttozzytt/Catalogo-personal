@@ -25,3 +25,11 @@ body[data-theme=dark] .brand,body[data-theme=dark] .brand small{color:var(--ink)
 body[data-theme=dark] .eyebrow{color:var(--accent,var(--gold))}
 body[data-theme=dark] .status{background:var(--surface);border:1px solid var(--line);color:var(--muted)}
 body[data-theme=dark] .primary{filter:brightness(1.12)}
+
+/* Botones portada Navaja 27 */
+.primary{background:#172d24;color:#fff;border:1px solid #172d24}
+.primary:hover{background:#294738;color:#fff}
+.primary:focus-visible,.theme-toggle:focus-visible{outline:3px solid #bd9461;outline-offset:3px}
+body[data-theme=dark] .primary{background:#d6b27c;color:#17251d;border-color:#d6b27c}
+body[data-theme=dark] .primary:hover{background:#edc994;color:#17251d}
+body[data-theme=dark] .theme-toggle{background:#1b2720;color:#eef1ed;border-color:#496050}
