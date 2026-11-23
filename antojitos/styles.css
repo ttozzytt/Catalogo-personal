@@ -25,3 +25,11 @@ body[data-theme=dark] .brand,body[data-theme=dark] .brand small{color:var(--ink)
 body[data-theme=dark] .eyebrow{color:var(--accent,var(--gold))}
 body[data-theme=dark] .status{background:var(--surface);border:1px solid var(--line);color:var(--muted)}
 body[data-theme=dark] .primary{filter:brightness(1.12)}
+
+/* Botones portada Antojitos */
+.primary{background:#8f3925;color:#fff;border:1px solid #8f3925}
+.primary:hover{background:#6f2d1e;color:#fff}
+.primary:focus-visible,.theme-toggle:focus-visible{outline:3px solid #c85e38;outline-offset:3px}
+body[data-theme=dark] .primary{background:#d77a5a;color:#271711;border-color:#d77a5a}
+body[data-theme=dark] .primary:hover{background:#edaa8d;color:#271711}
+body[data-theme=dark] .theme-toggle{background:#261d19;color:#f3e7dc;border-color:#624638}
