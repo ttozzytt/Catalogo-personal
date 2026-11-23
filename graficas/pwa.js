@@ -33,7 +33,7 @@
   function renderProducts(){
     const grid=$('productGrid'),q=$('productSearch').value.trim().toLocaleLowerCase('es');grid.replaceChildren();
     const rows=state.products.filter(p=>(state.filter==='todos'||p.category===state.filter)&&(p.name+' '+p.brand+' '+p.shortDescription+' '+Object.values(p.specs||{}).join(' ')).toLocaleLowerCase('es').includes(q));
-    $('catalogCount').textContent=rows.length+' referencias · '+state.products.length+' en catálogo';
+    $('catalogCount').textContent=rows.length+' productos · '+state.products.length+' en catálogo';
     if(!rows.length){grid.append(node('p','No hay componentes en esta categoría.','empty-state'));return;}
     rows.forEach(p=>{
       const card=node('article',undefined,'product-card'),art=node('div',undefined,'product-art'),body=node('div',undefined,'product-body');
@@ -56,7 +56,7 @@
     Object.entries(p.specs||{}).filter(([k,v])=>!['url','shortDescription','categoryLabel','artLabel','compare'].includes(k)&&v!==null&&v!=='').forEach(([key,value])=>{
       const item=node('div');item.append(node('dt',key),node('dd',String(value)));list.append(item);
     });
-    $('detailSpecs').append(list);$('detailLink').href=p.url;$('detailLink').textContent='Consultar en tienda ↗';$('detailModal').hidden=false;$('closeDetail').focus();
+    $('detailSpecs').append(list);$('detailLink').href=p.url;$('detailLink').textContent='Ver producto ↗';$('detailModal').hidden=false;$('closeDetail').focus();
   }
   function renderCompare(){
     const area=$('comparison');area.replaceChildren();const products=state.products.filter(p=>state.compare.includes(p.id));
