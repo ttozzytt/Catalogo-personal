@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
 <meta name="theme-color" content="#a3442b"><meta name="description" content="Menú digital de Antojitos en La Paz: hamburguesas, choripanes, hot dogs, salchipapas, parrillitas y bebidas.">
-<link rel="manifest" href="./manifest.json"><link rel="icon" href="./icons/icon.svg"><link rel="stylesheet" href="./pwa.css?v=antojitos-sales-clean-v10-theme-v6">
+<link rel="manifest" href="./manifest.json"><link rel="icon" href="./icons/icon.svg"><link rel="stylesheet" href="./pwa.css?v=antojitos-sales-clean-v11-theme-v7">
 <title>Antojitos · Menú y pedidos</title><script defer src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.119.2"></script>
 <script defer src="../catalog-db.js"></script>
 <script defer src="./pwa.js?v=antojitos-sales-clean-v9"></script>
@@ -52,7 +52,6 @@
    <button class="filter" type="button" data-filter="parrillitas">Parrillitas</button>
    <button class="filter" type="button" data-filter="bebidas">Bebidas</button>
   </nav>
-  <p class="fine-note">Menú y precios publicados por Snack Antojitos para sus sucursales Irpavi y Achumani. Pueden variar entre sucursales; confirma disponibilidad. Las fotografías son ilustrativas.</p>
   <div class="catalog-grid" id="productGrid"><p class="loading">Cargando menú…</p></div>
   <button class="more-button" id="showMore" type="button" hidden>Mostrar más productos</button>
  </section>
@@ -64,7 +63,7 @@
     <p class="eyebrow">TOTAL DEL PEDIDO</p><strong id="orderTotal">Bs 0</strong>
     <label>Observaciones<textarea id="orderNote" rows="3" maxlength="180" placeholder="Sin cebolla, retirar en local, etc."></textarea></label>
     <button class="button-primary" id="goCheckout" type="button">Continuar con el pedido ↗</button>
-    <small>El total se calcula con los precios publicados en el menú. Confirma disponibilidad al coordinar con el local.</small>
+    <small>El local confirma tu pedido.</small>
    </aside>
   </div>
  </section>
