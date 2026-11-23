@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
 <meta name="theme-color" content="#29154f"><meta name="description" content="TaDa Bolivia: catálogo de bebidas, lista de pedidos y solicitud de delivery.">
-<link rel="manifest" href="./manifest.json"><link rel="icon" href="./icons/icon.svg"><link rel="stylesheet" href="./pwa.css?v=tada-sales-clean-v13-theme-v5">
+<link rel="manifest" href="./manifest.json"><link rel="icon" href="./icons/icon.svg"><link rel="stylesheet" href="./pwa.css?v=tada-sales-clean-v14-theme-v6">
 <title>TaDa Bolivia · Catálogo y delivery</title><script defer src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.119.2"></script>
 <script defer src="../catalog-db.js"></script>
 <script defer src="./pwa.js?v=tada-sales-clean-v13"></script>
@@ -39,10 +39,9 @@
    <button type="button" data-category="packs"><span>06</span><strong>Packs y cajas</strong><small>Paquetes y cajas full por cotizar</small></button>
   </div>
   <div class="delivery-strip"><div><strong>¿Lo llevamos a tu domicilio?</strong><small>Prepara el pedido y verifica cobertura y disponibilidad.</small></div><button class="button-primary" data-go="lista" type="button">Armar pedido ↗</button></div>
-  <p class="fine-note">Catálogo referencial, sin precios ni inventario en tiempo real. La disponibilidad y el importe final se confirman en TaDa Delivery.</p>
  </section>
  <section class="view" id="view-catalogo" aria-labelledby="catalogTitle" hidden>
-  <div class="view-head"><div><p class="eyebrow">PORTAFOLIO DE MARCAS</p><h1 id="catalogTitle">Encuentra tu favorita</h1><p>Elige una marca y su presentación. Consulta precio y stock final por el canal oficial.</p></div><label class="search"><span>⌕</span><input id="productSearch" type="search" placeholder="Buscar bebida o marca…" aria-label="Buscar bebida"></label></div>
+  <div class="view-head"><div><p class="eyebrow">PORTAFOLIO DE MARCAS</p><h1 id="catalogTitle">Encuentra tu favorita</h1><p>Elige una marca y su presentación. Agrégala a tu pedido.</p></div><label class="search"><span>⌕</span><input id="productSearch" type="search" placeholder="Buscar bebida o marca…" aria-label="Buscar bebida"></label></div>
   <nav class="filter-row" aria-label="Categorías y presentaciones">
    <button class="filter active" type="button" data-filter="todos">Todo</button>
    <button class="filter" type="button" data-filter="cervezas">Cervezas</button>
@@ -53,7 +52,6 @@
    <button class="filter" type="button" data-filter="botellas">Botellas</button>
    <button class="filter" type="button" data-filter="packs">Packs / cajas</button>
   </nav>
-  <p class="fine-note">El portafolio de marcas se basa en el sitio oficial TaDa. Los precios señalados como referencia proceden de Hipermaxi o Amarket y no son cotizaciones oficiales de TaDa; confirma importe, presentación, unidades por caja y disponibilidad antes de pedir.</p>
   <div class="catalog-grid" id="productGrid"><p class="loading">Cargando marcas…</p></div>
  </section>
  <section class="view" id="view-lista" aria-labelledby="listTitle" hidden>
@@ -96,7 +94,7 @@
   <div class="info-grid"><article><strong>Delivery</strong><p>Consulta cobertura, catálogo, precios y tiempos de entrega.</p><a href="https://tadadelivery.com.bo/" target="_blank" rel="noopener">Abrir TaDa Delivery ↗</a></article><article><strong>Tiendas</strong><p>Sucursales publicadas en La Paz y otras ciudades.</p><a href="https://www.tada.com.bo/sucursales.html" target="_blank" rel="noopener">Ver sucursales ↗</a></article><article><strong>Franquicias</strong><p>Información institucional y marcas de la cadena.</p><a href="https://franquicias.tada.com.bo/" target="_blank" rel="noopener">Sitio de franquicias ↗</a></article></div>
  </section>
 </main>
-<footer class="app-footer"><a href="./index.html">Volver a portada</a><span>TaDa Bolivia · Catálogo referencial</span><span>+18 · Consume con responsabilidad</span></footer>
+<footer class="app-footer"><a href="./index.html">Volver a portada</a><span>TaDa Bolivia · Bebidas y delivery</span><span>+18 · Consume con responsabilidad</span></footer>
 <div class="age-gate" id="ageGate" role="dialog" aria-modal="true" aria-labelledby="ageTitle">
  <div class="age-card"><div class="age-logo">Ta<span>·</span>Da</div><p class="eyebrow">CONTROL DE EDAD</p><h2 id="ageTitle">¿Tienes 18 años o más?</h2><p id="ageMessage">Este catálogo incluye bebidas alcohólicas. Debes confirmar tu mayoría de edad para continuar.</p><button class="button-primary" id="confirmAge" type="button">Sí, tengo 18 años o más</button><button class="age-minor" id="denyAge" type="button">No, soy menor de edad</button><small>Consume con responsabilidad.</small></div>
 </div>
