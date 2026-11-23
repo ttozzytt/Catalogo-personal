@@ -260,3 +260,5 @@ body[data-theme=dark] .text-button{color:#f1b392}
 body[data-theme=dark] .confirm-close{color:#ead5c8}
 body[data-theme=dark] button:disabled{opacity:.42}
 :where(button,a).button-primary:focus-visible,:where(button,a).button-secondary:focus-visible,.filter:focus-visible,.category-tiles button:focus-visible,.theme-toggle:focus-visible{outline:3px solid #d98a69;outline-offset:3px}
+
+.price-source-note{display:block;margin-top:6px;color:var(--muted);font-size:10px;line-height:1.4}
