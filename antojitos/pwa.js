@@ -11,7 +11,7 @@
   function selectedProducts(){return state.products.filter(p=>state.cart[p.id]);}
   function updateBadge(){const n=count();$('cartBadge').textContent=n;$('mobileCartBadge').textContent=n;}
   async function saveCartState(){try{await state.cloud.saveUserState(STORE,'cart',{quantities:state.cart,note:state.note,mode:state.mode});}catch(error){toast('No se pudo sincronizar el carrito: '+error.message,'error');}}
-  function mapProduct(row){const s=row.specs||{};return{id:row.item_code,name:row.name,category:row.category,price:row.price===null?null:Number(row.price),priceLabel:s.priceLabel||money(row.price),priceSource:s.priceSource||'Consultar',branch:s.branch||'',description:row.description||'',image:row.image_url||'',imageAlt:row.image_alt||row.name,fallback:s.fallback||''};}
+  function mapProduct(row){const s=row.specs||{};return{id:row.item_code,name:row.name,category:row.category,price:row.price===null?null:Number(row.price),priceLabel:money(row.price),branch:s.branch||'',description:row.description||'',image:row.image_url||'',imageAlt:row.image_alt||row.name,fallback:s.fallback||''};}
   function setView(name){
     const target=$('view-'+name);if(!target)return;document.querySelectorAll('.view').forEach(v=>{v.hidden=true;v.classList.remove('active');});
     target.hidden=false;target.classList.add('active');document.querySelectorAll('[data-view]').forEach(b=>b.classList.toggle('active',b.dataset.view===name));
@@ -32,7 +32,7 @@
       img.addEventListener('error',()=>{img.remove();media.append(node('span',p.category.toUpperCase(),'food-image-category'),node('strong',p.name,'food-image-name'),node('small','Foto no disponible','food-image-note'));},{once:true});
       media.append(img);
       const body=node('div',undefined,'food-body');body.append(node('small',p.category.toUpperCase()+(p.branch?' · '+p.branch:'')),node('h3',p.name),node('p',p.description));
-      const foot=node('div',undefined,'food-foot'),price=node('strong',p.price===null?'Consultar precio':money(p.price)),button=node('button',state.cart[p.id]?'Añadir otro +':'Agregar +');button.type='button';
+      const foot=node('div',undefined,'food-foot'),price=node('strong',p.price===null?'Consultar':money(p.price)),button=node('button',state.cart[p.id]?'Añadir otro +':'Agregar +');button.type='button';
       button.addEventListener('click',async()=>{state.cart[p.id]=(state.cart[p.id]||0)+1;updateBadge();button.textContent='Agregado ✓';await saveCartState();toast(p.name+' agregado al pedido.');});
       foot.append(price,button);body.append(foot);card.append(media,body);grid.append(card);
     });
@@ -42,7 +42,7 @@
     const list=$('orderLines');list.replaceChildren();const rows=selectedProducts();
     if(!rows.length)list.append(node('p','Todavía no agregaste productos.','empty-state'));
     rows.forEach(p=>{
-      const row=node('article',undefined,'order-row'),info=node('div');info.append(node('strong',p.name),node('small',p.price===null?'Precio por confirmar · '+state.cart[p.id]+' unidad(es)':money(p.price)+' por unidad · Subtotal '+money(p.price*state.cart[p.id])));
+      const row=node('article',undefined,'order-row'),info=node('div');info.append(node('strong',p.name),node('small',p.price===null?'Consultar · '+state.cart[p.id]+' unidad(es)':money(p.price)+' por unidad · Subtotal '+money(p.price*state.cart[p.id])));
       const controls=node('div',undefined,'quantity-controls'),minus=node('button','−'),qty=node('b',state.cart[p.id]),plus=node('button','+');minus.type=plus.type='button';
       minus.setAttribute('aria-label','Quitar una unidad de '+p.name);plus.setAttribute('aria-label','Agregar una unidad de '+p.name);
       minus.addEventListener('click',async()=>{state.cart[p.id]--;if(state.cart[p.id]<=0)delete state.cart[p.id];renderOrder();updateBadge();await saveCartState();});
@@ -93,9 +93,9 @@
     const order=buildOrder(),c=order.customer;
     if(c.name.length<2||!/^\d{8}$/.test(c.phone)||!$('checkoutConsent').checked){$('checkoutMessage').textContent='Revisa nombre, celular y aceptación de la solicitud.';return;}
     if(c.mode==='Entrega a domicilio'&&(c.zone.length<2||c.address.length<4||c.reference.length<3)){$('checkoutMessage').textContent='Completa zona, calle y referencia de entrega.';return;}
-    if(order.estimatedTotal===null){$('checkoutMessage').textContent='Tu pedido incluye una presentación sin precio publicado. Puedes enviarlo, pero el total definitivo debe ser confirmado por el negocio.';}
+    if(order.estimatedTotal===null){$('checkoutMessage').textContent='Hay productos sin precio. Confirma el importe antes de enviar el pedido.';}
     state.pending=order;state.expiresAt=Date.now()+60000;
-    $('confirmSummary').textContent=order.items.map(p=>p.quantity+' × '+p.name).join(' · ')+' | '+money(order.estimatedTotal)+' (estimado) | '+c.mode;
+    $('confirmSummary').textContent=order.items.map(p=>p.quantity+' × '+p.name).join(' · ')+' | '+money(order.estimatedTotal)+' | '+c.mode;
     $('orderConfirm').hidden=false;updateCountdown();state.timer=setInterval(updateCountdown,250);$('acceptConfirm').focus();
   });
   function updateCountdown(){const left=Math.max(0,state.expiresAt-Date.now()),sec=Math.ceil(left/1000);$('confirmCountdown').textContent='00:'+String(sec).padStart(2,'0');$('confirmCountdownBar').style.width=(left/60000*100)+'%';if(left<=0)closeConfirm('El tiempo terminó. El pedido no se guardó; tu carrito sigue disponible.');}
