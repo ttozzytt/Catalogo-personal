@@ -6,11 +6,11 @@
 <link rel="manifest" href="./manifest.json"><link rel="icon" href="./icons/icon.svg"><link rel="stylesheet" href="./pwa.css?v=antojitos-mobile-grid-v13">
 <title>Antojitos · Menú y pedidos</title><script defer crossorigin="anonymous" src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.119.2"></script>
 <script defer src="../catalog-db.js"></script>
-<script defer src="./pwa.js?v=antojitos-price-source-v11"></script>
+<script defer src="./pwa.js?v=antojitos-menu-clean-v12"></script>
 </head>
 <body class="food-app">
 <header class="app-header">
- <a class="app-brand" href="./index.html"><span class="brand-mark">AN</span><span>ANTOJITOS<small>IRPAVI · ACHUMANI</small></span></a>
+ <a class="app-brand" href="./index.html"><img class="brand-logo" src="./brand-logo.svg" alt="Antojitos"></a>
  <nav class="main-nav" aria-label="Navegación principal">
   <button class="nav-link active" data-view="inicio" type="button">Inicio</button>
   <button class="nav-link" data-view="menu" type="button">Menú</button>
@@ -27,7 +27,7 @@
 <main class="app-main">
  <section class="view active" id="view-inicio" aria-labelledby="homeTitle">
   <div class="hero">
-   <div class="hero-copy"><p class="eyebrow">SNACK ANTOJITOS · LA PAZ</p><h1 id="homeTitle">El antojo<br><em>tiene nombre.</em></h1><p>Conoce los platos de Irpavi y Achumani, prepara tu pedido y consulta el total antes de enviarlo.</p><button class="button-primary" type="button" data-go="menu">Ver el menú</button></div>
+   <div class="hero-copy"><p class="eyebrow">SNACK ANTOJITOS · LA PAZ</p><h1 id="homeTitle">El antojo<br><em>tiene nombre.</em></h1><p>Explora el menú, añade tus favoritos y prepara tu pedido.</p><button class="button-primary" type="button" data-go="menu">Ver el menú</button></div>
    <img src="https://snackantojitos.com/wp-content/uploads/2026/01/BURGERPAPA.webp" alt="Hamburguesa con papas del menú de Snack Antojitos" fetchpriority="high">
   </div>
   <div class="category-tiles">
