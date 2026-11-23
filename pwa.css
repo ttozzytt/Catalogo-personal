@@ -107,7 +107,7 @@ body[data-theme=dark] .quote-only-note{background:#342b1e;color:#edd5a8}
  .app-header .main-nav{display:none!important}
  .app-header .theme-toggle{grid-area:theme;justify-self:end;min-height:34px;padding:0 9px;font-size:9px}
  .app-header .network-pill{grid-area:status;justify-self:start;max-width:100%;margin:0;white-space:normal;overflow-wrap:anywhere}
- .mobile-nav{top:88px!important;gap:3px;padding:6px 8px}
+ .mobile-nav{top:96px!important;gap:3px;padding:6px 8px}
  .mobile-nav .nav-link{padding:8px 9px;font-size:9px}
 }
 body[data-theme=dark] .theme-toggle{background:var(--surface);border-color:var(--line);color:var(--ink)}
