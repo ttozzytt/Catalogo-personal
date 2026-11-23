@@ -3,7 +3,7 @@
   const $ = id => document.getElementById(id);
   const STORE = 'navaja27';
   const QR_MATRIX_B64 = '/jHRFvPpkIuD/BHNdu0u2yJzUG6GPGVQ/oUIArt04EHAogX6fpXbo4tv9Da/O3euwVI2xTePHdRxB/qqqqqqqqqqr+AEPDHNDkQa6gCWhsz/bIPmcC0HDWh8Csgmq6rblfn1gFHHmEl7LCI930Cxg55jdlEzppmfzKrMbGyAwMlWPk7XbGcdS3OAPwYEcZx4fDPMTZsBfZGiYZoh5hbZDqsK0X3CI++I3oYXKoi8vaUd5voHJCKncbkB2dY3QYAU8jNEM1S8ainuqXhJeehuQnpuK7d61GWjpXj7lgCMNxgn8NgA5Vtnb4/T/zz76KSfoceqZEXMEfojxTaupapzlaxagrcxwBUWkyxwA/EI/Sovt9L++mP9JiMMQokMvHvO6MzgDrN35CdXceQRkERKRaZQTmgWhdg9ANa4Wmq/AWIZGuGvbDcuEY1kjvxPP0zDpXn/MK6oVRCpOUSjyKCa2+pkzdqo2tjtVM/9rPHW/8Ma+rXk8AwCty/LPXxi3TC4EDfj6dy96QzM18IAku2IjtfiZfaY7RF7gtjqYDlm4Qc9HctbSdpmuHT9YfK9YEcJomwYGdj8Qp+29vt+cxvxYp+Esz5NHc7xRRNF6T0UeoO9rJ/yorqqzMW8LGAgcfNLRBfuG//MNvhRr++KejkvM4OZA9GoaiIC7dFsXE9I3JPDPgXs3X8WiEtcdDkoCjWjL3aIm1U1SpK7aqMLB7SFfdMg1+5sbhR18IR4Zyfiva7vQjLVF/jMrAMPlZENKYFR0MQ5Hh3Z2aKqpLY4lq3lUs/r6DYS3aFGIqbFkjwE7KI+DEvBkLTes8tvw6XbKkHmwCJFwvW01rubqJjTpzK3J3Y3euFuE627A6TLQRSKt6a6D5jfPqlJ+IBy0ceIZx4nJF/5zTKgLKq5ECpQXpbRkvFGaUcXumhY+4n/4ipPldUD1lkmn/5KxO6eVw8WKGpqkvMEdJVQY3dvXAOv64ARL5bXsI6dAA==';
-  const state = { services: [], filter: 'todos', view: 'inicio', requests: [], profile: null, pending: null, timer: null, expiresAt: 0, cloud: null };
+  const state = { services: [], filter: 'todos', view: 'inicio', requests: [], profile: null, pending: null, timer: null, expiresAt: 0, agendaDate: null, cloud: null };
   const node = (tag, text, cls) => { const el = document.createElement(tag); if (text !== undefined) el.textContent = String(text); if (cls) el.className = cls; return el; };
   function toast(message, type) { const el=$('toast'); el.textContent=message; el.className='toast show'+(type?' '+type:''); clearTimeout(toast.timer); toast.timer=setTimeout(()=>el.className='toast',3200); }
   function setStatus(stateName,label) { $('networkStatus').dataset.state=stateName; $('networkStatus').querySelector('b').textContent=label; }
@@ -14,7 +14,9 @@
     target.hidden=false;target.classList.add('active');
     document.querySelectorAll('[data-view]').forEach(b=>b.classList.toggle('active',b.dataset.view===name));
     state.view=name;if(location.hash!=='#'+name)history.replaceState(null,'','#'+name);
-    if(name==='mis-turnos')renderRequests(); if(name==='cuenta')renderProfile();
+    if(name==='mis-turnos'){state.agendaDate=state.agendaDate||localDate();renderRequests();}
+    if(name==='cuenta')renderProfile();
+    window.scrollTo({top:0,behavior:'auto'});
   }
   document.querySelectorAll('[data-view]').forEach(b=>b.addEventListener('click',()=>showView(b.dataset.view)));
   document.querySelectorAll('[data-go]').forEach(b=>b.addEventListener('click',()=>showView(b.dataset.go)));
@@ -79,19 +81,16 @@
   function openConfirm(data) {
     state.pending=data;state.expiresAt=Date.now()+60000;
     $('confirmDetails').textContent=data.service+' · '+data.date.split('-').reverse().join('/')+' · '+data.time+' · '+data.name;
+    const hasPrice=typeof data.priceAmount==='number'&&Number.isFinite(data.priceAmount);
+    $('bookingQrPanel').hidden=!hasPrice;$('quoteOnlyNote').hidden=hasPrice;
+    $('paymentAcknowledged').checked=false;$('confirmPending').disabled=hasPrice;
+    $('bookingQrAmount').textContent=hasPrice?'Total a transferir: Bs '+data.priceAmount.toLocaleString('es-BO'):'Precio por confirmar';
+    if(hasPrice)drawAltokeQr();
     $('bookingConfirm').hidden=false;updateCountdown();state.timer=setInterval(updateCountdown,250);$('confirmPending').focus();
   }
   function toDate(row) {
     const d=row.request_data||{};
     return (d.date|| (row.requested_for?new Date(row.requested_for).toLocaleDateString('en-CA'):''))+' '+(d.time||'');
-  }
-  function requestAmount(row) {
-    const data=row.request_data||{};
-    if(typeof data.priceAmount==='number'&&Number.isFinite(data.priceAmount))return data.priceAmount;
-    const match=String(data.referencePrice||'').match(/Bs\s*([\d.,]+)/i);
-    if(!match)return null;
-    const amount=Number(match[1].replace(/,/g,''));
-    return Number.isFinite(amount)?amount:null;
   }
   function drawAltokeQr() {
     const canvas=$('qrPaymentCanvas');
@@ -109,38 +108,68 @@
     }
     canvas.dataset.ready='yes';
   }
-  function openQrPayment(row) {
-    const amount=requestAmount(row),data=row.request_data||{};
-    $('qrPaymentTitle').textContent='Pago con QR · Navaja 27';
-    $('qrPaymentService').textContent=(data.serviceName||'Servicio')+' · '+toDate(row);
-    $('qrPaymentAmount').textContent=amount===null?'Precio por confirmar':'Precio de referencia: Bs '+amount.toLocaleString('es-BO');
-    $('qrPaymentStatus').textContent='El monto es referencial. Confirma el precio con Navaja 27 y verifica el beneficiario y el importe en tu aplicación bancaria antes de autorizar.';
-    drawAltokeQr();
-    $('qrPaymentModal').hidden=false;
-    $('closeQrPayment').focus();
-  }
-  function renderRequests() {
+  function dateFromIso(value){const [y,m,d]=value.split('-').map(Number);return new Date(y,m-1,d);}
+  function isoFromDate(date){return [date.getFullYear(),String(date.getMonth()+1).padStart(2,'0'),String(date.getDate()).padStart(2,'0')].join('-');}
+  function shiftIsoDate(value,days){const date=dateFromIso(value);date.setDate(date.getDate()+days);return isoFromDate(date);}
+  function agendaWeekStart(value){const date=dateFromIso(value);date.setDate(date.getDate()-((date.getDay()+6)%7));return isoFromDate(date);}
+  function agendaDateLabel(value,options){return dateFromIso(value).toLocaleDateString('es-BO',options||{weekday:'long',day:'numeric',month:'long'});}
+  function requestDate(row){const d=row.request_data||{};return d.date||(row.requested_for?isoFromDate(new Date(row.requested_for)):'');}
+  function renderRequests(){
     const list=$('requestList');list.replaceChildren();
-    if(!state.requests.length){list.append(node('p','Todavía no tienes solicitudes guardadas.','empty-state'));return;}
-    state.requests.forEach(row=>{
-      const d=row.request_data||{},card=node('article',undefined,'request-card'),info=node('div');
-      const amount=requestAmount(row);
-      info.append(node('h3',d.serviceName||'Turno solicitado'),node('p',toDate(row)+' · '+row.contact_name+' · '+row.phone),node('small','Estado: '+(row.status||'pending')),node('small',amount===null?'Precio por confirmar':'Precio de referencia: Bs '+amount.toLocaleString('es-BO')));
-      const actions=node('div',undefined,'request-actions'),pay=node('button',amount===null?'Consultar precio':'Pagar con QR');
-      pay.type='button';pay.disabled=amount===null;pay.addEventListener('click',()=>openQrPayment(row));
-      actions.append(pay);card.append(info,actions);list.append(card);
+    const today=localDate();state.agendaDate=state.agendaDate||today;
+    const all=state.requests.filter(row=>row.request_type==='appointment'&&!['cancelled','canceled'].includes(String(row.status||'').toLowerCase()));
+    const toolbar=node('div',undefined,'agenda-toolbar');
+    const weekStart=agendaWeekStart(state.agendaDate);
+    const weekLabel=node('strong',agendaDateLabel(weekStart,{day:'numeric',month:'long'})+' – '+agendaDateLabel(shiftIsoDate(weekStart,6),{day:'numeric',month:'long',year:'numeric'}));
+    const controls=node('div',undefined,'agenda-controls');
+    const prev=node('button','‹','agenda-arrow'),next=node('button','›','agenda-arrow'),todayButton=node('button','Hoy','agenda-today');
+    prev.type=next.type=todayButton.type='button';prev.setAttribute('aria-label','Semana anterior');next.setAttribute('aria-label','Semana siguiente');
+    prev.addEventListener('click',()=>{state.agendaDate=shiftIsoDate(state.agendaDate,-7);renderRequests();});
+    next.addEventListener('click',()=>{state.agendaDate=shiftIsoDate(state.agendaDate,7);renderRequests();});
+    todayButton.addEventListener('click',()=>{state.agendaDate=today;renderRequests();});
+    controls.append(prev,todayButton,next);toolbar.append(weekLabel,controls);list.append(toolbar);
+    const week=node('div',undefined,'agenda-week'),dayNames=['lun','mar','mié','jue','vie','sáb','dom'];
+    for(let i=0;i<7;i++){
+      const date=shiftIsoDate(weekStart,i),dateRows=all.filter(row=>requestDate(row)===date);
+      const button=node('button',undefined,'agenda-day'+(date===state.agendaDate?' active':'')+(date===today?' is-today':''));
+      button.type='button';button.append(node('span',dayNames[i]),node('strong',String(dateFromIso(date).getDate())),node('small',dateRows.length?String(dateRows.length)+' turno(s)':'—'));
+      button.setAttribute('aria-pressed',String(date===state.agendaDate));
+      button.addEventListener('click',()=>{state.agendaDate=date;renderRequests();});week.append(button);
+    }
+    list.append(week);
+    const dayTitle=node('div',undefined,'agenda-day-title');
+    dayTitle.append(node('h2',agendaDateLabel(state.agendaDate)),node('small',state.agendaDate===today?'Agenda de hoy':state.agendaDate===shiftIsoDate(today,1)?'Agenda de mañana':'Turnos de esta fecha'));
+    list.append(dayTitle);
+    const dayRows=all.filter(row=>requestDate(row)===state.agendaDate).sort((a,b)=>String((a.request_data||{}).time||'').localeCompare(String((b.request_data||{}).time||'')));
+    if(!dayRows.length){
+      const empty=node('div',undefined,'agenda-empty');
+      empty.append(node('strong','No tienes cortes agendados para este día.'),node('p','Cuando solicites un turno, aparecerá aquí con su hora y duración.'));
+      const book=node('button','Reservar un corte','button-primary');book.type='button';book.addEventListener('click',()=>showView('turnos'));empty.append(book);list.append(empty);return;
+    }
+    const timeline=node('div',undefined,'agenda-timeline');
+    dayRows.forEach(row=>{
+      const d=row.request_data||{},event=node('article',undefined,'agenda-event'),time=node('div',undefined,'agenda-time'),info=node('div',undefined,'agenda-event-info');
+      const startTime=String(d.time||'--:--'),duration=Number(d.durationMinutes||30),parts=startTime.split(':').map(Number);
+      const endTime=parts.length===2&&parts.every(Number.isFinite)?String(Math.floor((parts[0]*60+parts[1]+duration)/60)%24).padStart(2,'0')+':'+String((parts[0]*60+parts[1]+duration)%60).padStart(2,'0'):'';
+      time.append(node('strong',startTime),node('small',endTime?startTime+' – '+endTime:'Hora'));
+      info.append(node('h3',d.serviceName||'Servicio de barbería'),node('p',(row.contact_name||'Cliente')+' · '+duration+' min'),node('small',row.status==='confirmed'?'Turno confirmado':'Pendiente de confirmación','agenda-status'));
+      if(d.paymentStatus==='reported_paid_pending_manual_review')info.append(node('small','Pago informado · verificación manual pendiente','agenda-payment'));
+      else if(d.paymentStatus==='quote_required')info.append(node('small','Precio por confirmar antes del pago','agenda-payment'));
+      event.append(time,info);timeline.append(event);
     });
+    list.append(timeline);
   }
   async function confirmPending() {
     const data=state.pending;if(!data)return;
     if(Date.now()>=state.expiresAt){closeConfirm('El tiempo terminó. Vuelve a solicitar el turno.');return;}
+    if(data.priceAmount!==null&&!$('paymentAcknowledged').checked){toast('Primero realiza el pago por QR y marca la confirmación.','error');return;}
     $('confirmPending').disabled=true;
     try {
       await state.cloud.saveProfile(STORE,{display_name:data.name,phone:data.phone,contact_preference:state.profile?.contact_preference||'whatsapp'});
       state.profile=await state.cloud.profile(STORE);
       await state.cloud.submit(STORE,'appointment',data.name,data.phone,{
         requested_for:new Date(data.date+'T'+data.time+':00').toISOString(),
-        request_data:{serviceCode:data.serviceCode,serviceName:data.service,date:data.date,time:data.time,note:data.note,durationMinutes:data.duration,referencePrice:data.priceLabel,priceAmount:data.priceAmount,currency:'BOB',paymentMethod:'Altoke QR',paymentStatus:data.priceAmount===null?'quote_required':'qr_pending_manual_verification'}
+        request_data:{serviceCode:data.serviceCode,serviceName:data.service,date:data.date,time:data.time,note:data.note,durationMinutes:data.duration,referencePrice:data.priceLabel,priceAmount:data.priceAmount,currency:'BOB',paymentMethod:data.priceAmount===null?null:'Altoke QR',paymentStatus:data.priceAmount===null?'quote_required':'reported_paid_pending_manual_review',customerDeclaredPaid:data.priceAmount!==null&&$('paymentAcknowledged').checked,paymentVerification:'manual'}
       });
       state.requests=await state.cloud.requests(STORE);
       closeConfirm('Solicitud registrada en tu historial en línea. Falta la confirmación real de Navaja 27.');
@@ -159,9 +188,7 @@
     openConfirm({name,phone,service:service.name,serviceCode:service.id,date,time,note:noteText,duration:service.duration,priceLabel:service.priceLabel,priceAmount:service.price});
   });
   $('confirmPending').addEventListener('click',confirmPending);
-  $('closeQrPayment').addEventListener('click',()=>$('qrPaymentModal').hidden=true);
-  $('closeQrPaymentBottom').addEventListener('click',()=>$('qrPaymentModal').hidden=true);
-  $('qrPaymentModal').addEventListener('click',event=>{if(event.target===$('qrPaymentModal'))$('qrPaymentModal').hidden=true;});
+  $('paymentAcknowledged').addEventListener('change',()=>{$('confirmPending').disabled=!$('paymentAcknowledged').checked;});
   $('cancelPending').addEventListener('click',()=>closeConfirm('Solicitud temporal cancelada.'));
   $('closeConfirm').addEventListener('click',()=>closeConfirm('Solicitud temporal cancelada.'));
   $('clearRequests').addEventListener('click',async()=>{
