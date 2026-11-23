@@ -66,3 +66,34 @@ body[data-theme=dark] .button-primary{background:#ffb85b;color:#251d31}
 body[data-theme=dark] .network-pill{background:#211a30;border-color:#42364f;color:#cfc5d9}
 body[data-theme=dark] .empty-state{background:#211a30;border-color:#514365;color:#c8bed5}
 
+
+/* Botones TaDa: estados claros y oscuros */
+.button-primary{background:#ffad43;color:#29154f;border:1px solid #ffad43}
+.button-primary:hover{background:#ffc36b;color:#29154f;border-color:#ffc36b}
+.button-secondary{background:#fff;color:#29154f;border:1px solid #c9bdd9}
+.button-secondary:hover{background:#f0eaf8;color:#29154f;border-color:#a897c1}
+.filter{background:#fff;color:#55476a;border-color:#d9d1e3}
+.filter:hover{background:#f2edf8;color:#29154f}
+.filter.active{background:#50309a;color:#fff;border-color:#50309a}
+.category-tiles button{background:#fff;color:#29154f;border-color:#d9d1e3}
+.category-tiles button:hover{background:#f6f1fb;border-color:#b79fd7}
+.product-foot button,.quantity-controls button{background:#eee8f6;color:#29154f;border:1px solid #d4c9e2}
+.product-foot button:hover,.quantity-controls button:hover{background:#ded2ef;color:#29154f}
+.age-minor,.text-button{color:#50309a}
+.confirm-close{color:#5b5067}
+body[data-theme=dark] .button-primary{background:#ffbd63;color:#29154f;border-color:#ffbd63}
+body[data-theme=dark] .button-primary:hover{background:#ffd28c;color:#29154f}
+body[data-theme=dark] .button-secondary{background:#382d47;color:#f3edfb;border-color:#77658b}
+body[data-theme=dark] .button-secondary:hover{background:#4a3b5e;color:#fff;border-color:#aa93c7}
+body[data-theme=dark] .filter{background:#30253e;color:#e4dced;border-color:#59476c}
+body[data-theme=dark] .filter:hover{background:#403250;color:#fff}
+body[data-theme=dark] .filter.active{background:#c6a5ff;color:#251936;border-color:#c6a5ff}
+body[data-theme=dark] .category-tiles button{background:#2c2238;color:#f0eafa;border-color:#574667}
+body[data-theme=dark] .category-tiles button:hover{background:#392b49;border-color:#9c81bb}
+body[data-theme=dark] .category-tiles strong{color:#e5d8fb}
+body[data-theme=dark] .product-foot button,body[data-theme=dark] .quantity-controls button{background:#403250;color:#f5effa;border-color:#655279}
+body[data-theme=dark] .product-foot button:hover,body[data-theme=dark] .quantity-controls button:hover{background:#514064;color:#fff}
+body[data-theme=dark] .age-minor,body[data-theme=dark] .text-button{color:#d5b8ff}
+body[data-theme=dark] .confirm-close{color:#eee5f6}
+body[data-theme=dark] button:disabled{opacity:.42}
+:where(button,a).button-primary:focus-visible,:where(button,a).button-secondary:focus-visible,.filter:focus-visible,.category-tiles button:focus-visible,.theme-toggle:focus-visible{outline:3px solid #ffbd63;outline-offset:3px}
