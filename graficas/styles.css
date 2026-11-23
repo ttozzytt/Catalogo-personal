@@ -15,3 +15,13 @@ body[data-theme=dark] .eyebrow{color:var(--accent,var(--gold))}
 body[data-theme=dark] .status{background:var(--surface);border-color:var(--line);color:var(--muted)}
 body[data-theme=dark] .primary{filter:brightness(1.15)}
 @media(max-width:600px){.theme-toggle{top:10px;right:10px;min-height:36px;padding:0 11px;font-size:10px}}
+
+body[data-theme=dark] .theme-toggle{background:var(--surface);border-color:var(--line);color:var(--ink)}
+body[data-theme=dark] .landing{background:var(--surface);border-color:var(--line);box-shadow:0 24px 65px #0008}
+body[data-theme=dark] .landing-copy{background:var(--surface);color:var(--ink)}
+body[data-theme=dark] .landing h1{color:var(--ink)}
+body[data-theme=dark] .lead,body[data-theme=dark] .landing-note{color:var(--muted)}
+body[data-theme=dark] .brand,body[data-theme=dark] .brand small{color:var(--ink)}
+body[data-theme=dark] .eyebrow{color:var(--accent,var(--gold))}
+body[data-theme=dark] .status{background:var(--surface);border:1px solid var(--line);color:var(--muted)}
+body[data-theme=dark] .primary{filter:brightness(1.12)}
