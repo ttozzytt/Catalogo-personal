@@ -5,7 +5,7 @@
   const node=(tag,text,cls)=>{const el=document.createElement(tag);if(text!==undefined)el.textContent=String(text);if(cls)el.className=cls;return el;};
   function toast(message,type){const el=$('toast');el.textContent=message;el.className='toast show'+(type?' '+type:'');clearTimeout(toast.timer);toast.timer=setTimeout(()=>el.className='toast',3200);}
   function status(s,label){$('networkStatus').dataset.state=s;$('networkStatus').querySelector('b').textContent=label;}
-  function money(v){return v===null||v===undefined?'Consultar':'Bs '+Number(v).toLocaleString('es-BO',{minimumFractionDigits:0,maximumFractionDigits:2});}
+  function money(v){return v===null||v===undefined?'':'Bs '+Number(v).toLocaleString('es-BO',{minimumFractionDigits:0,maximumFractionDigits:2});}
   function count(){return Object.values(state.cart).reduce((a,b)=>a+Number(b||0),0);}
   function total(){const rows=selectedProducts();if(rows.some(p=>p.price===null||p.price===undefined))return null;return rows.reduce((sum,p)=>sum+Number(p.price)*(state.cart[p.id]||0),0);}
   function selectedProducts(){return state.products.filter(p=>state.cart[p.id]);}
@@ -32,7 +32,7 @@
       img.addEventListener('error',()=>{img.remove();media.append(node('span',p.category.toUpperCase(),'food-image-category'),node('strong',p.name,'food-image-name'),node('small','Foto no disponible','food-image-note'));},{once:true});
       media.append(img);
       const body=node('div',undefined,'food-body');body.append(node('small',p.category.toUpperCase()),node('h3',p.name),node('p',p.description));
-      const foot=node('div',undefined,'food-foot'),price=node('strong',p.price===null?'Consultar':money(p.price)),button=node('button',state.cart[p.id]?'Añadir otro +':'Agregar +');button.type='button';
+      const foot=node('div',undefined,'food-foot'),price=node('strong',money(p.price)),button=node('button',state.cart[p.id]?'Añadir otro +':'Agregar +');button.type='button';
       button.addEventListener('click',async()=>{state.cart[p.id]=(state.cart[p.id]||0)+1;updateBadge();button.textContent='Agregado ✓';await saveCartState();toast(p.name+' agregado al pedido.');});
       foot.append(price,button);body.append(foot);card.append(media,body);grid.append(card);
     });
@@ -42,7 +42,7 @@
     const list=$('orderLines');list.replaceChildren();const rows=selectedProducts();
     if(!rows.length)list.append(node('p','Todavía no agregaste productos.','empty-state'));
     rows.forEach(p=>{
-      const row=node('article',undefined,'order-row'),info=node('div');info.append(node('strong',p.name),node('small',p.price===null?'Consultar · '+state.cart[p.id]+' unidad(es)':money(p.price)+' por unidad · Subtotal '+money(p.price*state.cart[p.id])));
+      const row=node('article',undefined,'order-row'),info=node('div');info.append(node('strong',p.name),node('small',p.price===null?state.cart[p.id]+' unidad(es)':money(p.price)+' por unidad · Subtotal '+money(p.price*state.cart[p.id])));
       const controls=node('div',undefined,'quantity-controls'),minus=node('button','−'),qty=node('b',state.cart[p.id]),plus=node('button','+');minus.type=plus.type='button';
       minus.setAttribute('aria-label','Quitar una unidad de '+p.name);plus.setAttribute('aria-label','Agregar una unidad de '+p.name);
       minus.addEventListener('click',async()=>{state.cart[p.id]--;if(state.cart[p.id]<=0)delete state.cart[p.id];renderOrder();updateBadge();await saveCartState();});
