@@ -10,7 +10,7 @@
 </head>
 <body class="barber-app">
 <header class="app-header">
- <a class="app-brand" href="./index.html"><span class="brand-mark">N27</span><span>NAVAJA 27<small>BARBER STUDIO</small></span></a>
+ <a class="app-brand" href="./index.html"><img class="brand-logo" src="./brand-logo.svg" alt="Navaja 27 Barber Studio"></a>
  <nav class="main-nav" aria-label="Navegación principal">
   <button class="nav-link active" data-view="inicio" type="button">Inicio</button>
   <button class="nav-link" data-view="servicios" type="button">Servicios</button>
@@ -38,10 +38,12 @@
   <div class="section-foot"><span>Atención personalizada</span><span>Aplicación PWA · Modo sin conexión</span></div>
  </section>
  <section class="view" id="view-servicios" aria-labelledby="servicesTitle" hidden>
-  <div class="view-head"><div><p class="eyebrow">CARTA DE BARBERÍA</p><h1 id="servicesTitle">Servicios</h1><p>Detalles, duración y tarifa por confirmar.</p></div><label class="search"><span>⌕</span><input id="serviceSearch" type="search" placeholder="Buscar servicio…" aria-label="Buscar servicio"></label></div>
+  <div class="view-head"><div><p class="eyebrow">CARTA DE BARBERÍA</p><h1 id="servicesTitle">Servicios</h1><p>Servicios, duración y precios.</p></div><label class="search"><span>⌕</span><input id="serviceSearch" type="search" placeholder="Buscar servicio…" aria-label="Buscar servicio"></label></div>
+  <div class="price-card-preview"><img src="./carta-precios.svg" alt="Carta de precios de Navaja 27"><div><strong>Carta de servicios</strong><span>Tarifas de Navaja 27</span><button class="text-button" id="openPriceCard" type="button">Ampliar carta</button></div></div>
   <nav class="filter-row" aria-label="Filtrar servicios"><button class="filter active" data-filter="todos" type="button">Todos</button><button class="filter" data-filter="cabello" type="button">Cabello</button><button class="filter" data-filter="barba" type="button">Barba</button><button class="filter" data-filter="cejas" type="button">Cejas</button><button class="filter" data-filter="combos" type="button">Combos</button></nav>
   <div class="catalog-grid" id="serviceGrid" aria-live="polite"><p class="loading">Cargando servicios…</p></div>
  </section>
+ <dialog class="price-card-dialog" id="priceCardDialog" aria-label="Carta completa de precios"><button id="closePriceCard" class="price-card-close" type="button" aria-label="Cerrar carta">×</button><img src="./carta-precios.svg" alt="Carta completa de servicios y precios de Navaja 27"></dialog>
  <section class="view" id="view-turnos" aria-labelledby="bookingTitle" hidden>
   <div class="view-head"><div><p class="eyebrow">AGENDA DE ATENCIÓN</p><h1 id="bookingTitle">Reserva tu turno</h1><p>Completa los datos y confirma dentro del tiempo indicado.</p></div></div>
   <div class="form-layout">
