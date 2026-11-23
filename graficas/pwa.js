@@ -9,7 +9,7 @@
   function mapProduct(row){
     const s=row.specs||{};
     return{id:row.item_code,name:row.name,brand:row.brand||'',category:row.category,categoryLabel:s.categoryLabel||row.category,
-      price:row.price,shortDescription:row.description||s.shortDescription||'',image:row.image_url||'',url:s.url||'https://www.compucenter.store/category/componentes-pc',
+      price:row.price,shortDescription:row.description||s.shortDescription||'',image:row.image_url||'',imageAlt:row.image_alt||row.name,url:s.url||'https://www.compucenter.store/category/componentes-pc',
       specs:s,compare:s.compare!==false,artLabel:s.artLabel||row.brand||'COMPONENTE'};
   }
   function showView(name){
@@ -38,7 +38,7 @@
     rows.forEach(p=>{
       const card=node('article',undefined,'product-card'),art=node('div',undefined,'product-art'),body=node('div',undefined,'product-body');
       if(p.image){
-        const img=node('img');img.src=p.image;img.alt=p.name;img.loading='lazy';img.decoding='async';
+        const img=node('img');img.src=p.image;img.alt=p.imageAlt;img.loading='lazy';img.decoding='async';
         img.addEventListener('error',()=>{img.remove();art.append(node('span',p.artLabel,'product-art-fallback'));},{once:true});art.append(img);
       }else art.append(node('span',p.artLabel,'product-art-fallback'));
       body.append(node('small',(p.brand||'A cotizar')+' · '+p.categoryLabel),node('h3',p.name),node('p',p.shortDescription));
