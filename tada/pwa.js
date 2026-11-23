@@ -25,11 +25,11 @@
     const n=totalUnits();$('listBadge').textContent=n;$('mobileBadge').textContent=n;
     $('listSummary').textContent=n+' unidades seleccionadas';
     const total=listTotal();
-    $('listTotal').textContent=total===null?'Total: Consultar':'Total: '+formatPrice({price:total});
+    $('listTotal').textContent=total===null?'Total: —':'Total: '+formatPrice({price:total});
   }
   async function saveList(){try{await state.cloud.saveUserState(STORE,'cart',{quantities:state.list});}catch(error){toast('No se pudo sincronizar la lista: '+error.message,'error');}}
   function formatPrice(p){
-    if(p.price===null)return 'Consultar';
+    if(p.price===null)return '';
     const amount='Bs '+p.price.toLocaleString('es-BO',{minimumFractionDigits:p.price%1?2:0,maximumFractionDigits:2});
     return amount;
   }
@@ -55,7 +55,7 @@
     const area=$('selectedList');area.replaceChildren();const rows=state.products.filter(p=>state.list[p.id]);
     if(!rows.length){area.append(node('p','Tu lista está vacía. Explora el catálogo para agregar bebidas.','empty-state'));updateBadges();return;}
     rows.forEach(p=>{
-      const row=node('article',undefined,'selected-row'),info=node('div');info.append(node('strong',p.name),node('small',p.type+' · '+state.list[p.id]+' unidad(es) · '+formatPrice(p)+(p.price===null?'':' · Subtotal '+formatPrice({price:p.price*state.list[p.id]}))));
+      const row=node('article',undefined,'selected-row'),info=node('div');const detail=p.type+' · '+state.list[p.id]+' unidad(es)'+(p.price===null?'':' · '+formatPrice(p)+' · Subtotal '+formatPrice({price:p.price*state.list[p.id]}));info.append(node('strong',p.name),node('small',detail));
       const controls=node('div',undefined,'quantity-controls'),minus=node('button','−'),count=node('b',state.list[p.id]),plus=node('button','+');minus.type=plus.type='button';
       minus.setAttribute('aria-label','Quitar una unidad de '+p.name);plus.setAttribute('aria-label','Agregar una unidad de '+p.name);
       minus.addEventListener('click',async()=>{state.list[p.id]--;if(state.list[p.id]<=0)delete state.list[p.id];updateBadges();renderList();await saveList();});
