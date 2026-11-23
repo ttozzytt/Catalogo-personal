@@ -106,3 +106,5 @@ body[data-theme=dark] .list-totals strong{color:#ffbd63}
 @media(max-width:430px){.list-totals strong{font-size:15px}}
 
 @media(min-width:768px){.catalog-grid{grid-template-columns:repeat(auto-fit,minmax(220px,1fr))}}
+
+.price-source-note{display:block;margin-top:6px;color:var(--muted);font-size:10px;line-height:1.4}
