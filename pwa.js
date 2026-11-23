@@ -73,20 +73,25 @@
     clearInterval(state.timer);state.timer=null;state.pending=null;state.expiresAt=0;$('bookingConfirm').hidden=true;if(message)toast(message);
   }
   function updateCountdown() {
+    if(!state.expiresAt){$('bookingCountdown').textContent='--:--';$('countdownBar').style.width='100%';return;}
     const left=Math.max(0,state.expiresAt-Date.now()),seconds=Math.ceil(left/1000);
     $('bookingCountdown').textContent='00:'+String(seconds).padStart(2,'0');
     $('countdownBar').style.width=(left/60000*100)+'%';
     if(left<=0)closeConfirm('El tiempo terminó. La solicitud no se guardó.');
   }
   function openConfirm(data) {
-    state.pending=data;state.expiresAt=Date.now()+60000;
+    clearInterval(state.timer);state.timer=null;
+    state.pending=data;
     $('confirmDetails').textContent=data.service+' · '+data.date.split('-').reverse().join('/')+' · '+data.time+' · '+data.name;
     const hasPrice=typeof data.priceAmount==='number'&&Number.isFinite(data.priceAmount);
     $('bookingQrPanel').hidden=!hasPrice;$('quoteOnlyNote').hidden=hasPrice;
     $('paymentAcknowledged').checked=false;$('confirmPending').disabled=hasPrice;
     $('bookingQrAmount').textContent=hasPrice?'Total a transferir: Bs '+data.priceAmount.toLocaleString('es-BO'):'Precio por confirmar';$('confirmPending').textContent=hasPrice?'Confirmar turno':'Enviar solicitud para cotizar';
-    if(hasPrice)drawAltokeQr();
-    $('bookingConfirm').hidden=false;updateCountdown();state.timer=setInterval(updateCountdown,250);$('confirmPending').focus();
+    $('countdownLabel').textContent=hasPrice?'EL MINUTO EMPIEZA DESPUÉS DEL PAGO':'TIEMPO PARA ENVIAR LA SOLICITUD';
+    state.expiresAt=hasPrice?0:Date.now()+60000;
+    if(hasPrice){$('bookingCountdown').textContent='--:--';$('countdownBar').style.width='100%';drawAltokeQr();}
+    else{updateCountdown();state.timer=setInterval(updateCountdown,250);}
+    $('bookingConfirm').hidden=false;$('confirmPending').focus();
   }
   function toDate(row) {
     const d=row.request_data||{};
@@ -189,7 +194,20 @@
     openConfirm({name,phone,service:service.name,serviceCode:service.id,date,time,note:noteText,duration:service.duration,priceLabel:service.priceLabel,priceAmount:service.price});
   });
   $('confirmPending').addEventListener('click',confirmPending);
-  $('paymentAcknowledged').addEventListener('change',()=>{$('confirmPending').disabled=!$('paymentAcknowledged').checked;});
+  $('paymentAcknowledged').addEventListener('change',()=>{
+    const checked=$('paymentAcknowledged').checked;
+    $('confirmPending').disabled=!checked;
+    clearInterval(state.timer);state.timer=null;
+    if(checked){
+      state.expiresAt=Date.now()+60000;
+      $('countdownLabel').textContent='TIEMPO PARA CONFIRMAR EL TURNO';
+      updateCountdown();state.timer=setInterval(updateCountdown,250);
+    }else{
+      state.expiresAt=0;
+      $('countdownLabel').textContent='EL MINUTO EMPIEZA DESPUÉS DEL PAGO';
+      updateCountdown();
+    }
+  });
   $('cancelPending').addEventListener('click',()=>closeConfirm('Solicitud temporal cancelada.'));
   $('closeConfirm').addEventListener('click',()=>closeConfirm('Solicitud temporal cancelada.'));
   $('clearRequests').addEventListener('click',async()=>{
