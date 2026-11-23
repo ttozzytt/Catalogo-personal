@@ -1,5 +1,5 @@
 'use strict';
-const CACHE='antojitos-pwa-v17-menu-clean';
+const CACHE='antojitos-pwa-v18-menu-clean';
 const SDK_URL='https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.119.2';
 const SHELL=['./','./index.html','./styles.css','./app.js','./pwa.html','./pwa.css','./pwa.js','./manifest.json','../catalog-db.js','./icons/icon.svg','./media/hero.webp','./media/paceña.webp','./media/mani.webp','./media/maracuya.webp','./media/barbacoa.webp','./media/piña.webp','./media/doble.webp','./media/salchipapas.webp','../theme-toggle.js?v=light-dark-v1','./brand-logo.svg','./styles.css?v=antojitos-brand-logo-v4','./pwa.css?v=antojitos-mobile-grid-v14','./pwa.js?v=antojitos-menu-clean-v13'];
 self.addEventListener('install',event=>event.waitUntil((async()=>{
