@@ -33,3 +33,5 @@ body[data-theme=dark] .primary{filter:brightness(1.12)}
 body[data-theme=dark] .primary{background:#8ab0ff;color:#101e31;border-color:#8ab0ff}
 body[data-theme=dark] .primary:hover{background:#b2cbff;color:#101e31}
 body[data-theme=dark] .theme-toggle{background:#1a293a;color:#eaf0f8;border-color:#405a78}
+
+.brand-logo{display:block;width:255px;height:76px;max-width:100%;object-fit:contain;object-position:left center}@media(max-width:600px){.brand-logo{width:225px;height:66px}}
