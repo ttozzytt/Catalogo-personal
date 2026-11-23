@@ -71,3 +71,35 @@ body[data-theme=dark] .hero-copy>p,body[data-theme=dark] .hero p{color:inherit}
 body[data-theme=dark] .confirm-layer{background:#000b}
 body[data-theme=dark] .toast{background:#33463c;color:#fff}
 @media(max-width:850px){.theme-toggle{min-height:32px;padding:0 8px;font-size:9px}}
+
+/* Cabecera compacta para móvil y sin recorte del indicador Online */
+@media(max-width:760px){
+ .app-header{display:grid!important;grid-template-columns:minmax(0,1fr) auto;grid-template-areas:"brand theme" "status status";gap:8px 9px;min-height:0;padding:9px 12px}
+ .app-header .app-brand{grid-area:brand;min-width:0;max-width:100%}
+ .app-header .main-nav{display:none!important}
+ .app-header .theme-toggle{grid-area:theme;justify-self:end;min-height:34px;padding:0 9px;font-size:9px}
+ .app-header .network-pill{grid-area:status;justify-self:start;max-width:100%;margin:0;white-space:normal;overflow-wrap:anywhere}
+ .mobile-nav{top:88px!important;gap:3px;padding:6px 8px}
+ .mobile-nav .nav-link{padding:8px 9px;font-size:9px}
+}
+body[data-theme=dark] .theme-toggle{background:var(--surface);border-color:var(--line);color:var(--ink)}
+
+/* Overrides visuales del modo noche */
+
+body[data-theme=dark] .app-header,body[data-theme=dark] .mobile-nav,body[data-theme=dark] .app-footer{background:#1a293a;border-color:#34485f;color:#eaf0f8}
+body[data-theme=dark] .hero{background:#1a293a!important;color:#eaf0f8}
+body[data-theme=dark] .hero h1,body[data-theme=dark] .view-head h1{color:#eaf0f8}
+body[data-theme=dark] .hero-copy>p:not(.eyebrow),body[data-theme=dark] .view-head p{color:#b9c9da}
+body[data-theme=dark] .hero>img{background:#1a293a;object-fit:contain;padding:12px}
+body[data-theme=dark] .eyebrow{color:#9bbcf5}
+body[data-theme=dark] .category-tiles button,body[data-theme=dark] .product-card,body[data-theme=dark] .product-body,body[data-theme=dark] .product-art,body[data-theme=dark] .compare-card,body[data-theme=dark] .history-card,body[data-theme=dark] .request-card,body[data-theme=dark] .info-panel,body[data-theme=dark] .account-form,body[data-theme=dark] .confirm-card{background:#1a293a;border-color:#34485f;color:#eaf0f8}
+body[data-theme=dark] .product-body h3,body[data-theme=dark] .category-tiles strong,body[data-theme=dark] .history-card strong,body[data-theme=dark] .info-panel h2{color:#b8d0ff}
+body[data-theme=dark] .product-body p,body[data-theme=dark] .product-body small,body[data-theme=dark] .category-tiles small,body[data-theme=dark] .fine-note{color:#b0c0d1}
+body[data-theme=dark] .product-art{background:#263b55}
+body[data-theme=dark] .product-art-fallback{color:#d7e5ff}
+body[data-theme=dark] .product-foot strong{color:#d0e1ff}
+body[data-theme=dark] .product-actions button,body[data-theme=dark] .button-secondary,body[data-theme=dark] .more-button,body[data-theme=dark] .quantity-controls button{background:#24384f;border-color:#3b536e;color:#eaf0f8}
+body[data-theme=dark] .button-primary{background:#8ab0ff;color:#101e31}
+body[data-theme=dark] .network-pill{background:#1a293a;border-color:#34485f;color:#c5d4e6}
+body[data-theme=dark] .empty-state{background:#1a293a;border-color:#3b536e;color:#b0c0d1}
+
