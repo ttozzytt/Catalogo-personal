@@ -191,7 +191,7 @@ body[data-theme=dark] .toast{background:#33463c;color:#fff}
  .app-header .main-nav{display:none!important}
  .app-header .theme-toggle{grid-area:theme;justify-self:end;min-height:34px;padding:0 9px;font-size:9px}
  .app-header .network-pill{grid-area:status;justify-self:start;max-width:100%;margin:0;white-space:normal;overflow-wrap:anywhere}
- .mobile-nav{top:88px!important;gap:3px;padding:6px 8px}
+ .mobile-nav{top:96px!important;gap:3px;padding:6px 8px}
  .mobile-nav .nav-link{padding:8px 9px;font-size:9px}
 }
 body[data-theme=dark] .theme-toggle{background:var(--surface);border-color:var(--line);color:var(--ink)}
@@ -222,3 +222,5 @@ body[data-theme=dark] .button-primary{background:#d77a5a;color:#fff}
 body[data-theme=dark] .network-pill{background:#261d19;border-color:#45332b;color:#d9c8ba}
 body[data-theme=dark] .empty-state{background:#261d19;border-color:#564035;color:#c3aea1}
 
+
+@media(max-width:650px){.food-media{height:130px}}
