@@ -99,3 +99,37 @@ body[data-theme=dark] .quote-only-note{background:#342b1e;color:#edd5a8}
  .agenda-time strong{font-size:21px}
  .agenda-day-title h2{font-size:21px}
 }
+
+/* Cabecera compacta para móvil y sin recorte del indicador Online */
+@media(max-width:760px){
+ .app-header{display:grid!important;grid-template-columns:minmax(0,1fr) auto;grid-template-areas:"brand theme" "status status";gap:8px 9px;min-height:0;padding:9px 12px}
+ .app-header .app-brand{grid-area:brand;min-width:0;max-width:100%}
+ .app-header .main-nav{display:none!important}
+ .app-header .theme-toggle{grid-area:theme;justify-self:end;min-height:34px;padding:0 9px;font-size:9px}
+ .app-header .network-pill{grid-area:status;justify-self:start;max-width:100%;margin:0;white-space:normal;overflow-wrap:anywhere}
+ .mobile-nav{top:88px!important;gap:3px;padding:6px 8px}
+ .mobile-nav .nav-link{padding:8px 9px;font-size:9px}
+}
+body[data-theme=dark] .theme-toggle{background:var(--surface);border-color:var(--line);color:var(--ink)}
+
+/* Overrides visuales del modo noche */
+
+body[data-theme=dark] .app-header,body[data-theme=dark] .mobile-nav,body[data-theme=dark] .app-footer{background:#1b2720;border-color:#34453a;color:#eef1ed}
+body[data-theme=dark] .hero{background:#1b2720;color:#eef1ed}
+body[data-theme=dark] .hero h1,body[data-theme=dark] .view-head h1{color:#eef1ed}
+body[data-theme=dark] .hero-copy>p:not(.eyebrow),body[data-theme=dark] .view-head p{color:#b6c3b9}
+body[data-theme=dark] .eyebrow{color:#d6b27c}
+body[data-theme=dark] .service-card,body[data-theme=dark] .service-body,body[data-theme=dark] .booking-form,body[data-theme=dark] .profile-card,body[data-theme=dark] .request-card,body[data-theme=dark] .agenda-event,body[data-theme=dark] .agenda-empty,body[data-theme=dark] .agenda-toolbar,body[data-theme=dark] .agenda-day{background:#1b2720;border-color:#34453a;color:#eef1ed}
+body[data-theme=dark] .service-body h3,body[data-theme=dark] .request-card h3,body[data-theme=dark] .agenda-day-title h2,body[data-theme=dark] .agenda-event-info h3{color:#d6e5d9}
+body[data-theme=dark] .service-body p,body[data-theme=dark] .service-detail-wrap,body[data-theme=dark] .agenda-event-info p,body[data-theme=dark] .agenda-time small,body[data-theme=dark] .agenda-day-title small{color:#aeb9b1}
+body[data-theme=dark] .service-detail-wrap p{background:#26362d;color:#d8e1da}
+body[data-theme=dark] .button-secondary,body[data-theme=dark] .agenda-arrow,body[data-theme=dark] .agenda-today{background:#26362d;border-color:#405246;color:#e8efe8}
+body[data-theme=dark] .button-primary{background:#d6b27c;color:#17251d}
+body[data-theme=dark] .agenda-day.active{background:#6e987c;border-color:#6e987c;color:#102018}
+body[data-theme=dark] .agenda-day.active strong{color:#102018}
+body[data-theme=dark] .booking-qr-panel{background:#1b2720;border-color:#405246}
+body[data-theme=dark] .booking-qr-heading,body[data-theme=dark] .payment-check{color:#eef1ed}
+body[data-theme=dark] .quote-only-note{background:#3a3022;color:#f0d9b1}
+body[data-theme=dark] .empty-state{background:#1b2720;border-color:#405246;color:#c0ccc3}
+body[data-theme=dark] .network-pill{background:#1b2720;border-color:#405246;color:#cfdbd2}
+
