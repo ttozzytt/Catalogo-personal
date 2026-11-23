@@ -1,0 +1,44 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 768 1180" role="img" aria-labelledby="title desc">
+<title id="title">Carta de servicios y precios de Navaja 27</title>
+<desc id="desc">Corte clásico Bs 25, corte con degradado Bs 30, corte infantil Bs 20, barba más diseño Bs 25, corte más barba Bs 50, depilación con hilo Bs 25 y perfilación y diseño Bs 20. Experiencia VIP a consultar.</desc>
+<defs>
+ <linearGradient id="bg" x2="1" y2="1"><stop stop-color="#08150f"/><stop offset=".55" stop-color="#13271e"/><stop offset="1" stop-color="#07120d"/></linearGradient>
+ <linearGradient id="gold" x2="0" y2="1"><stop stop-color="#f8df9b"/><stop offset=".48" stop-color="#c69a50"/><stop offset="1" stop-color="#f4d58b"/></linearGradient>
+ <pattern id="grain" width="28" height="28" patternUnits="userSpaceOnUse"><path d="M0 7L28 7M0 21L28 21" stroke="#d4b16f" stroke-opacity=".035"/><circle cx="7" cy="14" r="1" fill="#e4c47d" fill-opacity=".1"/></pattern>
+</defs>
+<rect width="768" height="1180" rx="30" fill="url(#bg)"/>
+<rect x="18" y="18" width="732" height="1144" rx="24" fill="none" stroke="url(#gold)" stroke-width="5"/>
+<rect x="31" y="31" width="706" height="1118" rx="18" fill="url(#grain)" stroke="#8e6d3c" stroke-width="1.5"/>
+<path d="M64 132H704M64 1040H704" stroke="url(#gold)" stroke-width="2" opacity=".8"/>
+<g fill="url(#gold)">
+ <path d="M78 90l14-18 14 18-14 18z"/><path d="M662 90l14-18 14 18-14 18z"/>
+ <circle cx="384" cy="76" r="37" fill="none" stroke="url(#gold)" stroke-width="5"/>
+</g>
+<g fill="none" stroke="url(#gold)" stroke-width="5" stroke-linecap="round"><path d="M363 84L405 42M365 42L405 84"/><circle cx="362" cy="42" r="8"/><circle cx="406" cy="42" r="8"/><path d="M376 66L390 66"/></g>
+<text x="384" y="177" text-anchor="middle" fill="#fff5dd" font-family="Georgia,serif" font-size="52" font-weight="bold" letter-spacing="3">NAVAJA 27</text>
+<text x="384" y="218" text-anchor="middle" fill="url(#gold)" font-family="Arial,sans-serif" font-size="23" font-weight="700" letter-spacing="9">BARBER STUDIO</text>
+<text x="384" y="261" text-anchor="middle" fill="#e8ddc7" font-family="Arial,sans-serif" font-size="17" letter-spacing="4">ESTILO MODERNO PARA TI</text>
+<g font-family="Arial,sans-serif">
+ <text x="78" y="323" fill="url(#gold)" font-size="27" font-weight="800" letter-spacing="2">CORTES MODERNOS</text>
+ <g fill="#f4eee0" font-size="25" font-weight="600">
+  <text x="88" y="389">Corte clásico</text><text x="88" y="455">Corte con degradado</text><text x="88" y="521">Corte infantil</text>
+ </g>
+ <g fill="url(#gold)" font-size="29" font-weight="800" text-anchor="end">
+  <text x="683" y="389">Bs 25</text><text x="683" y="455">Bs 30</text><text x="683" y="521">Bs 20</text>
+ </g>
+ <g fill="none" stroke="#cba460" stroke-width="3" opacity=".9"><path d="M77 416H691M77 482H691M77 548H691"/></g>
+ <text x="78" y="608" fill="url(#gold)" font-size="27" font-weight="800" letter-spacing="2">BARBA &amp; DISEÑO</text>
+ <g fill="#f4eee0" font-size="25" font-weight="600"><text x="88" y="674">Barba más diseño</text><text x="88" y="740">Corte más barba</text></g>
+ <g fill="url(#gold)" font-size="29" font-weight="800" text-anchor="end"><text x="683" y="674">Bs 25</text><text x="683" y="740">Bs 50</text></g>
+ <path d="M77 701H691M77 767H691" stroke="#cba460" stroke-width="3" opacity=".9"/>
+ <text x="78" y="827" fill="url(#gold)" font-size="27" font-weight="800" letter-spacing="2">EXPERIENCIA VIP</text>
+ <rect x="77" y="846" width="614" height="77" rx="10" fill="#142a20" stroke="#cda965" stroke-width="2"/>
+ <text x="100" y="879" fill="#f6e8c8" font-size="22" font-weight="700">Cuidado premium</text>
+ <text x="100" y="906" fill="#d8c49c" font-size="18">Toalla caliente y más · Consulta el servicio</text>
+ <text x="78" y="980" fill="url(#gold)" font-size="27" font-weight="800" letter-spacing="2">SERVICIOS DE CEJAS</text>
+ <g fill="#f4eee0" font-size="24" font-weight="600"><text x="88" y="1040">Depilación con hilo</text><text x="88" y="1096">Perfilación y diseño</text></g>
+ <g fill="url(#gold)" font-size="28" font-weight="800" text-anchor="end"><text x="683" y="1040">Bs 25</text><text x="683" y="1096">Bs 20</text></g>
+</g>
+<rect x="77" y="1110" width="614" height="38" rx="19" fill="#0d1b14" stroke="#b99456" stroke-width="1.5"/>
+<text x="384" y="1136" text-anchor="middle" fill="#f0d89f" font-family="Arial,sans-serif" font-size="16" font-weight="700" letter-spacing="2">@navaja27barber · 7081 2345</text>
+</svg>
